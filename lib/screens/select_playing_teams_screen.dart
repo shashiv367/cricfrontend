@@ -1,0 +1,222 @@
+import 'package:flutter/material.dart';
+import '../utils/app_colors.dart';
+import 'select_team_screen.dart';
+import 'select_squad_screen.dart';
+
+class SelectPlayingTeamsScreen extends StatefulWidget {
+  const SelectPlayingTeamsScreen({super.key});
+
+  @override
+  State<SelectPlayingTeamsScreen> createState() => _SelectPlayingTeamsScreenState();
+}
+
+class _SelectPlayingTeamsScreenState extends State<SelectPlayingTeamsScreen> {
+  String? _teamAName;
+  String? _teamBName;
+  SquadSelectionResult? _teamASquad;
+  SquadSelectionResult? _teamBSquad;
+
+  Future<void> _selectTeam(bool isTeamA) async {
+    final selected = await Navigator.push<String>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => SelectTeamScreen(
+          title: 'Select team ${isTeamA ? 'a' : 'b'}',
+          currentSelection: isTeamA ? _teamAName : _teamBName,
+        ),
+      ),
+    );
+    if (selected == null || !mounted) return;
+
+    // After selecting a team, go to squad selection & role assignment
+    final squad = await Navigator.push<SquadSelectionResult>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => SelectSquadScreen(teamName: selected),
+      ),
+    );
+
+    if (!mounted) return;
+
+    setState(() {
+      if (isTeamA) {
+        _teamAName = selected;
+        _teamASquad = squad;
+      } else {
+        _teamBName = selected;
+        _teamBSquad = squad;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        backgroundColor: AppColors.primaryElectric,
+        foregroundColor: Colors.white,
+        elevation: 0,
+        title: const Text('Select playing teams', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help_outline, color: Colors.white),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: 16),
+              Text(
+                'Scoring a match on CricHeroes is free.',
+                style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic, color: AppColors.textSecondary),
+              ),
+              const SizedBox(height: 32),
+              _buildTeamBlock(isTeamA: true),
+              const SizedBox(height: 24),
+              _buildVsDivider(),
+              const SizedBox(height: 24),
+              _buildTeamBlock(isTeamA: false),
+              if (_teamAName != null && _teamBName != null) ...[
+                const SizedBox(height: 32),
+                Material(
+                  color: AppColors.primaryTeal,
+                  borderRadius: BorderRadius.circular(10),
+                  child: InkWell(
+                    onTap: _handleContinueToMatch,
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      alignment: Alignment.center,
+                      child: const Text('Continue to match', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+                    ),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTeamBlock({required bool isTeamA}) {
+    final name = isTeamA ? _teamAName : _teamBName;
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () => _selectTeam(isTeamA),
+          child: Container(
+            width: 72,
+            height: 72,
+            decoration: BoxDecoration(
+              color: AppColors.textPrimary.withOpacity(0.85),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(Icons.add, color: Colors.white, size: 36),
+          ),
+        ),
+        const SizedBox(height: 12),
+        Material(
+          color: AppColors.primaryTeal,
+          borderRadius: BorderRadius.circular(10),
+          child: InkWell(
+            onTap: () => _selectTeam(isTeamA),
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              alignment: Alignment.center,
+              child: Text(
+                name != null ? name : 'Select team ${isTeamA ? 'a' : 'b'}',
+                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildVsDivider() {
+    return SizedBox(
+      height: 56,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          CustomPaint(
+            size: const Size(52, 52),
+            painter: _DiamondVsPainter(),
+          ),
+          Text('vs', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
+        ],
+      ),
+    );
+  }
+
+  void _handleContinueToMatch() {
+    // Require at least two players in each squad before proceeding,
+    // similar to CricHeroes UX.
+    if (_teamASquad == null || (_teamASquad!.players.length) < 2) {
+      if (!mounted) return;
+      final name = _teamAName ?? 'Team A';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Please select minimum two-player-squad in team $name'),
+        ),
+      );
+      return;
+    }
+
+    if (_teamBSquad == null || (_teamBSquad!.players.length) < 2) {
+      if (!mounted) return;
+      final name = _teamBName ?? 'Team B';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Please select minimum two-player-squad in team $name'),
+        ),
+      );
+      return;
+    }
+
+    Navigator.pushReplacementNamed(
+      context,
+      '/create-match',
+      arguments: {
+        'teamA': _teamAName,
+        'teamB': _teamBName,
+        'teamASquad': _teamASquad,
+        'teamBSquad': _teamBSquad,
+      },
+    );
+  }
+}
+
+class _DiamondVsPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    final path = Path()
+      ..moveTo(center.dx, center.dy - 24)
+      ..lineTo(center.dx + 24, center.dy)
+      ..lineTo(center.dx, center.dy + 24)
+      ..lineTo(center.dx - 24, center.dy)
+      ..close();
+    canvas.drawPath(
+      path,
+      Paint()
+        ..color = AppColors.divider
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1.5,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}

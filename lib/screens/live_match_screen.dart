@@ -51,7 +51,7 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
                     'Matches',
                     style: TextStyle(
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                       fontSize: 24,
                     ),
                   ),
@@ -63,7 +63,7 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
               indicatorWeight: 3,
               labelColor: Colors.white,
               unselectedLabelColor: Colors.white70,
-              labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              labelStyle: TextStyle(fontWeight: FontWeight.normal, fontSize: 14),
               dividerColor: Colors.transparent,
               tabs: [
                 Tab(text: 'LIVE'),
@@ -158,7 +158,7 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
       child: Text(
         title,
         style: const TextStyle(
-          fontWeight: FontWeight.w900,
+          fontWeight: FontWeight.normal,
           color: Colors.black, // Changed from AppColors.textSecondary as requested
           fontSize: 13,
           letterSpacing: 0.5,
@@ -178,7 +178,7 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
             child: Text(
               seriesName,
               style: const TextStyle(
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.normal,
                 fontSize: 12,
                 color: AppColors.textSecondary,
               ),
@@ -214,8 +214,8 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
               children: [
                 Container(width: 20, height: 20, color: Colors.grey.shade200), // Logo
                 const SizedBox(width: 8),
-                Expanded(child: Text(team1, style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.textPrimary))),
-                Text(score1, style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+                Expanded(child: Text(team1, style: const TextStyle(fontWeight: FontWeight.normal, color: AppColors.textPrimary))),
+                Text(score1, style: const TextStyle(fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
               ],
             ),
             const SizedBox(height: 8),
@@ -223,8 +223,8 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
               children: [
                 Container(width: 20, height: 20, color: Colors.grey.shade200), // Logo
                 const SizedBox(width: 8),
-                Expanded(child: Text(team2, style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.textPrimary))),
-                Text(score2, style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+                Expanded(child: Text(team2, style: const TextStyle(fontWeight: FontWeight.normal, color: AppColors.textPrimary))),
+                Text(score2, style: const TextStyle(fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
               ],
             ),
             const SizedBox(height: 12),
@@ -232,7 +232,7 @@ class _LiveMatchScreenState extends State<LiveMatchScreen> {
               status,
               style: TextStyle(
                 color: isLive ? Colors.red : (isDone ? AppColors.primaryElectric : Colors.orange),
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.normal,
                 fontSize: 12,
               ),
             ),

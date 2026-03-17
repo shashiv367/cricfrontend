@@ -21,7 +21,7 @@ class CommunityCategoryScreen extends StatelessWidget {
         backgroundColor: AppColors.primaryElectric,
         foregroundColor: Colors.white,
         elevation: 0,
-        title: const Text('Community', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+        title: const Text('Community', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 18)),
         actions: [
           IconButton(icon: const Icon(Icons.search, color: Colors.white), onPressed: () {}),
           Stack(
@@ -33,7 +33,7 @@ class CommunityCategoryScreen extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(4),
                   decoration: const BoxDecoration(color: AppColors.primaryTeal, shape: BoxShape.circle),
-                  child: const Text('1', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+                  child: const Text('1', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.normal)),
                 ),
               ),
             ],
@@ -50,7 +50,7 @@ class CommunityCategoryScreen extends StatelessWidget {
                 Expanded(
                   child: Text(
                     categoryName,
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: AppColors.textPrimary),
                   ),
                 ),
                 Material(
@@ -66,7 +66,7 @@ class CommunityCategoryScreen extends StatelessWidget {
                         children: const [
                           Icon(Icons.add, color: Colors.white, size: 20),
                           SizedBox(width: 6),
-                          Text('Register', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+                          Text('Register', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 13)),
                         ],
                       ),
                     ),
@@ -84,7 +84,7 @@ class CommunityCategoryScreen extends StatelessWidget {
                   onTap: () {},
                   child: Text(
                     '$_location (change)',
-                    style: const TextStyle(fontSize: 13, color: AppColors.primaryTeal, fontWeight: FontWeight.w600),
+                    style: const TextStyle(fontSize: 13, color: AppColors.primaryTeal, fontWeight: FontWeight.normal),
                   ),
                 ),
                 const Spacer(),
@@ -143,7 +143,7 @@ class CommunityCategoryScreen extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
+                  style: const TextStyle(fontSize: 15, fontWeight: FontWeight.normal, color: AppColors.textPrimary),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -169,7 +169,7 @@ class CommunityCategoryScreen extends StatelessWidget {
                         ),
                         child: Text(
                           '$rating/$outOf',
-                          style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),
+                          style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.normal),
                         ),
                       ),
                       const SizedBox(width: 8),

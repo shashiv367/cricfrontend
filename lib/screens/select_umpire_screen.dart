@@ -151,7 +151,7 @@ class _SelectUmpireScreenState extends State<SelectUmpireScreen> {
               name.isNotEmpty ? name[0].toUpperCase() : '?',
               style: const TextStyle(
                 fontSize: 18,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.normal,
                 color: AppColors.primaryElectric,
               ),
             ),
@@ -165,7 +165,7 @@ class _SelectUmpireScreenState extends State<SelectUmpireScreen> {
                   name,
                   style: const TextStyle(
                     fontSize: 15,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.normal,
                     color: AppColors.textPrimary,
                   ),
                 ),

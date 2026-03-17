@@ -17,7 +17,7 @@ class DefaultPageBackground extends StatelessWidget {
         Positioned.fill(
           child: Container(color: AppColors.scaffoldSurface),
         ),
-        // Soft blurred glowing shapes (ethereal overlay)
+        // Soft blurred glowing shapes (ethereal overlay) – visible app background
         Positioned.fill(
           child: CustomPaint(
             painter: _BlurShapesPainter(),
@@ -33,15 +33,15 @@ class DefaultPageBackground extends StatelessWidget {
 class _BlurShapesPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    // Scattered pastel purple and pink circles (clearly visible)
+    // Scattered pastel purple and pink circles – clearly visible app background
     final shapes = [
-      _Shape(Offset(size.width * 0.15, size.height * 0.08), size.width * 0.55, size.width * 0.4, AppColors.blurShapeLightPurple, 0.22),
-      _Shape(Offset(size.width * 0.65, size.height * 0.12), size.width * 0.5, size.width * 0.35, AppColors.blurShapeLightPink, 0.18),
-      _Shape(Offset(size.width * 0.02, size.height * 0.38), size.width * 0.45, size.width * 0.55, AppColors.blurShapeLightPurple, 0.16),
-      _Shape(Offset(size.width * 0.58, size.height * 0.48), size.width * 0.55, size.width * 0.45, AppColors.blurShapeLightPink, 0.15),
-      _Shape(Offset(size.width * 0.72, size.height * 0.72), size.width * 0.5, size.width * 0.4, AppColors.blurShapeLightPink, 0.18),
-      _Shape(Offset(size.width * 0.08, size.height * 0.76), size.width * 0.4, size.width * 0.45, AppColors.blurShapeLightPurple, 0.14),
-      _Shape(Offset(size.width * 0.38, size.height * 0.32), size.width * 0.35, size.width * 0.4, AppColors.blurShapeLightPurple, 0.12),
+      _Shape(Offset(size.width * 0.15, size.height * 0.08), size.width * 0.55, size.width * 0.4, AppColors.blurShapeLightPurple, 0.32),
+      _Shape(Offset(size.width * 0.65, size.height * 0.12), size.width * 0.5, size.width * 0.35, AppColors.blurShapeLightPink, 0.28),
+      _Shape(Offset(size.width * 0.02, size.height * 0.38), size.width * 0.45, size.width * 0.55, AppColors.blurShapeLightPurple, 0.26),
+      _Shape(Offset(size.width * 0.58, size.height * 0.48), size.width * 0.55, size.width * 0.45, AppColors.blurShapeLightPink, 0.24),
+      _Shape(Offset(size.width * 0.72, size.height * 0.72), size.width * 0.5, size.width * 0.4, AppColors.blurShapeLightPink, 0.28),
+      _Shape(Offset(size.width * 0.08, size.height * 0.76), size.width * 0.4, size.width * 0.45, AppColors.blurShapeLightPurple, 0.22),
+      _Shape(Offset(size.width * 0.38, size.height * 0.32), size.width * 0.35, size.width * 0.4, AppColors.blurShapeLightPurple, 0.20),
     ];
     for (final s in shapes) {
       _paintBlurShape(canvas, s);

@@ -28,7 +28,7 @@ class MoreScreen extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 28,
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.normal,
                   letterSpacing: 2.0,
                 ),
               ),
@@ -37,7 +37,7 @@ class MoreScreen extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.white.withOpacity(0.7),
                   fontSize: 12,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                   letterSpacing: 1.2,
                 ),
               ),
@@ -81,7 +81,7 @@ class MoreScreen extends StatelessWidget {
               const SizedBox(height: 16),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-                child: Text('Account & Admin', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.textSecondary)),
+                child: Text('Account & Admin', style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: AppColors.textSecondary)),
               ),
               _buildMoreItem(
                 icon: Icons.account_circle_outlined,

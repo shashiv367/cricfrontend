@@ -86,8 +86,6 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
                   const SizedBox(height: 12),
                   _settingsGroup('Other Options', [
                     'Scoring help',
-                    'Share sync file',
-                    'Share the app',
                   ]),
                   const SizedBox(height: 16),
                   const Divider(),
@@ -807,18 +805,6 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
       ScaffoldMessenger.of(context).clearSnackBars();
     }
     setState(() => _loading = true);
-    
-    // Handle placeholder for demo/dev purposes
-    if (_matchId == 'placeholder' || _matchId == 'dummy') {
-      await Future.delayed(const Duration(milliseconds: 800));
-      if (mounted) {
-        setState(() {
-          _match = _getMockMatchData();
-          _loading = false;
-        });
-      }
-      return;
-    }
 
     try {
       final session = supabase.auth.currentSession;
@@ -838,62 +824,30 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
             _match!['playerStats'] = [...aStats, ...bStats];
           }
           
+          // Ensure score object exists so Live tab and quick scoring work (backend may return null when no match_score row yet)
+          if (_match != null && _match!['score'] == null) {
+            _match!['score'] = {
+              'team_a_score': 0,
+              'team_a_wkts': 0,
+              'team_a_overs': 0.0,
+              'team_b_score': 0,
+              'team_b_wkts': 0,
+              'team_b_overs': 0.0,
+            };
+          }
+          
           _loading = false;
         });
       }
     } catch (e) {
       developer.log('Error loading match details: $e');
-      
-      // Fallback to mock data on error so UI can still be refined/seen
       if (mounted) {
-        developer.log('Falling back to mock data due to error');
         setState(() {
-          _match = _getMockMatchData();
+          _match = null;
           _loading = false;
         });
       }
     }
-  }
-
-  Map<String, dynamic> _getMockMatchData() {
-    return {
-      'id': 'mock_123',
-      'team_a': {'id': 'team_1', 'name': 'Dudekonda Warriors'},
-      'team_b': {'id': 'team_2', 'name': 'Banglore Stars'},
-      'score': {
-        'team_a_score': 244,
-        'team_a_wkts': 4,
-        'team_a_overs': 20.0,
-        'team_b_score': 205,
-        'team_b_wkts': 7,
-        'team_b_overs': 20.0,
-      },
-      'status': 'completed',
-      'venue_details': {'name': 'Stadium Ground'},
-      'overs': 20,
-      'start_date': DateTime.now().toIso8601String(),
-      'tournament_name': 'Match of Kcr Saab',
-      'playerStats': [
-        {'player_name': 'S. Kumar', 'runs': 75, 'balls': 42, 'fours': 8, 'sixes': 3, 'wickets': 0, 'overs': 0.0, 'team_id': 'team_1'},
-        {'player_name': 'R. Sharma', 'runs': 45, 'balls': 30, 'fours': 4, 'sixes': 2, 'wickets': 2, 'overs': 4.0, 'team_id': 'team_2'},
-      ],
-      'commentary': [
-        {
-          'over_number': 19, 
-          'ball_number': 6, 
-          'event_type': '1',
-          'commentary_text': 'Final ball of the match. A single to deep mid-wicket.',
-          'runs': 1,
-        },
-        {
-          'over_number': 19, 
-          'ball_number': 5, 
-          'event_type': '6',
-          'commentary_text': 'SIX! Massive hit over long on.',
-          'runs': 6,
-        },
-      ]
-    };
   }
 
   @override
@@ -1010,24 +964,6 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
                     ),
                   ),
                   IconButton(icon: const Icon(Icons.refresh, color: Colors.white), onPressed: _loadMatchDetails),
-                  IconButton(
-                    icon: const Icon(Icons.share_rounded, color: Colors.white),
-                    tooltip: 'Share scorecard',
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Share scorecard – link copied'), backgroundColor: AppColors.accentGreen),
-                      );
-                    },
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.cast_rounded, color: Colors.white),
-                    tooltip: 'Broadcast score live',
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Broadcast score live – coming soon'), backgroundColor: AppColors.primaryElectric),
-                      );
-                    },
-                  ),
                   IconButton(icon: const Icon(Icons.notifications_none, color: Colors.white), onPressed: () {}),
                   IconButton(
                     icon: const Icon(Icons.more_vert, color: Colors.white),
@@ -1078,8 +1014,8 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
               'Overs': (_match?['overs'] ?? 20).toString(),
             }),
             _buildInfoSection('TEAMS', {
-              'Team A': _match?['team_a']?['name'] ?? 'TBA',
-              'Team B': _match?['team_b']?['name'] ?? 'TBA',
+              'Team A': _getTeamName(_match?['team_a'] ?? _match?['team_a_details'], 'TBA'),
+              'Team B': _getTeamName(_match?['team_b'] ?? _match?['team_b_details'], 'TBA'),
             }),
           ],
         ),
@@ -1116,25 +1052,39 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
     final status = statusRaw?.toString().toLowerCase() ?? '';
     final bool isCompleted = status.contains('completed') || status.contains('finished');
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.only(bottom: 24),
+    return Material(
+      color: Colors.transparent,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.max,
         children: [
           const SizedBox(height: 12),
           _buildModernScoreHeader(),
           const SizedBox(height: 12),
-          if (!isCompleted) ...[
-            _buildQuickControlsStrip(),
-            const SizedBox(height: 16),
-            _buildBatterBowlerCards(),
-            const SizedBox(height: 16),
-            _buildOverTimelineAndCommentary(),
-          ] else ...[
-            _buildPostMatchSummary(),
-            const SizedBox(height: 16),
-            _buildOverTimelineAndCommentary(),
-          ],
+          if (!isCompleted) _buildQuickControlsStrip(),
+          if (isCompleted) const SizedBox(height: 12),
+          const SizedBox(height: 16),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.only(bottom: 24),
+              physics: const ClampingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (!isCompleted) ...[
+                    _buildBatterBowlerCards(),
+                    const SizedBox(height: 16),
+                    _buildOverTimelineAndCommentary(),
+                  ] else ...[
+                    _buildPostMatchSummary(),
+                    const SizedBox(height: 16),
+                    _buildOverTimelineAndCommentary(),
+                  ],
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -1144,16 +1094,16 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
   Widget _buildModernScoreHeader() {
     final score = _match?['score'];
     final status = _match?['status'];
-    final teamAName = _match?['team_a']?['name'] ?? 'Team A';
-    final teamBName = _match?['team_b']?['name'] ?? 'Team B';
+    final teamAName = _getTeamName(_match?['team_a'] ?? _match?['team_a_details'], 'Team A');
+    final teamBName = _getTeamName(_match?['team_b'] ?? _match?['team_b_details'], 'Team B');
 
-    final teamAScore = score?['team_a_score'] ?? 0;
-    final teamAWkts = score?['team_a_wkts'] ?? 0;
-    final teamAOvers = (score?['team_a_overs'] ?? 0.0) * 1.0;
+    final teamAScore = _parseInt(score?['team_a_score'], 0);
+    final teamAWkts = _parseInt(score?['team_a_wkts'], 0);
+    final teamAOvers = _parseDouble(score?['team_a_overs'], 0.0);
 
-    final teamBScore = score?['team_b_score'] ?? 0;
-    final teamBWkts = score?['team_b_wkts'] ?? 0;
-    final teamBOvers = (score?['team_b_overs'] ?? 0.0) * 1.0;
+    final teamBScore = _parseInt(score?['team_b_score'], 0);
+    final teamBWkts = _parseInt(score?['team_b_wkts'], 0);
+    final teamBOvers = _parseDouble(score?['team_b_overs'], 0.0);
 
     // Decide who is currently batting based on overs bowled (simple heuristic)
     final bool isTeamBBatting = teamBOvers > teamAOvers;
@@ -1184,6 +1134,7 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
         decoration: BoxDecoration(
+          color: Colors.white,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
@@ -1322,6 +1273,19 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
     );
   }
 
+  int _parseInt(dynamic v, int def) {
+    if (v == null) return def;
+    if (v is int) return v;
+    return int.tryParse(v.toString()) ?? def;
+  }
+
+  double _parseDouble(dynamic v, double def) {
+    if (v == null) return def;
+    if (v is double) return v;
+    if (v is int) return v.toDouble();
+    return double.tryParse(v.toString()) ?? def;
+  }
+
   int _oversToBalls(double overs) {
     final whole = overs.floor();
     final fraction = ((overs - whole) * 10).round(); // 0.0 → 0, 0.1 → 1 ball ...
@@ -1330,8 +1294,8 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
   }
 
   Widget _buildStatusChip(dynamic statusRaw) {
-    final status = statusRaw?.toString().toLowerCase() ?? 'scheduled';
-    String label = status.toUpperCase();
+    final status = (statusRaw?.toString().toLowerCase() ?? 'scheduled').trim();
+    String label = status.isEmpty ? 'SCHEDULED' : status.toUpperCase();
     Color bg = Colors.grey;
 
     if (status.contains('live')) {
@@ -1363,7 +1327,7 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
     );
   }
 
-  // 4.2 Quick controls strip – scoring buttons
+  // 4.2 Quick controls strip – scoring buttons (Wrap so horizontal scroll doesn't block tab swipe)
   Widget _buildQuickControlsStrip() {
     final controls = [
       '+1',
@@ -1377,24 +1341,19 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
       '0.1 over',
     ];
 
-    return SizedBox(
-      height: 60,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: Row(
-          children: controls.map((label) {
-            final isPrimary = label == '4' || label == '6' || label == 'W';
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: _quickControlButton(
-                label,
-                isPrimary: isPrimary,
-                onTap: label == 'W' ? () => _showSelectOutTypeSheet() : null,
-              ),
-            );
-          }).toList(),
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: controls.map((label) {
+          final isPrimary = label == '4' || label == '6' || label == 'W';
+          return _quickControlButton(
+            label,
+            isPrimary: isPrimary,
+            onTap: label == 'W' ? () => _showSelectOutTypeSheet() : null,
+          );
+        }).toList(),
       ),
     );
   }
@@ -1585,45 +1544,50 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
         'sixes': 0,
         'wickets': 0,
         'overs': 0,
+        'runs_conceded': 0,
       });
     }
+
+    // Placeholder cards when no batters/bowlers yet so Live tab is never empty
+    final strikerPlaceholder = {'player_name': 'Striker', 'runs': 0, 'balls': 0, 'fours': 0, 'sixes': 0};
+    final nonStrikerPlaceholder = {'player_name': 'Non-striker', 'runs': 0, 'balls': 0, 'fours': 0, 'sixes': 0};
+    final bowlerPlaceholder = {'player_name': 'Bowler', 'wickets': 0, 'overs': 0, 'runs_conceded': 0};
+
+    final showBatters = batters.isNotEmpty ? batters : [strikerPlaceholder, nonStrikerPlaceholder];
+    final showBowlers = bowlers.isNotEmpty ? bowlers : [bowlerPlaceholder];
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          if (batters.isNotEmpty) ...[
-            Row(
-              children: [
+          Row(
+            children: [
+              Expanded(
+                child: _batterCard(
+                  label: 'STRIKER',
+                  player: showBatters[0] as Map<String, dynamic>,
+                  onStrike: true,
+                ),
+              ),
+              if (showBatters.length > 1) ...[
+                const SizedBox(width: 12),
                 Expanded(
                   child: _batterCard(
-                    label: 'STRIKER',
-                    player: batters[0],
-                    onStrike: true,
+                    label: 'NON-STRIKER',
+                    player: showBatters[1] as Map<String, dynamic>,
+                    onStrike: false,
                   ),
                 ),
-                if (batters.length > 1) ...[
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: _batterCard(
-                      label: 'NON-STRIKER',
-                      player: batters[1],
-                      onStrike: false,
-                    ),
-                  ),
-                ],
               ],
-            ),
-          ],
-          if (bowlers.isNotEmpty) ...[
-            const SizedBox(height: 12),
-            _bowlerCard(
-              bowler: bowlers.first,
-              overLabel: (currentOver != null && currentBall != null)
-                  ? 'Over $currentOver.$currentBall'
-                  : 'Current spell',
-            ),
-          ],
+            ],
+          ),
+          const SizedBox(height: 12),
+          _bowlerCard(
+            bowler: showBowlers.first as Map<String, dynamic>,
+            overLabel: (currentOver != null && currentBall != null)
+                ? 'Over $currentOver.$currentBall'
+                : (bowlers.isEmpty ? 'Yet to bowl' : 'Current spell'),
+          ),
         ],
       ),
     );
@@ -1859,7 +1823,8 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
               labels[0],
               style: const TextStyle(
                 fontSize: 11,
-                color: AppColors.textSecondary,
+                color: Colors.black,
+                fontWeight: FontWeight.normal,
               ),
             ),
           ),
@@ -1870,7 +1835,8 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 11,
-                  color: AppColors.textSecondary,
+                  color: Colors.black,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
             ),
@@ -2230,32 +2196,6 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
         Row(
           children: [
             Expanded(
-              child: ElevatedButton.icon(
-                icon: const Icon(Icons.share_rounded, size: 18),
-                label: const Text(
-                  'Share scorecard',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryElectric,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                ),
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Share scorecard – link copied'),
-                      backgroundColor: AppColors.accentGreen,
-                    ),
-                  );
-                },
-              ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
               child: OutlinedButton(
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: AppColors.primaryElectric),
@@ -2524,14 +2464,17 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
     final teamAScore = '${score?['team_a_score'] ?? 0}-${score?['team_a_wkts'] ?? 0} (${score?['team_a_overs'] ?? 0})';
     final teamBScore = '${score?['team_b_score'] ?? 0}-${score?['team_b_wkts'] ?? 0} (${score?['team_b_overs'] ?? 0})';
 
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          _inningsSection(teamA, teamAScore, 0),
-          if (_expandedInnings == 0) _buildInningsContent(0),
-          _inningsSection(teamB, teamBScore, 1),
-          if (_expandedInnings == 1) _buildInningsContent(1),
-        ],
+    return Material(
+      color: Colors.transparent,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            _inningsSection(teamA, teamAScore, 0),
+            if (_expandedInnings == 0) _buildInningsContent(0),
+            _inningsSection(teamB, teamBScore, 1),
+            if (_expandedInnings == 1) _buildInningsContent(1),
+          ],
+        ),
       ),
     );
   }
@@ -2549,15 +2492,15 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
         });
       },
       child: Container(
-        color: isExpanded ? AppColors.primaryElectric.withOpacity(0.9) : Colors.grey[50], // Removed green
+        color: isExpanded ? AppColors.primaryElectric.withOpacity(0.9) : Colors.transparent,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-             Text(team, style: TextStyle(color: isExpanded ? Colors.white : AppColors.textPrimary, fontWeight: FontWeight.bold)),
+             Text(team, style: TextStyle(color: isExpanded ? Colors.white : Colors.black, fontWeight: FontWeight.normal)),
              Row(
                children: [
-                 Text(score, style: TextStyle(color: isExpanded ? Colors.white : AppColors.textPrimary, fontWeight: FontWeight.bold)),
+                 Text(score, style: TextStyle(color: isExpanded ? Colors.white : Colors.black, fontWeight: FontWeight.normal)),
                  Icon(isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down, color: isExpanded ? Colors.white : AppColors.textSecondary),
                ],
              ),
@@ -2608,9 +2551,9 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Did not bat', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+          const Text('Did not bat', style: TextStyle(fontWeight: FontWeight.normal, fontSize: 13, color: Colors.black)),
           const SizedBox(height: 8),
-          Text(players, style: const TextStyle(color: Colors.grey, fontSize: 12, height: 1.4)),
+          Text(players, style: const TextStyle(color: Colors.black, fontSize: 12, height: 1.4)),
         ],
       ),
     );
@@ -2626,16 +2569,16 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name, style: const TextStyle(color: AppColors.primaryElectric, fontWeight: FontWeight.bold)),
-                Text(desc, style: const TextStyle(color: Colors.grey, fontSize: 11)),
+                Text(name, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.normal)),
+                Text(desc, style: const TextStyle(color: Colors.black54, fontSize: 11)),
               ],
             ),
           ),
-          Expanded(child: Text(r, textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.bold))),
-          Expanded(child: Text(b, textAlign: TextAlign.center)),
-          Expanded(child: Text(f, textAlign: TextAlign.center)),
-          Expanded(child: Text(s, textAlign: TextAlign.center)),
-          Expanded(child: Text(sr, textAlign: TextAlign.center)),
+          Expanded(child: Text(r, textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.normal, color: Colors.black))),
+          Expanded(child: Text(b, textAlign: TextAlign.center, style: const TextStyle(color: Colors.black))),
+          Expanded(child: Text(f, textAlign: TextAlign.center, style: const TextStyle(color: Colors.black))),
+          Expanded(child: Text(s, textAlign: TextAlign.center, style: const TextStyle(color: Colors.black))),
+          Expanded(child: Text(sr, textAlign: TextAlign.center, style: const TextStyle(color: Colors.black))),
         ],
       ),
     );
@@ -2646,12 +2589,12 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
       padding: const EdgeInsets.all(16),
       child: Row(
         children: [
-          Expanded(flex: 3, child: Text(name, style: const TextStyle(color: AppColors.primaryElectric, fontWeight: FontWeight.bold))),
-          Expanded(child: Text(o, textAlign: TextAlign.center)),
-          Expanded(child: Text(m, textAlign: TextAlign.center)),
-          Expanded(child: Text(r, textAlign: TextAlign.center)),
-          Expanded(child: Text(w, textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.bold))),
-          Expanded(child: Text(er, textAlign: TextAlign.center)),
+          Expanded(flex: 3, child: Text(name, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.normal))),
+          Expanded(child: Text(o, textAlign: TextAlign.center, style: const TextStyle(color: Colors.black))),
+          Expanded(child: Text(m, textAlign: TextAlign.center, style: const TextStyle(color: Colors.black))),
+          Expanded(child: Text(r, textAlign: TextAlign.center, style: const TextStyle(color: Colors.black))),
+          Expanded(child: Text(w, textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.normal, color: Colors.black))),
+          Expanded(child: Text(er, textAlign: TextAlign.center, style: const TextStyle(color: Colors.black))),
         ],
       ),
     );
@@ -2671,8 +2614,8 @@ class _LiveDetailScreenState extends State<LiveDetailScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
         children: [
-          SizedBox(width: 60, child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold))),
-          Expanded(child: Text(value, style: TextStyle(fontWeight: isBold ? FontWeight.bold : FontWeight.normal))),
+          SizedBox(width: 60, child: Text(label, style: const TextStyle(fontWeight: FontWeight.normal, color: Colors.black))),
+          Expanded(child: Text(value, style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black))),
         ],
       ),
     );

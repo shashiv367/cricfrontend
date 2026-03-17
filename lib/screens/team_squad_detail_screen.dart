@@ -70,7 +70,7 @@ class TeamSquadDetailScreen extends StatelessWidget {
               Expanded(
                 child: Text(
                   title,
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 20),
                 ),
               ),
             ],
@@ -87,7 +87,7 @@ class TeamSquadDetailScreen extends StatelessWidget {
       color: Colors.white.withOpacity(0.5),
       child: Text(
         title,
-        style: const TextStyle(fontWeight: FontWeight.w900, color: AppColors.textSecondary, fontSize: 13, letterSpacing: 0.5),
+        style: const TextStyle(fontWeight: FontWeight.normal, color: AppColors.textSecondary, fontSize: 13, letterSpacing: 0.5),
       ),
     );
   }
@@ -106,7 +106,7 @@ class TeamSquadDetailScreen extends StatelessWidget {
             ? null // In a real app, use Image.network
             : const Icon(Icons.person, color: Colors.grey),
         ),
-        title: Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppColors.textPrimary)),
+        title: Text(name, style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 16, color: AppColors.textPrimary)),
       ),
     );
   }

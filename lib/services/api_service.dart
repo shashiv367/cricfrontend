@@ -52,7 +52,9 @@ class ApiService {
     } catch (e) {
       developer.log('❌ [API] Error parsing response: $e');
       if (e is FormatException) {
-        throw Exception('Server returned an invalid response.');
+        final raw = response.body;
+        final snippet = raw.length > 300 ? '${raw.substring(0, 300)}...' : raw;
+        throw Exception('Server returned an invalid response (${response.statusCode}). ${snippet.isEmpty ? 'Empty body' : snippet}');
       }
       rethrow;
     }

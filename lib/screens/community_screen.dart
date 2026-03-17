@@ -32,7 +32,7 @@ class CommunityScreen extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 15,
                             color: AppColors.primaryTeal,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ),
@@ -106,7 +106,7 @@ class CommunityScreen extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontSize: 12,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.normal,
                   color: AppColors.textPrimary,
                 ),
               ),

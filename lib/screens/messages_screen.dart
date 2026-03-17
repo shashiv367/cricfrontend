@@ -15,7 +15,7 @@ class MessagesScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Messages', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text('Messages', style: TextStyle(fontWeight: FontWeight.normal)),
         backgroundColor: AppColors.primaryElectric,
         foregroundColor: Colors.white,
       ),
@@ -27,9 +27,9 @@ class MessagesScreen extends StatelessWidget {
           return ListTile(
             leading: CircleAvatar(
               backgroundColor: AppColors.primaryElectric.withOpacity(0.1),
-              child: Text(chat['name'].toString()[0], style: const TextStyle(color: AppColors.primaryElectric, fontWeight: FontWeight.bold)),
+              child: Text(chat['name'].toString()[0], style: const TextStyle(color: AppColors.primaryElectric, fontWeight: FontWeight.normal)),
             ),
-            title: Text(chat['name'].toString(), style: const TextStyle(fontWeight: FontWeight.bold)),
+            title: Text(chat['name'].toString(), style: const TextStyle(fontWeight: FontWeight.normal)),
             subtitle: Text(chat['msg'].toString(), maxLines: 1, overflow: TextOverflow.ellipsis),
             trailing: Column(
               mainAxisAlignment: MainAxisAlignment.center,

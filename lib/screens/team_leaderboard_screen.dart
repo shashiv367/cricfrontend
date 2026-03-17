@@ -49,7 +49,7 @@ class _TeamLeaderboardScreenState extends State<TeamLeaderboardScreen> with Sing
         ),
         title: const Text(
           'Team Leaderboard',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 18),
         ),
         actions: [
           IconButton(icon: const Icon(Icons.help_outline, color: Colors.white), onPressed: () {}),
@@ -69,7 +69,7 @@ class _TeamLeaderboardScreenState extends State<TeamLeaderboardScreen> with Sing
                 indicatorWeight: 3,
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.white70,
-                labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                labelStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 13),
                 unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 13),
                 dividerColor: Colors.transparent,
                 tabs: _tabs.map((s) => Tab(text: s)).toList(),
@@ -134,7 +134,7 @@ class _TeamLeaderboardPageState extends State<_TeamLeaderboardPage> {
             _criteria,
             style: const TextStyle(
               color: AppColors.primaryTeal,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.normal,
               fontSize: 14,
             ),
           ),
@@ -165,7 +165,7 @@ class _TeamLeaderboardPageState extends State<_TeamLeaderboardPage> {
             rank.toString().padLeft(2, '0'),
             style: const TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.normal,
               color: AppColors.textSecondary,
             ),
           ),
@@ -178,7 +178,7 @@ class _TeamLeaderboardPageState extends State<_TeamLeaderboardPage> {
                 backgroundColor: AppColors.backgroundCardAlt,
                 child: Text(
                   name.isNotEmpty ? name.substring(0, 1).toUpperCase() : '?',
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textSecondary),
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.normal, color: AppColors.textSecondary),
                 ),
               ),
               Positioned(
@@ -202,7 +202,7 @@ class _TeamLeaderboardPageState extends State<_TeamLeaderboardPage> {
               children: [
                 Text(
                   name,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.textPrimary),
+                  style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 14, color: AppColors.textPrimary),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -216,7 +216,7 @@ class _TeamLeaderboardPageState extends State<_TeamLeaderboardPage> {
           ),
           Text(
             '$score',
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.normal, color: AppColors.textPrimary),
           ),
         ],
       ),
@@ -236,7 +236,7 @@ class _TeamLeaderboardPageState extends State<_TeamLeaderboardPage> {
               const Expanded(
                 child: Text(
                   'Ready to challenge yourself?',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: AppColors.textPrimary),
+                  style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15, color: AppColors.textPrimary),
                 ),
               ),
               GestureDetector(
@@ -262,7 +262,7 @@ class _TeamLeaderboardPageState extends State<_TeamLeaderboardPage> {
           Center(
             child: GestureDetector(
               onTap: () {},
-              child: const Text('Explore', style: TextStyle(color: AppColors.primaryTeal, fontWeight: FontWeight.w600, fontSize: 14)),
+              child: const Text('Explore', style: TextStyle(color: AppColors.primaryTeal, fontWeight: FontWeight.normal, fontSize: 14)),
             ),
           ),
         ],
@@ -297,14 +297,14 @@ class _TeamLeaderboardPageState extends State<_TeamLeaderboardPage> {
                 child: Center(
                   child: Text(
                     badgeText.length > 10 ? '${badgeText.substring(0, 8)}..' : badgeText,
-                    style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold),
+                    style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.normal),
                     textAlign: TextAlign.center,
                   ),
                 ),
               ),
             ],
           ),
-          Text(title, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: AppColors.textPrimary)),
+          Text(title, style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 13, color: AppColors.textPrimary)),
           Row(
             children: [
               const Text('Limited Overs', style: TextStyle(fontSize: 11, color: AppColors.textSecondary)),
@@ -322,7 +322,7 @@ class _TeamLeaderboardPageState extends State<_TeamLeaderboardPage> {
                 borderRadius: BorderRadius.circular(8),
                 child: const Padding(
                   padding: EdgeInsets.symmetric(vertical: 10),
-                  child: Center(child: Text('Join', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13))),
+                  child: Center(child: Text('Join', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 13))),
                 ),
               ),
             ),

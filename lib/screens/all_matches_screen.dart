@@ -32,7 +32,7 @@ class _AllMatchesScreenState extends State<AllMatchesScreen> with SingleTickerPr
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        title: const Text('All Matches', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text('All Matches', style: TextStyle(fontWeight: FontWeight.normal)),
         backgroundColor: AppColors.primaryElectric,
         foregroundColor: Colors.white,
         bottom: TabBar(
@@ -143,7 +143,7 @@ class _MatchListTabState extends State<_MatchListTab> with AutomaticKeepAliveCli
           const SizedBox(height: 16),
           Text(
             'No ${widget.status} matches',
-            style: TextStyle(color: Colors.grey[600], fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.grey[600], fontSize: 16, fontWeight: FontWeight.normal),
           ),
           const SizedBox(height: 8),
           Text(
@@ -190,7 +190,7 @@ class _MatchListTabState extends State<_MatchListTab> with AutomaticKeepAliveCli
                 children: [
                   Text(
                     match['tournament_name'] ?? 'Local Match',
-                    style: TextStyle(color: Colors.grey[500], fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 0.5),
+                    style: TextStyle(color: Colors.grey[500], fontSize: 11, fontWeight: FontWeight.normal, letterSpacing: 0.5),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -203,7 +203,7 @@ class _MatchListTabState extends State<_MatchListTab> with AutomaticKeepAliveCli
                       style: TextStyle(
                         color: isLive ? Colors.white : Colors.grey[600],
                         fontSize: 10,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ),
@@ -237,7 +237,7 @@ class _MatchListTabState extends State<_MatchListTab> with AutomaticKeepAliveCli
                    const Spacer(),
                    const Text(
                      'View Scorecard →',
-                     style: TextStyle(color: AppColors.primaryTeal, fontWeight: FontWeight.bold, fontSize: 12),
+                     style: TextStyle(color: AppColors.primaryTeal, fontWeight: FontWeight.normal, fontSize: 12),
                    ),
                 ],
               ),
@@ -264,7 +264,7 @@ class _MatchListTabState extends State<_MatchListTab> with AutomaticKeepAliveCli
         Expanded(
           child: Text(
             name,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color(0xFF333333)),
+            style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 15, color: Color(0xFF333333)),
           ),
         ),
         Column(
@@ -272,7 +272,7 @@ class _MatchListTabState extends State<_MatchListTab> with AutomaticKeepAliveCli
           children: [
             Text(
               score,
-              style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: Color(0xFF333333)),
+              style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 16, color: Color(0xFF333333)),
             ),
             Text(overs, style: TextStyle(color: Colors.grey[400], fontSize: 11)),
           ],

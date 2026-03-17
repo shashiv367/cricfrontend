@@ -158,8 +158,37 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
               icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 20),
               onPressed: () => Navigator.pop(context),
             ),
-            title: const Text('CREATE MATCH', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, letterSpacing: 1.2, fontSize: 16)),
+            title: const Text('CREATE MATCH', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, letterSpacing: 1.2, fontSize: 16)),
             centerTitle: true,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: TextButton(
+                  onPressed: saving
+                      ? null
+                      : () async {
+                          final id = await _saveMatch();
+                          if (!mounted || id == null) return;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: const Text('Match saved.'),
+                              backgroundColor: AppColors.accentGreen,
+                              behavior: SnackBarBehavior.floating,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            ),
+                          );
+                        },
+                  child: const Text(
+                    'Save',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.normal,
+                      letterSpacing: 0.6,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
 
           SliverToBoxAdapter(
@@ -218,7 +247,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
                     child: Column(
                       children: [
                         SwitchListTile(
-                          title: const Text('Public Match', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                          title: const Text('Public Match', style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15)),
                           subtitle: Text(isPublic ? 'Visible to global feed' : 'Private: Invite only', style: const TextStyle(fontSize: 12)),
                           value: isPublic,
                           activeColor: AppColors.primaryElectric,
@@ -241,8 +270,8 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      const Text('SHARE INVITE CODE', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: AppColors.textSecondary, letterSpacing: 1)),
-                                      Text(inviteCode!, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: AppColors.primaryElectric, letterSpacing: 2)),
+                                      const Text('SHARE INVITE CODE', style: TextStyle(fontSize: 10, fontWeight: FontWeight.normal, color: AppColors.textSecondary, letterSpacing: 1)),
+                                      Text(inviteCode!, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.normal, color: AppColors.primaryElectric, letterSpacing: 2)),
                                     ],
                                   ),
                                 ),
@@ -252,34 +281,6 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
                         ],
                       ],
                     ),
-                  ),
-
-                  const SizedBox(height: 24),
-                  _buildSectionLabel('LIVE SCORING PREVIEW'),
-                  const SizedBox(height: 16),
-
-                  _proScoreCard(
-                    title: teamAName ?? 'TEAM A',
-                    score: scoreA,
-                    wickets: wicketsA,
-                    overs: oversA,
-                    onAddRun: (r) => _incrementScore(true, r),
-                    onAddWicket: () => _incrementWicket(true),
-                    onAddOver: () => _incrementOver(true),
-                    accentColor: AppColors.primaryElectric,
-                    isA: true,
-                  ),
-                  const SizedBox(height: 16),
-                  _proScoreCard(
-                    title: teamBName ?? 'TEAM B',
-                    score: scoreB,
-                    wickets: wicketsB,
-                    overs: oversB,
-                    onAddRun: (r) => _incrementScore(false, r),
-                    onAddWicket: () => _incrementWicket(false),
-                    onAddOver: () => _incrementOver(false),
-                    accentColor: AppColors.accentSunset,
-                    isA: false,
                   ),
 
                   const SizedBox(height: 32),
@@ -315,7 +316,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
                             },
                       child: saving
                           ? const SizedBox(height: 24, width: 24, child: CircularProgressIndicator(strokeWidth: 3, color: Colors.white))
-                          : const Text('Next (toss)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, letterSpacing: 1.2)),
+                          : const Text('Next (toss)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, letterSpacing: 1.2)),
                     ),
                   ),
                   
@@ -332,7 +333,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                       ),
                       onPressed: matchId == null ? null : _openPlayerStatsSheet,
-                      child: const Text('ADD PLAYER STATS', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1)),
+                      child: const Text('ADD PLAYER STATS', style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, letterSpacing: 1)),
                     ),
                   ),
                   
@@ -352,7 +353,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
       style: const TextStyle(
         color: AppColors.textSecondary,
         fontSize: 12,
-        fontWeight: FontWeight.w900,
+        fontWeight: FontWeight.normal,
         letterSpacing: 1.5,
       ),
     );
@@ -380,13 +381,13 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
             children: [
               Icon(icon, size: 18, color: accentColor),
               const SizedBox(width: 8),
-              Text(label, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: accentColor, letterSpacing: 1)),
+              Text(label, style: TextStyle(fontSize: 11, fontWeight: FontWeight.normal, color: accentColor, letterSpacing: 1)),
             ],
           ),
           const SizedBox(height: 8),
           TextFormField(
             controller: controller,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.normal, color: AppColors.textPrimary),
             decoration: InputDecoration(
               hintText: 'Enter name...',
               hintStyle: TextStyle(fontSize: 18, color: AppColors.textSecondary.withOpacity(0.3)),
@@ -429,12 +430,12 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
             children: [
               Text(
                 title.toUpperCase(),
-                style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: AppColors.textPrimary, letterSpacing: 1),
+                style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 13, color: AppColors.textPrimary, letterSpacing: 1),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(color: AppColors.backgroundLight, borderRadius: BorderRadius.circular(20)),
-                child: Text('${overs.toStringAsFixed(1)} OVERS', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: AppColors.textSecondary)),
+                child: Text('${overs.toStringAsFixed(1)} OVERS', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.normal, color: AppColors.textSecondary)),
               ),
             ],
           ),
@@ -445,11 +446,11 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
             children: [
               Text(
                 '$score',
-                style: TextStyle(fontSize: 48, fontWeight: FontWeight.w900, color: accentColor),
+                style: TextStyle(fontSize: 48, fontWeight: FontWeight.normal, color: accentColor),
               ),
               Text(
                 ' / $wickets',
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.normal, color: AppColors.textPrimary),
               ),
             ],
           ),
@@ -490,7 +491,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
             label,
             style: TextStyle(
               fontSize: 12,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.normal,
               color: selected ? Colors.white : AppColors.textSecondary,
             ),
           ),
@@ -538,7 +539,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
                       'No. of overs',
                       style: TextStyle(
                         fontSize: 12,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.normal,
                         color: AppColors.textSecondary,
                       ),
                     ),
@@ -573,7 +574,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
                       'Overs per bowler',
                       style: TextStyle(
                         fontSize: 12,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.normal,
                         color: AppColors.textSecondary,
                       ),
                     ),
@@ -607,7 +608,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
                     'Power play >',
                     style: TextStyle(
                       fontSize: 12,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.normal,
                       color: AppColors.primaryTeal,
                     ),
                   ),
@@ -621,7 +622,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
             'City / town',
             style: TextStyle(
               fontSize: 12,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.normal,
               color: AppColors.textSecondary,
             ),
           ),
@@ -648,7 +649,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
             'Date & time',
             style: TextStyle(
               fontSize: 12,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.normal,
               color: AppColors.textSecondary,
             ),
           ),
@@ -682,7 +683,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
             'Ball type',
             style: TextStyle(
               fontSize: 12,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.normal,
               color: AppColors.textSecondary,
             ),
           ),
@@ -705,7 +706,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
                   'Wagon wheel',
                   style: TextStyle(
                     fontSize: 12,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.normal,
                     color: AppColors.textSecondary,
                   ),
                 ),
@@ -731,7 +732,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
             'Pitch type',
             style: TextStyle(
               fontSize: 12,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.normal,
               color: AppColors.textSecondary,
             ),
           ),
@@ -753,7 +754,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
             'Match officials',
             style: TextStyle(
               fontSize: 12,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.normal,
               color: AppColors.textSecondary,
             ),
           ),
@@ -764,26 +765,42 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
                       Expanded(
                         child: Wrap(
                           spacing: 12,
-                          children: const [
-                            _OfficialIcon(label: 'Umpires', icon: Icons.account_circle_outlined, count: 1),
-                            _OfficialIcon(label: 'Scorers', icon: Icons.receipt_long_outlined),
-                            _OfficialIcon(label: 'Live streamer', icon: Icons.videocam_outlined),
-                            _OfficialIcon(label: 'Others', icon: Icons.more_horiz),
+                          children: [
+                            _OfficialIcon(
+                              label: 'Umpires',
+                              icon: Icons.account_circle_outlined,
+                              count: 1,
+                              onTap: saving ? null : _openMatchOfficials,
+                            ),
+                            _OfficialIcon(
+                              label: 'Scorers',
+                              icon: Icons.receipt_long_outlined,
+                              onTap: saving ? null : _openMatchOfficials,
+                            ),
+                            _OfficialIcon(
+                              label: 'Live streamer',
+                              icon: Icons.videocam_outlined,
+                              onTap: saving ? null : _openMatchOfficials,
+                            ),
+                            _OfficialIcon(
+                              label: 'Others',
+                              icon: Icons.more_horiz,
+                              onTap: saving ? null : _openMatchOfficials,
+                            ),
                           ],
                         ),
                       ),
                       TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (_) => const MatchOfficialsScreen()),
-                          );
-                        },
+                        onPressed: saving
+                            ? null
+                            : () async {
+                                await _openMatchOfficials();
+                              },
                         child: const Text(
                           'Edit',
                           style: TextStyle(
                             color: AppColors.primaryTeal,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ),
@@ -801,7 +818,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
         label,
         style: TextStyle(
           fontSize: 12,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.normal,
           color: selected ? Colors.white : AppColors.textSecondary,
         ),
       ),
@@ -820,7 +837,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
         code,
         style: TextStyle(
           fontSize: 11,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.normal,
           color: selected ? Colors.white : AppColors.textSecondary,
         ),
       ),
@@ -903,7 +920,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
                 'Power play',
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.normal,
                   color: AppColors.textPrimary,
                 ),
               ),
@@ -936,7 +953,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
               label,
               style: TextStyle(
                 color: isSpecial ? Colors.white : color,
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.normal,
                 fontSize: 16,
               ),
             ),
@@ -944,6 +961,65 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _openMatchOfficials() async {
+    // Ensure the match is saved before opening officials so invite sending works.
+    final id = matchId ?? await _saveMatch();
+    if (!mounted || id == null) return;
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => MatchOfficialsScreen(
+          matchId: id,
+          inviteCode: inviteCode,
+        ),
+      ),
+    );
+  }
+
+  Future<void> _addLocationManually() async {
+    final selected = await showDialog<String>(
+      context: context,
+      barrierDismissible: true,
+      builder: (ctx) {
+        final controller = TextEditingController(text: _groundName ?? '');
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          title: const Text('Add location', style: TextStyle(fontWeight: FontWeight.normal)),
+          content: TextField(
+            controller: controller,
+            autofocus: true,
+            decoration: const InputDecoration(
+              hintText: 'Enter ground / location name',
+              hintStyle: TextStyle(fontWeight: FontWeight.normal),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('Cancel', style: TextStyle(fontWeight: FontWeight.normal)),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primaryTeal,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () {
+                final name = controller.text.trim();
+                if (name.isEmpty) return;
+                Navigator.pop(ctx, name);
+              },
+              child: const Text('Add', style: TextStyle(fontWeight: FontWeight.normal)),
+            ),
+          ],
+        );
+      },
+    );
+    if (!mounted) return;
+    if (selected != null && selected.trim().isNotEmpty) {
+      setState(() => _groundName = selected.trim());
+    }
   }
 
   Widget _buildGroundSelector(BuildContext context) {
@@ -975,7 +1051,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
                   'GROUND / LOCATION',
                   style: TextStyle(
                     fontSize: 11,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                     color: AppColors.textSecondary,
                     letterSpacing: 1,
                   ),
@@ -985,7 +1061,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
                   _groundName ?? 'Select ground',
                   style: TextStyle(
                     fontSize: 15,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.normal,
                     color: _groundName == null ? AppColors.textSecondary : AppColors.textPrimary,
                   ),
                 ),
@@ -1005,7 +1081,18 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
             child: const Text(
               'Change',
               style: TextStyle(
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.normal,
+                fontSize: 13,
+                color: AppColors.primaryTeal,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: _addLocationManually,
+            child: const Text(
+              'Add',
+              style: TextStyle(
+                fontWeight: FontWeight.normal,
                 fontSize: 13,
                 color: AppColors.primaryTeal,
               ),
@@ -1022,7 +1109,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
     try {
       final overs = int.tryParse(_oversController.text.trim()) ?? 20;
       final oversPerBowler = int.tryParse(_oversPerBowlerController.text.trim());
-      final id = await _matchService.createMatch(
+      final resp = await _matchService.createMatch(
         teamAName: _teamAController.text.trim(),
         teamBName: _teamBController.text.trim(),
         venue: _groundName,
@@ -1031,22 +1118,29 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
         startDate: _matchDateTime,
         oversPerBowler: oversPerBowler,
       );
-      
-      final code = await _matchService.getInviteCode(id);
+
+      final id = resp['matchId']?.toString();
+      if (id == null || id.isEmpty) throw Exception('Match id missing');
+      final code = resp['inviteCode']?.toString();
       
       setState(() {
         matchId = id;
         teamAName = _teamAController.text.trim();
         teamBName = _teamBController.text.trim();
-        inviteCode = code;
+        inviteCode = (code != null && code.trim().isNotEmpty) ? code.trim() : inviteCode;
       });
+
+      // Fetch real team UUIDs for pre-populating match players.
+      final teamIds = await _matchService.getMatchTeamIds(id);
+      final teamAId = teamIds['A']!;
+      final teamBId = teamIds['B']!;
 
       // Pre-populate match with selected squad players (no stats yet).
       if (_teamASquad != null) {
         for (final name in _teamASquad!.players) {
           await _matchService.addPlayerStat(
             matchId: id,
-            teamId: teamAName ?? '',
+            teamId: teamAId,
             playerName: name,
           );
         }
@@ -1055,7 +1149,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
         for (final name in _teamBSquad!.players) {
           await _matchService.addPlayerStat(
             matchId: id,
-            teamId: teamBName ?? '',
+            teamId: teamBId,
             playerName: name,
           );
         }
@@ -1119,7 +1213,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('ADD PLAYER STATS', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20, letterSpacing: 1, color: AppColors.textPrimary)),
+                    const Text('ADD PLAYER STATS', style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20, letterSpacing: 1, color: AppColors.textPrimary)),
                     const SizedBox(height: 20),
                     Row(
                       children: [
@@ -1175,7 +1269,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
                              // handled in MatchService
                           }
                         },
-                        child: const Text('SAVE PERFORMANCE', style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+                        child: const Text('SAVE PERFORMANCE', style: TextStyle(fontWeight: FontWeight.normal, letterSpacing: 1.2)),
                       ),
                     ),
                   ],
@@ -1199,7 +1293,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
             borderRadius: BorderRadius.circular(12),
           ),
           alignment: Alignment.center,
-          child: Text(label, style: TextStyle(color: active ? Colors.white : AppColors.textSecondary, fontWeight: FontWeight.bold, fontSize: 12)),
+          child: Text(label, style: TextStyle(color: active ? Colors.white : AppColors.textSecondary, fontWeight: FontWeight.normal, fontSize: 12)),
         ),
       ),
     );
@@ -1211,7 +1305,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
       child: TextField(
         controller: controller,
         keyboardType: keyboard,
-        style: const TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(fontWeight: FontWeight.normal),
         decoration: InputDecoration(
           prefixIcon: icon != null ? Icon(icon, size: 20) : null,
           labelText: label,
@@ -1231,12 +1325,13 @@ class _OfficialIcon extends StatelessWidget {
   final String label;
   final IconData icon;
   final int? count;
+  final VoidCallback? onTap;
 
-  const _OfficialIcon({required this.label, required this.icon, this.count});
+  const _OfficialIcon({required this.label, required this.icon, this.count, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    final content = Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Stack(
@@ -1246,7 +1341,9 @@ class _OfficialIcon extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: (count != null && count! > 0) ? AppColors.primaryTeal.withOpacity(0.12) : AppColors.backgroundLight,
+                color: (count != null && count! > 0)
+                    ? AppColors.primaryTeal.withOpacity(0.12)
+                    : AppColors.backgroundLight,
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -1272,7 +1369,7 @@ class _OfficialIcon extends StatelessWidget {
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 10,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                 ),
@@ -1288,6 +1385,16 @@ class _OfficialIcon extends StatelessWidget {
           ),
         ),
       ],
+    );
+
+    if (onTap == null) return content;
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Padding(
+        padding: const EdgeInsets.all(4),
+        child: content,
+      ),
     );
   }
 }

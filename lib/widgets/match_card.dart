@@ -75,7 +75,7 @@ class MatchCard extends StatelessWidget {
                         team1,
                         style: const TextStyle(
                           fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.normal,
                           color: AppColors.textPrimary,
                         ),
                         textAlign: TextAlign.center,
@@ -95,7 +95,7 @@ class MatchCard extends StatelessWidget {
                         '$score1 - $score2',
                         style: const TextStyle(
                           fontSize: 28,
-                          fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.normal,
                           color: AppColors.textPrimary,
                         ),
                       ),
@@ -112,7 +112,7 @@ class MatchCard extends StatelessWidget {
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 10,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
                         ),
@@ -122,7 +122,7 @@ class MatchCard extends StatelessWidget {
                            "FT", // Full Time / Finished
                             style: TextStyle(
                               fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.normal,
                               color: AppColors.textSecondary,
                             ),
                          ),
@@ -141,7 +141,7 @@ class MatchCard extends StatelessWidget {
                         team2,
                         style: const TextStyle(
                           fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.normal,
                           color: AppColors.textPrimary,
                         ),
                         textAlign: TextAlign.center,
@@ -168,7 +168,7 @@ class MatchCard extends StatelessWidget {
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 12,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
@@ -195,7 +195,7 @@ class MatchCard extends StatelessWidget {
         teamName.isNotEmpty ? teamName[0].toUpperCase() : '?',
         style: const TextStyle(
           fontSize: 20,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.normal,
           color: AppColors.textSecondary,
         ),
       ),

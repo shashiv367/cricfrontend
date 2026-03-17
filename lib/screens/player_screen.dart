@@ -39,7 +39,7 @@ class PlayerScreen extends StatelessWidget {
               title: Text(
                 player['name'].toString(),
                 style: const TextStyle(
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                   color: AppColors.textDark,
                 ),
               ),
@@ -54,7 +54,7 @@ class PlayerScreen extends StatelessWidget {
                     ? '${player['runs']} runs'
                     : '${player['wickets']} wkts',
                 style: const TextStyle(
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.normal,
                   color: AppColors.textDark,
                 ),
               ),

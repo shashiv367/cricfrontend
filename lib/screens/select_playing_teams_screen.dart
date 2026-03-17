@@ -15,9 +15,15 @@ class _SelectPlayingTeamsScreenState extends State<SelectPlayingTeamsScreen> {
   String? _teamBName;
   SquadSelectionResult? _teamASquad;
   SquadSelectionResult? _teamBSquad;
+  bool _teamAAddMyself = false;
+  bool _teamBAddMyself = false;
+
+  Set<String> _normalizedPlayerSet(List<String> players) {
+    return players.map((p) => p.trim().toLowerCase()).where((p) => p.isNotEmpty).toSet();
+  }
 
   Future<void> _selectTeam(bool isTeamA) async {
-    final selected = await Navigator.push<String>(
+    final selected = await Navigator.push<TeamSelectionResult>(
       context,
       MaterialPageRoute(
         builder: (_) => SelectTeamScreen(
@@ -28,11 +34,33 @@ class _SelectPlayingTeamsScreenState extends State<SelectPlayingTeamsScreen> {
     );
     if (selected == null || !mounted) return;
 
+    // Prevent same team name on both sides (case/space-insensitive).
+    final picked = selected.teamName.trim().toLowerCase();
+    final other = (isTeamA ? _teamBName : _teamAName)?.trim().toLowerCase();
+    if (other != null && other.isNotEmpty && picked == other) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Team A and Team B cannot be the same team'),
+          backgroundColor: AppColors.accentRed,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
     // After selecting a team, go to squad selection & role assignment
+    final blocked = isTeamA
+        ? (_teamBSquad?.players.toSet() ?? <String>{})
+        : (_teamASquad?.players.toSet() ?? <String>{});
+
     final squad = await Navigator.push<SquadSelectionResult>(
       context,
       MaterialPageRoute(
-        builder: (_) => SelectSquadScreen(teamName: selected),
+        builder: (_) => SelectSquadScreen(
+          teamName: selected.teamName,
+          addMyself: selected.addMyself,
+          blockedPlayers: blocked,
+        ),
       ),
     );
 
@@ -40,11 +68,13 @@ class _SelectPlayingTeamsScreenState extends State<SelectPlayingTeamsScreen> {
 
     setState(() {
       if (isTeamA) {
-        _teamAName = selected;
+        _teamAName = selected.teamName;
         _teamASquad = squad;
+        _teamAAddMyself = selected.addMyself;
       } else {
-        _teamBName = selected;
+        _teamBName = selected.teamName;
         _teamBSquad = squad;
+        _teamBAddMyself = selected.addMyself;
       }
     });
   }
@@ -57,7 +87,7 @@ class _SelectPlayingTeamsScreenState extends State<SelectPlayingTeamsScreen> {
         backgroundColor: AppColors.primaryElectric,
         foregroundColor: Colors.white,
         elevation: 0,
-        title: const Text('Select playing teams', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+        title: const Text('Select playing teams', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 18)),
         actions: [
           IconButton(
             icon: const Icon(Icons.help_outline, color: Colors.white),
@@ -94,7 +124,7 @@ class _SelectPlayingTeamsScreenState extends State<SelectPlayingTeamsScreen> {
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       alignment: Alignment.center,
-                      child: const Text('Continue to match', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+                      child: const Text('Continue to match', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 15)),
                     ),
                   ),
                 ),
@@ -135,7 +165,7 @@ class _SelectPlayingTeamsScreenState extends State<SelectPlayingTeamsScreen> {
               alignment: Alignment.center,
               child: Text(
                 name != null ? name : 'Select team ${isTeamA ? 'a' : 'b'}',
-                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
+                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 15),
               ),
             ),
           ),
@@ -154,7 +184,7 @@ class _SelectPlayingTeamsScreenState extends State<SelectPlayingTeamsScreen> {
             size: const Size(52, 52),
             painter: _DiamondVsPainter(),
           ),
-          Text('vs', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
+          Text('vs', style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textSecondary)),
         ],
       ),
     );
@@ -180,6 +210,21 @@ class _SelectPlayingTeamsScreenState extends State<SelectPlayingTeamsScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Please select minimum two-player-squad in team $name'),
+        ),
+      );
+      return;
+    }
+
+    final a = _normalizedPlayerSet(_teamASquad!.players);
+    final b = _normalizedPlayerSet(_teamBSquad!.players);
+    final dup = a.intersection(b);
+    if (dup.isNotEmpty) {
+      final sample = dup.take(3).join(', ');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Same player cannot be in both teams: $sample'),
+          backgroundColor: AppColors.accentRed,
+          behavior: SnackBarBehavior.floating,
         ),
       );
       return;

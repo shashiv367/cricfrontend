@@ -114,10 +114,10 @@ class _PlayerManagementScreenState extends State<PlayerManagementScreen> {
               backgroundColor: AppColors.primaryElectric.withOpacity(0.1),
               child: Text(
                 player['name']?.substring(0, 1).toUpperCase() ?? 'P',
-                style: const TextStyle(color: AppColors.primaryElectric, fontWeight: FontWeight.bold),
+                style: const TextStyle(color: AppColors.primaryElectric, fontWeight: FontWeight.normal),
               ),
             ),
-            title: Text(player['name'] ?? 'Elite Player', style: const TextStyle(fontWeight: FontWeight.bold)),
+            title: Text(player['name'] ?? 'Elite Player', style: const TextStyle(fontWeight: FontWeight.normal)),
             subtitle: Text('Team: $teamName', style: const TextStyle(fontSize: 12)),
             trailing: const Icon(Icons.chevron_right, color: AppColors.textSecondary),
             onTap: () {}, // Profile view

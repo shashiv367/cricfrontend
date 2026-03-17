@@ -7,6 +7,8 @@
    	<string>We need access to your photo library to upload profile pictures</string>
    	<key>NSCameraUsageDescription</key>
    	<string>We need access to your camera to take profile pictures</string>
+	<key>NSContactsUsageDescription</key>
+	<string>We need access to your contacts to add players from your contacts</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

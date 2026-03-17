@@ -333,7 +333,7 @@ class _PlayerDashboardScreenState extends State<PlayerDashboardScreen> with Sing
                                     style: const TextStyle(
                                       color: AppColors.textPrimary,
                                       fontSize: 28,
-                                      fontWeight: FontWeight.w900,
+                                      fontWeight: FontWeight.normal,
                                       letterSpacing: -0.5,
                                     ),
                                   ),
@@ -481,7 +481,7 @@ class _PlayerDashboardScreenState extends State<PlayerDashboardScreen> with Sing
         style: TextStyle(
           color: AppColors.accentPurple,
           fontSize: 12,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.normal,
           letterSpacing: 0.5,
         ),
       ),
@@ -517,7 +517,7 @@ class _PlayerDashboardScreenState extends State<PlayerDashboardScreen> with Sing
             text,
             style: const TextStyle(
               fontSize: 12,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.normal,
               color: AppColors.textPrimary,
             ),
           ),
@@ -538,7 +538,7 @@ class _PlayerDashboardScreenState extends State<PlayerDashboardScreen> with Sing
           style: TextStyle(
             color: AppColors.accentPurple,
             fontSize: 28,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.normal,
           ),
         ),
       ),
@@ -590,7 +590,7 @@ class _PlayerDashboardScreenState extends State<PlayerDashboardScreen> with Sing
                     style: TextStyle(
                       color: AppColors.textPrimary,
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                 ],
@@ -629,7 +629,7 @@ class _PlayerDashboardScreenState extends State<PlayerDashboardScreen> with Sing
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label, style: TextStyle(color: AppColors.textSecondary, fontSize: 10)),
-          Text(value, style: const TextStyle(color: AppColors.textPrimary, fontSize: 12, fontWeight: FontWeight.bold)),
+          Text(value, style: const TextStyle(color: AppColors.textPrimary, fontSize: 12, fontWeight: FontWeight.normal)),
         ],
       ),
     );
@@ -651,7 +651,7 @@ class _PlayerDashboardScreenState extends State<PlayerDashboardScreen> with Sing
                 style: TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
               const SizedBox(height: 8),
@@ -715,7 +715,7 @@ class _PlayerDashboardScreenState extends State<PlayerDashboardScreen> with Sing
                 style: TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
               const SizedBox(height: 20),
@@ -755,7 +755,7 @@ class _PlayerDashboardScreenState extends State<PlayerDashboardScreen> with Sing
           style: TextStyle(
             color: AppColors.textSecondary,
             fontSize: 10,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.normal,
           ),
         ),
       ],
@@ -818,7 +818,7 @@ class _PlayerDashboardScreenState extends State<PlayerDashboardScreen> with Sing
                 style: const TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 20,
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
               Text(
@@ -884,7 +884,7 @@ class _PlayerDashboardScreenState extends State<PlayerDashboardScreen> with Sing
               ),
               child: const Text(
                 'View Full Stats',
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 14),
               ),
             ),
           ),
@@ -902,7 +902,7 @@ class _PlayerDashboardScreenState extends State<PlayerDashboardScreen> with Sing
               onPressed: () {},
               child: const Text(
                 'Share Profile',
-                style: TextStyle(color: AppColors.accentPurple, fontWeight: FontWeight.bold, fontSize: 14),
+                style: TextStyle(color: AppColors.accentPurple, fontWeight: FontWeight.normal, fontSize: 14),
               ),
             ),
           ),
@@ -942,7 +942,7 @@ class _PlayerDashboardScreenState extends State<PlayerDashboardScreen> with Sing
             style: TextStyle(
               color: AppColors.accentPurple,
               fontSize: 20,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.normal,
             ),
           ),
           const SizedBox(height: 24),
@@ -1001,7 +1001,7 @@ class _PlayerDashboardScreenState extends State<PlayerDashboardScreen> with Sing
                           'Save Changes',
                           style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ],

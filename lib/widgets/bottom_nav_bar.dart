@@ -70,7 +70,7 @@ class BottomNavBar extends StatelessWidget {
                 style: TextStyle(
                   color: isSelected ? AppColors.primaryBlue : AppColors.textMuted,
                   fontSize: 12,
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                  fontWeight: isSelected ? FontWeight.normal : FontWeight.normal,
                 ),
               ),
             ],

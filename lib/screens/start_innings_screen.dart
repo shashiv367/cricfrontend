@@ -78,7 +78,7 @@ class _StartInningsScreenState extends State<StartInningsScreen> {
               'Batting - $battingTeam',
               style: const TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.normal,
                 color: AppColors.textPrimary,
               ),
             ),
@@ -113,7 +113,7 @@ class _StartInningsScreenState extends State<StartInningsScreen> {
               'Bowling - $bowlingTeam',
               style: const TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.normal,
                 color: AppColors.textPrimary,
               ),
             ),
@@ -168,7 +168,7 @@ class _StartInningsScreenState extends State<StartInningsScreen> {
                 label,
                 style: const TextStyle(
                   fontSize: 13,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.normal,
                   color: AppColors.textPrimary,
                 ),
               ),
@@ -220,7 +220,7 @@ class _StartInningsScreenState extends State<StartInningsScreen> {
                     'Start scoring',
                     style: TextStyle(
                       fontSize: 14,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.normal,
                       color: Colors.white,
                     ),
                   ),
@@ -305,7 +305,7 @@ class _StartInningsScreenState extends State<StartInningsScreen> {
                 'Capture moment of the match',
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.normal,
                   color: AppColors.textPrimary,
                 ),
               ),
@@ -447,7 +447,7 @@ class _SelectInningsPlayerScreenState extends State<_SelectInningsPlayerScreen> 
                         },
                   child: const Text(
                     'Continue scoring',
-                    style: TextStyle(fontWeight: FontWeight.w600),
+                    style: TextStyle(fontWeight: FontWeight.normal),
                   ),
                 ),
               ),
@@ -473,7 +473,7 @@ class _SelectInningsPlayerScreenState extends State<_SelectInningsPlayerScreen> 
           label,
           style: TextStyle(
             fontSize: 13,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.normal,
             color: active ? Colors.white : AppColors.textSecondary,
           ),
         ),
@@ -493,7 +493,7 @@ class _SelectInningsPlayerScreenState extends State<_SelectInningsPlayerScreen> 
               'Playing squad',
               style: TextStyle(
                 fontSize: 14,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.normal,
                 color: AppColors.textPrimary,
               ),
             ),
@@ -518,7 +518,7 @@ class _SelectInningsPlayerScreenState extends State<_SelectInningsPlayerScreen> 
             ),
             title: Text(
               name,
-              style: const TextStyle(fontWeight: FontWeight.w600),
+              style: const TextStyle(fontWeight: FontWeight.normal),
             ),
             onTap: () async {
               setState(() {
@@ -542,7 +542,7 @@ class _SelectInningsPlayerScreenState extends State<_SelectInningsPlayerScreen> 
             'Add a new player',
             style: TextStyle(
               fontSize: 14,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.normal,
               color: AppColors.textPrimary,
             ),
           ),
@@ -621,7 +621,7 @@ class _SelectInningsPlayerScreenState extends State<_SelectInningsPlayerScreen> 
                 title,
                 style: const TextStyle(
                   color: AppColors.accentRed,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
               content: Column(
@@ -736,7 +736,7 @@ class _SelectInningsPlayerScreenState extends State<_SelectInningsPlayerScreen> 
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 12,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.normal,
                     color: selected ? Colors.white : AppColors.textPrimary,
                   ),
                 ),

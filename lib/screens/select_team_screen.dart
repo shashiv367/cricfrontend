@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
 
+class TeamSelectionResult {
+  final String teamName;
+  final bool addMyself;
+  const TeamSelectionResult({required this.teamName, required this.addMyself});
+}
+
 class SelectTeamScreen extends StatefulWidget {
   final String title;
   final String? currentSelection;
@@ -58,7 +64,7 @@ class _SelectTeamScreenState extends State<SelectTeamScreen> with SingleTickerPr
       );
       return;
     }
-    Navigator.pop(context, name);
+    Navigator.pop(context, TeamSelectionResult(teamName: name, addMyself: _addMyself));
   }
 
   @override
@@ -69,7 +75,7 @@ class _SelectTeamScreenState extends State<SelectTeamScreen> with SingleTickerPr
         backgroundColor: AppColors.primaryElectric,
         foregroundColor: Colors.white,
         elevation: 0,
-        title: Text(widget.title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+        title: Text(widget.title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 18)),
         actions: [
           IconButton(icon: const Icon(Icons.qr_code_scanner, color: Colors.white), onPressed: () {}),
           IconButton(icon: const Icon(Icons.search, color: Colors.white), onPressed: () {}),
@@ -86,7 +92,7 @@ class _SelectTeamScreenState extends State<SelectTeamScreen> with SingleTickerPr
               indicatorWeight: 3,
               labelColor: AppColors.textPrimary,
               unselectedLabelColor: AppColors.textSecondary,
-              labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              labelStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 14),
               tabs: const [
                 Tab(text: 'Your Teams'),
                 Tab(text: 'Opponents'),
@@ -130,7 +136,7 @@ class _SelectTeamScreenState extends State<SelectTeamScreen> with SingleTickerPr
                           children: const [
                             Icon(Icons.add, color: Colors.white, size: 20),
                             SizedBox(width: 6),
-                            Text('Add team', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+                            Text('Add team', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 13)),
                           ],
                         ),
                       ),
@@ -171,7 +177,7 @@ class _SelectTeamScreenState extends State<SelectTeamScreen> with SingleTickerPr
           captain: t['captain'] as String?,
           verified: t['verified'] as bool,
           avatarColor: t['avatarColor'] as int?,
-          onTap: () => Navigator.pop(context, t['name'] as String),
+          onTap: () => Navigator.pop(context, TeamSelectionResult(teamName: t['name'] as String, addMyself: false)),
         );
       },
     );
@@ -205,7 +211,7 @@ class _SelectTeamScreenState extends State<SelectTeamScreen> with SingleTickerPr
                   backgroundColor: color.withOpacity(0.2),
                   child: Text(
                     name.length >= 2 ? name.substring(0, 2).toUpperCase() : name.toUpperCase(),
-                    style: TextStyle(fontWeight: FontWeight.bold, color: color, fontSize: 14),
+                    style: TextStyle(fontWeight: FontWeight.normal, color: color, fontSize: 14),
                   ),
                 ),
                 if (verified)
@@ -225,7 +231,7 @@ class _SelectTeamScreenState extends State<SelectTeamScreen> with SingleTickerPr
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+                  Text(name, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
                   const SizedBox(height: 4),
                   Row(
                     children: [
@@ -241,7 +247,7 @@ class _SelectTeamScreenState extends State<SelectTeamScreen> with SingleTickerPr
                         CircleAvatar(
                           radius: 10,
                           backgroundColor: AppColors.backgroundCardAlt,
-                          child: const Text('C', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: AppColors.textSecondary)),
+                          child: const Text('C', style: TextStyle(fontSize: 10, fontWeight: FontWeight.normal, color: AppColors.textSecondary)),
                         ),
                         const SizedBox(width: 6),
                         Text(captain, style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
@@ -299,7 +305,7 @@ class _SelectTeamScreenState extends State<SelectTeamScreen> with SingleTickerPr
                           borderRadius: BorderRadius.circular(20),
                           child: const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                            child: Text('Add', style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600)),
+                            child: Text('Add', style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.normal)),
                           ),
                         ),
                       ),
@@ -385,7 +391,7 @@ class _SelectTeamScreenState extends State<SelectTeamScreen> with SingleTickerPr
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   alignment: Alignment.center,
-                  child: const Text('Add team', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+                  child: const Text('Add team', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 16)),
                 ),
               ),
             ),

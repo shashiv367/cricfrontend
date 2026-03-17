@@ -245,7 +245,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                               style: TextStyle(
                                 color: Colors.white70,
                                 fontSize: 12,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.normal,
                                 letterSpacing: 4.0,
                               ),
                             ),
@@ -446,7 +446,7 @@ class _MainScreenState extends State<MainScreen> {
         unselectedItemColor: Colors.grey[600],
         selectedFontSize: 10,
         unselectedFontSize: 10,
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.search), activeIcon: Icon(Icons.search, weight: 900), label: 'Looking'),
@@ -526,7 +526,7 @@ class _MainScreenState extends State<MainScreen> {
                     border: Border.all(color: Colors.white.withOpacity(0.6)),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Text('PRO', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold)),
+                  child: const Text('PRO', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.normal)),
                 ),
               ),
             ),

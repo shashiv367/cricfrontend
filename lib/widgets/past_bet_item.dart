@@ -72,7 +72,7 @@ class PastBetItem extends StatelessWidget {
                         team1,
                         style: const TextStyle(
                           fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.normal,
                           color: AppColors.textDark,
                         ),
                         overflow: TextOverflow.ellipsis,
@@ -87,7 +87,7 @@ class PastBetItem extends StatelessWidget {
                   '$score1 - $score2',
                   style: const TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                     color: AppColors.textDark,
                   ),
                 ),
@@ -101,7 +101,7 @@ class PastBetItem extends StatelessWidget {
                         team2,
                         style: const TextStyle(
                           fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.normal,
                           color: AppColors.textDark,
                         ),
                         textAlign: TextAlign.right,
@@ -140,7 +140,7 @@ class PastBetItem extends StatelessWidget {
               result,
               style: TextStyle(
                 fontSize: 12,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.normal,
                 color: isWin ? AppColors.successGreen : AppColors.errorRed,
               ),
             ),

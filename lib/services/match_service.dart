@@ -20,7 +20,7 @@ class MatchService {
     return insert['id'] as String;
   }
 
-  Future<String> createMatch({
+  Future<Map<String, dynamic>> createMatch({
     required String teamAName,
     required String teamBName,
     String? venue,
@@ -49,12 +49,8 @@ class MatchService {
 
       final matchId = response['matchId'] as String;
       developer.log('✅ [MATCH_SERVICE] Match created successfully: $matchId');
-      
-      // Update with isPublic if needed (if the API doesn't handle it yet)
-      // Note: The backend schema has is_public but the controller we saw didn't explicitly set it from req.body.
-      // However, it's safer to keep it consistent.
-      
-      return matchId;
+
+      return response;
     } catch (e) {
       developer.log('❌ [MATCH_SERVICE] Failed to create match: $e');
       rethrow;
@@ -62,8 +58,33 @@ class MatchService {
   }
 
   Future<String?> getInviteCode(String matchId) async {
-    final res = await supabase.from('matches').select('invite_code').eq('id', matchId).single();
-    return res['invite_code'] as String?;
+    final token = supabase.auth.currentSession?.accessToken;
+    if (token == null) throw Exception('No active session. Please log in.');
+
+    // Use backend match details (bypasses client RLS issues).
+    final res = await ApiService.getMatchDetails(token: token, matchId: matchId);
+    final match = res['match'] as Map<String, dynamic>?;
+    return match?['invite_code']?.toString();
+  }
+
+  Future<Map<String, String>> getMatchTeamIds(String matchId) async {
+    final token = supabase.auth.currentSession?.accessToken;
+    if (token == null) throw Exception('No active session. Please log in.');
+
+    final res = await ApiService.getMatchDetails(token: token, matchId: matchId);
+    final match = res['match'] as Map<String, dynamic>?;
+    if (match == null) throw Exception('Match not found');
+
+    final teamA = match['team_a'] as Map<String, dynamic>?;
+    final teamB = match['team_b'] as Map<String, dynamic>?;
+    final teamAId = teamA?['id']?.toString();
+    final teamBId = teamB?['id']?.toString();
+
+    if (teamAId == null || teamAId.isEmpty || teamBId == null || teamBId.isEmpty) {
+      throw Exception('Match teams not available');
+    }
+
+    return {'A': teamAId, 'B': teamBId};
   }
 
   Future<void> updateScore({

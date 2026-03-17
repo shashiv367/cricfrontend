@@ -177,7 +177,7 @@ class _UserMatchScoreboardScreenState extends State<UserMatchScoreboardScreen> {
           '$teamA v $teamB',
           style: const TextStyle(
             color: AppColors.textPrimary,
-            fontWeight: FontWeight.w900,
+            fontWeight: FontWeight.normal,
             fontSize: 20,
             letterSpacing: -0.5,
           ),
@@ -200,7 +200,7 @@ class _UserMatchScoreboardScreenState extends State<UserMatchScoreboardScreen> {
                     style: TextStyle(
                       color: AppColors.accentPurple,
                       fontSize: 10,
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.normal,
                       letterSpacing: 2,
                     ),
                   ),
@@ -222,7 +222,7 @@ class _UserMatchScoreboardScreenState extends State<UserMatchScoreboardScreen> {
         style: const TextStyle(
           color: AppColors.textPrimary,
           fontSize: 14,
-          fontWeight: FontWeight.w900,
+          fontWeight: FontWeight.normal,
           letterSpacing: 1.5,
         ),
       ),
@@ -284,7 +284,7 @@ class _UserMatchScoreboardScreenState extends State<UserMatchScoreboardScreen> {
                               style: const TextStyle(
                                 color: AppColors.textPrimary,
                                 fontSize: 20,
-                                fontWeight: FontWeight.w900,
+                                fontWeight: FontWeight.normal,
                                 letterSpacing: -0.5,
                               ),
                             ),
@@ -293,7 +293,7 @@ class _UserMatchScoreboardScreenState extends State<UserMatchScoreboardScreen> {
                               style: TextStyle(
                                 color: AppColors.textSecondary.withOpacity(0.7),
                                 fontSize: 10,
-                                fontWeight: FontWeight.w900,
+                                fontWeight: FontWeight.normal,
                                 letterSpacing: 1,
                               ),
                             ),
@@ -317,7 +317,7 @@ class _UserMatchScoreboardScreenState extends State<UserMatchScoreboardScreen> {
                           style: const TextStyle(
                             color: AppColors.textPrimary,
                             fontSize: 48,
-                            fontWeight: FontWeight.w900,
+                            fontWeight: FontWeight.normal,
                             height: 1,
                           ),
                         ),
@@ -326,7 +326,7 @@ class _UserMatchScoreboardScreenState extends State<UserMatchScoreboardScreen> {
                           style: TextStyle(
                             color: AppColors.textPrimary.withOpacity(0.4),
                             fontSize: 28,
-                            fontWeight: FontWeight.w900,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ],
@@ -340,7 +340,7 @@ class _UserMatchScoreboardScreenState extends State<UserMatchScoreboardScreen> {
                               '${overs.toStringAsFixed(1)}',
                               style: const TextStyle(
                                 color: AppColors.textPrimary,
-                                fontWeight: FontWeight.w900,
+                                fontWeight: FontWeight.normal,
                                 fontSize: 18,
                               ),
                             ),
@@ -350,7 +350,7 @@ class _UserMatchScoreboardScreenState extends State<UserMatchScoreboardScreen> {
                               style: TextStyle(
                                 color: AppColors.textSecondary.withOpacity(0.5),
                                 fontSize: 10,
-                                fontWeight: FontWeight.w900,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ],
@@ -361,7 +361,7 @@ class _UserMatchScoreboardScreenState extends State<UserMatchScoreboardScreen> {
                           style: const TextStyle(
                             color: AppColors.accentPurple,
                             fontSize: 12,
-                            fontWeight: FontWeight.w900,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ],
@@ -391,7 +391,7 @@ class _UserMatchScoreboardScreenState extends State<UserMatchScoreboardScreen> {
             style: TextStyle(
               color: AppColors.textSecondary,
               fontSize: 10,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.normal,
               letterSpacing: 1,
             ),
           ),
@@ -451,7 +451,7 @@ class _UserMatchScoreboardScreenState extends State<UserMatchScoreboardScreen> {
                           name,
                           style: const TextStyle(
                             color: AppColors.textPrimary,
-                            fontWeight: FontWeight.w900,
+                            fontWeight: FontWeight.normal,
                             fontSize: 14,
                           ),
                         ),
@@ -481,7 +481,7 @@ class _TableHeader extends StatelessWidget {
     return Text(
       label,
       style: TextStyle(
-        fontWeight: FontWeight.w900,
+        fontWeight: FontWeight.normal,
         color: AppColors.textSecondary.withOpacity(0.6),
         fontSize: 10,
         letterSpacing: 1.5,
@@ -503,7 +503,7 @@ class _TableValue extends StatelessWidget {
       textAlign: TextAlign.center,
       style: TextStyle(
         color: color ?? AppColors.textSecondary,
-        fontWeight: isBold ? FontWeight.w900 : FontWeight.bold,
+        fontWeight: isBold ? FontWeight.normal : FontWeight.normal,
         fontSize: 14,
       ),
     );

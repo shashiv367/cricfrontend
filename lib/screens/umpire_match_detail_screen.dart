@@ -328,7 +328,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
                 style: TextStyle(
                   color: color,
                   fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
             ),
@@ -545,7 +545,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
               style: const TextStyle(
                 color: AppColors.textPrimary,
                 fontSize: 16,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.normal,
               ),
             ),
             if (locationName != null)
@@ -625,7 +625,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
                                 style: TextStyle(
                                   color: statusColor,
                                   fontSize: 11,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.normal,
                                 ),
                               ),
                             ),
@@ -689,7 +689,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
                     children: [
                       Icon(Icons.comment_rounded, color: AppColors.primaryBlue),
                       SizedBox(width: 12),
-                      Text('Match Commentary', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+                      Text('Match Commentary', style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
                     ],
                   ),
                   const SizedBox(height: 16),
@@ -745,7 +745,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
                             'Save Score',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
                         ],
@@ -787,7 +787,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
                               'Match Complete',
                               style: TextStyle(
                                 fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ],
@@ -839,7 +839,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
                 style: TextStyle(
                   color: color,
                   fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                   letterSpacing: 1.2,
                 ),
               ),
@@ -849,7 +849,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
                 style: TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 16,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
             ],
@@ -899,7 +899,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
                   style: TextStyle(
                     color: AppColors.textSecondary,
                     fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ],
@@ -917,7 +917,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
                     style: TextStyle(
                       color: AppColors.textSecondary,
                       fontSize: 14,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                 ),
@@ -967,7 +967,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
               style: TextStyle(
                 color: color,
                 fontSize: 16,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.normal,
               ),
             ),
           ],
@@ -1021,7 +1021,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
           style: TextStyle(
             color: AppColors.textSecondary,
             fontSize: 12,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.normal,
           ),
         ),
         const SizedBox(height: 8),
@@ -1031,7 +1031,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
           style: const TextStyle(
             color: AppColors.textPrimary,
             fontSize: 16,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.normal,
           ),
           decoration: InputDecoration(
             filled: true,
@@ -1110,7 +1110,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
                     style: TextStyle(
                       color: teamColor,
                       fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                 ),
@@ -1128,7 +1128,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
                             style: TextStyle(
                               color: AppColors.textPrimary,
                               fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
                         ),
@@ -1144,7 +1144,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
                               style: TextStyle(
                                 color: teamColor,
                                 fontSize: 10,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ),
@@ -1206,7 +1206,7 @@ class _UmpireMatchDetailScreenState extends State<UmpireMatchDetailScreen> {
           style: const TextStyle(
             color: AppColors.textPrimary,
             fontSize: 16,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.normal,
           ),
         ),
         Text(

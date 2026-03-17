@@ -61,7 +61,7 @@ class _UmpireLiveMatchesScreenState extends State<UmpireLiveMatchesScreen> {
           style: TextStyle(
             color: AppColors.textPrimary,
             fontSize: 20,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.normal,
           ),
         ),
         iconTheme: const IconThemeData(color: AppColors.textPrimary),
@@ -134,7 +134,7 @@ class _UmpireLiveMatchesScreenState extends State<UmpireLiveMatchesScreen> {
                                       style: const TextStyle(
                                         color: AppColors.textPrimary,
                                         fontSize: 28,
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.normal,
                                       ),
                                     ),
                                   ],
@@ -182,7 +182,7 @@ class _UmpireLiveMatchesScreenState extends State<UmpireLiveMatchesScreen> {
             style: TextStyle(
               color: AppColors.textSecondary,
               fontSize: 20,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.normal,
             ),
           ),
           const SizedBox(height: 8),
@@ -290,7 +290,7 @@ class _UmpireLiveMatchesScreenState extends State<UmpireLiveMatchesScreen> {
                           style: TextStyle(
                             color: statusColor,
                             fontSize: 12,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ],
@@ -317,7 +317,7 @@ class _UmpireLiveMatchesScreenState extends State<UmpireLiveMatchesScreen> {
                           style: TextStyle(
                             color: AppColors.primaryPurple,
                             fontSize: 12,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ],
@@ -348,7 +348,7 @@ class _UmpireLiveMatchesScreenState extends State<UmpireLiveMatchesScreen> {
                                   style: TextStyle(
                                     color: AppColors.primaryPurple,
                                     fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.normal,
                                   ),
                                 ),
                               ),
@@ -360,7 +360,7 @@ class _UmpireLiveMatchesScreenState extends State<UmpireLiveMatchesScreen> {
                                 style: const TextStyle(
                                   color: AppColors.textPrimary,
                                   fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.normal,
                                 ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -378,7 +378,7 @@ class _UmpireLiveMatchesScreenState extends State<UmpireLiveMatchesScreen> {
                       style: TextStyle(
                         color: AppColors.textMuted,
                         fontSize: 14,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ),
@@ -395,7 +395,7 @@ class _UmpireLiveMatchesScreenState extends State<UmpireLiveMatchesScreen> {
                                 style: const TextStyle(
                                   color: AppColors.textPrimary,
                                   fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.normal,
                                 ),
                                 textAlign: TextAlign.end,
                                 maxLines: 1,
@@ -416,7 +416,7 @@ class _UmpireLiveMatchesScreenState extends State<UmpireLiveMatchesScreen> {
                                   style: TextStyle(
                                     color: AppColors.accentRed,
                                     fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.normal,
                                   ),
                                 ),
                               ),

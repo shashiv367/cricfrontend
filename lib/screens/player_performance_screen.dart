@@ -66,7 +66,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
                           backgroundColor: Colors.white24,
                           child: Text(
                             _playerName.isNotEmpty ? _playerName.substring(0, 1).toUpperCase() : 'P',
-                            style: const TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),
+                            style: const TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.normal),
                           ),
                         ),
                         const SizedBox(width: 20),
@@ -77,7 +77,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
                             children: [
                               Text(
                                 _playerName,
-                                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
+                                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 22),
                                 overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 6),
@@ -87,7 +87,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
                                   color: Colors.white.withOpacity(0.25),
                                   borderRadius: BorderRadius.circular(14),
                                 ),
-                                child: const Text('India', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600)),
+                                child: const Text('India', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.normal)),
                               ),
                             ],
                           ),
@@ -103,7 +103,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
                       indicatorWeight: 3,
                       labelColor: Colors.white,
                       unselectedLabelColor: Colors.white70,
-                      labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                      labelStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 13),
                       tabs: const [
                         Tab(text: 'INFO'),
                         Tab(text: 'BATTING'),
@@ -140,7 +140,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('PERSONAL INFORMATION', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary, letterSpacing: 0.5)),
+          const Text('PERSONAL INFORMATION', style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textPrimary, letterSpacing: 0.5)),
           const SizedBox(height: 12),
           _buildCard([
             _row('Born', 'July 18, 1996 (29 years)'),
@@ -151,9 +151,9 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
             _row('Bowling Style', 'Right-arm medium'),
           ]),
           const SizedBox(height: 24),
-          const Text('RECENT FORM', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary, letterSpacing: 0.5)),
+          const Text('RECENT FORM', style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textPrimary, letterSpacing: 0.5)),
           const SizedBox(height: 8),
-          const Text('BATTING', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
+          const Text('BATTING', style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: AppColors.textSecondary)),
           const SizedBox(height: 8),
           _buildRecentFormTable(
             headers: const ['SCORE', 'OPPN.', 'FORMAT', 'DATE'],
@@ -168,10 +168,10 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
           const SizedBox(height: 12),
           GestureDetector(
             onTap: () {},
-            child: Text('View all matches >', style: TextStyle(fontSize: 14, color: AppColors.primaryElectric, fontWeight: FontWeight.w600)),
+            child: Text('View all matches >', style: TextStyle(fontSize: 14, color: AppColors.primaryElectric, fontWeight: FontWeight.normal)),
           ),
           const SizedBox(height: 24),
-          const Text('TEAMS', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary, letterSpacing: 0.5)),
+          const Text('TEAMS', style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textPrimary, letterSpacing: 0.5)),
           const SizedBox(height: 8),
           Container(
             width: double.infinity,
@@ -187,7 +187,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
             ),
           ),
           const SizedBox(height: 24),
-          const Text('ICC RANKINGS', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary, letterSpacing: 0.5)),
+          const Text('ICC RANKINGS', style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textPrimary, letterSpacing: 0.5)),
           const SizedBox(height: 12),
           Row(
             children: [
@@ -208,7 +208,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
             ],
           ),
           const SizedBox(height: 24),
-          const Text('SUMMARY', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary, letterSpacing: 0.5)),
+          const Text('SUMMARY', style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textPrimary, letterSpacing: 0.5)),
           const SizedBox(height: 12),
           Text(
             'Started cricket at school and soon became the second Indian cricketer to feature in a foreign T20 league, scoring a World Cup century and a double ton in domestic cricket. Signed up for trials at nine, left-handed with the bat despite being right-handed. Made it to Maharashtra Under-19 and then the senior team, debuting with 155 against Saurashtra. Scored a fifty on Test debut in 2014. Played World T20 and WBBL before an ACL tear. Took part in ECB\'s Women\'s Cricket League. Became India\'s youngest T20I captain at 22, leading a 3-match series against England in 2019, and was named International Woman Cricketer of the Year. Scored a maiden Test century in 2021. Won silver at the 2022 Commonwealth Games and gold at the 2023 Asian Games.',
@@ -228,7 +228,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
         children: [
           Row(
             children: [
-              const Text('Career', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+              const Text('Career', style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
               const Spacer(),
               Icon(Icons.arrow_drop_down, color: AppColors.textSecondary),
             ],
@@ -270,7 +270,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
         children: [
           Row(
             children: [
-              const Text('Career', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+              const Text('Career', style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
               const Spacer(),
               Icon(Icons.arrow_drop_down, color: AppColors.textSecondary),
             ],
@@ -295,7 +295,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
             ],
           ),
           const SizedBox(height: 24),
-          const Text('BOWLING', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary, letterSpacing: 0.5)),
+          const Text('BOWLING', style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textPrimary, letterSpacing: 0.5)),
           const SizedBox(height: 12),
           _buildRecentFormTable(
             headers: const ['WICKETS', 'OPPN.', 'FORMAT', 'DATE'],
@@ -310,17 +310,17 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
           const SizedBox(height: 12),
           GestureDetector(
             onTap: () {},
-            child: Text('View all matches >', style: TextStyle(fontSize: 14, color: AppColors.primaryElectric, fontWeight: FontWeight.w600)),
+            child: Text('View all matches >', style: TextStyle(fontSize: 14, color: AppColors.primaryElectric, fontWeight: FontWeight.normal)),
           ),
           const SizedBox(height: 24),
-          const Text('TEAMS', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary, letterSpacing: 0.5)),
+          const Text('TEAMS', style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textPrimary, letterSpacing: 0.5)),
           const SizedBox(height: 8),
           Text(
             'India Women, Brisbane Heat Women, Trailblazers, Western Storm, Hobart Hurricanes Women, India B Women, Southern Brave Women, Sydney Thunder Women, Royal Challengers Bengaluru Women, India A Women',
             style: TextStyle(fontSize: 13, color: AppColors.textSecondary, height: 1.4),
           ),
           const SizedBox(height: 24),
-          const Text('ICC RANKINGS', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary, letterSpacing: 0.5)),
+          const Text('ICC RANKINGS', style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textPrimary, letterSpacing: 0.5)),
           const SizedBox(height: 12),
           Row(
             children: [
@@ -357,7 +357,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: AppColors.primaryElectric),
         ),
-        child: Text(label, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: selected ? Colors.white : AppColors.textPrimary)),
+        child: Text(label, style: TextStyle(fontSize: 13, fontWeight: FontWeight.normal, color: selected ? Colors.white : AppColors.textPrimary)),
       ),
     );
   }
@@ -380,7 +380,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(f['format']!, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textPrimary, letterSpacing: 0.5)),
+                Text(f['format']!, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textPrimary, letterSpacing: 0.5)),
                 const SizedBox(height: 12),
                 Container(
                   width: double.infinity,
@@ -415,7 +415,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
+        Text(label, style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: AppColors.textSecondary)),
         const SizedBox(height: 4),
         if (isNotPlayed)
           GestureDetector(
@@ -482,7 +482,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
                         children: [
                           Text(
                             n['headline']!,
-                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
+                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textPrimary),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -524,7 +524,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 16, top: 12, bottom: 4),
-            child: Text('Ad', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppColors.textSecondary)),
+            child: Text('Ad', style: TextStyle(fontSize: 11, fontWeight: FontWeight.normal, color: AppColors.textSecondary)),
           ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -542,21 +542,21 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('INDIA', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey[800])),
+                    Text('INDIA', style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: Colors.grey[800])),
                     const SizedBox(width: 14),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(color: Colors.white54, borderRadius: BorderRadius.circular(6)),
-                      child: Text('vs', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.grey[800])),
+                      child: Text('vs', style: TextStyle(fontSize: 11, fontWeight: FontWeight.normal, color: Colors.grey[800])),
                     ),
                     const SizedBox(width: 14),
-                    Text('ZIM', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey[800])),
+                    Text('ZIM', style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: Colors.grey[800])),
                   ],
                 ),
                 const SizedBox(height: 16),
-                const Text('PAN BAHAR', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.textPrimary, letterSpacing: 1.2)),
+                const Text('PAN BAHAR', style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal, color: AppColors.textPrimary, letterSpacing: 1.2)),
                 const SizedBox(height: 6),
-                Text('PEHCHAN KAMYABI KI CONTEST', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.grey[800])),
+                Text('PEHCHAN KAMYABI KI CONTEST', style: TextStyle(fontSize: 11, fontWeight: FontWeight.normal, color: Colors.grey[800])),
                 const SizedBox(height: 20),
                 Material(
                   color: AppColors.accentSunset,
@@ -566,7 +566,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
                     borderRadius: BorderRadius.circular(8),
                     child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 28, vertical: 14),
-                      child: Text('CLICK TO ENTER', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+                      child: Text('CLICK TO ENTER', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 13)),
                     ),
                   ),
                 ),
@@ -574,7 +574,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('WIN TEES', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: Colors.grey[800])),
+                    Text('WIN TEES', style: TextStyle(fontSize: 10, fontWeight: FontWeight.normal, color: Colors.grey[800])),
                     Icon(Icons.info_outline, size: 18, color: Colors.grey[700]),
                   ],
                 ),
@@ -604,7 +604,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Pan Bahar', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
+                      Text('Pan Bahar', style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
                       const SizedBox(height: 4),
                       Text('The Heritage Pan Masala - Pehchan Ka...', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                     ],
@@ -619,7 +619,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
                     borderRadius: BorderRadius.circular(8),
                     child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-                      child: Text('Know More', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 13)),
+                      child: Text('Know More', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 13)),
                     ),
                   ),
                 ),
@@ -688,7 +688,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
                   flex: flex,
                   child: Text(
                     e.value,
-                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF166534)),
+                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: Color(0xFF166534)),
                   ),
                 );
               }).toList(),
@@ -729,7 +729,7 @@ class _PlayerPerformanceScreenState extends State<PlayerPerformanceScreen> with 
         scrollDirection: Axis.horizontal,
         child: DataTable(
           headingRowColor: WidgetStateProperty.all(AppColors.primaryElectric.withOpacity(0.12)),
-          headingTextStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+          headingTextStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: AppColors.textPrimary),
           dataTextStyle: const TextStyle(fontSize: 13, color: AppColors.textPrimary),
           columnSpacing: 24,
           columns: [

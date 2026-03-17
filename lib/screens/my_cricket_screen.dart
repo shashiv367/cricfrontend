@@ -43,7 +43,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
             indicatorWeight: 3,
             labelColor: AppColors.textPrimary,
             unselectedLabelColor: AppColors.textSecondary,
-            labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+            labelStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 13),
             tabs: const [
               Tab(text: 'Matches'),
               Tab(text: 'Tournaments'),
@@ -192,7 +192,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
           children: [
             Icon(Icons.bar_chart_rounded, size: 64, color: AppColors.primaryElectric.withOpacity(0.3)),
             const SizedBox(height: 16),
-            Text('Your stats and records', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
+            Text('Your stats and records', style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
             const SizedBox(height: 8),
             Text('Track runs, wickets and form here.', style: TextStyle(fontSize: 14, color: AppColors.textSecondary)),
           ],
@@ -238,7 +238,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
             borderRadius: BorderRadius.circular(8),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Text(buttonLabel, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
+              child: Text(buttonLabel, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 14)),
             ),
           ),
         ),
@@ -270,7 +270,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
                     labels[i],
                     style: TextStyle(
                       color: selected ? Colors.white : AppColors.textPrimary,
-                      fontWeight: selected ? FontWeight.bold : FontWeight.w500,
+                      fontWeight: selected ? FontWeight.normal : FontWeight.w500,
                       fontSize: 13,
                     ),
                   ),
@@ -319,7 +319,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(color: AppColors.primaryTeal.withOpacity(0.2), borderRadius: BorderRadius.circular(8)),
-                child: const Text('Individual Match', style: TextStyle(fontSize: 11, color: AppColors.primaryTeal, fontWeight: FontWeight.w600)),
+                child: const Text('Individual Match', style: TextStyle(fontSize: 11, color: AppColors.primaryTeal, fontWeight: FontWeight.normal)),
               ),
               const Spacer(),
               Container(
@@ -341,7 +341,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
               borderRadius: BorderRadius.circular(8),
             ),
             child: const Center(
-              child: Text('Congratulations ADITYA 11 won the match by 1 run\nCHECK HIGHLIGHTS', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+              child: Text('Congratulations ADITYA 11 won the match by 1 run\nCHECK HIGHLIGHTS', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12)),
             ),
           ),
         ],
@@ -435,7 +435,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
                   ),
                   child: Text(
                     title,
-                    style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                    style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.normal),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -450,7 +450,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.95),
                     fontSize: 13,
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.normal,
                     letterSpacing: 0.5,
                   ),
                   maxLines: 1,
@@ -466,7 +466,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
                     color: statusTagColor,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Text(status, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600)),
+                  child: Text(status, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.normal)),
                 ),
               ),
             ],
@@ -483,7 +483,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
                     Icon(Icons.place_outlined, size: 14, color: AppColors.textSecondary),
                     const SizedBox(width: 4),
                     Expanded(child: Text(location, style: TextStyle(fontSize: 13, color: AppColors.textSecondary))),
-                    Text(actionLabel, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.primaryTeal)),
+                    Text(actionLabel, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.normal, color: AppColors.primaryTeal)),
                   ],
                 ),
               ],
@@ -512,7 +512,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
                 const SizedBox(height: 8),
                 Text(
                   'Every streamed match gets remembered',
-                  style: TextStyle(color: Colors.white.withOpacity(0.95), fontSize: 14, fontWeight: FontWeight.w600),
+                  style: TextStyle(color: Colors.white.withOpacity(0.95), fontSize: 14, fontWeight: FontWeight.normal),
                 ),
                 const SizedBox(height: 10),
                 Material(
@@ -526,7 +526,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: const [
-                          Text('Go live →', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+                          Text('Go live →', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 13)),
                         ],
                       ),
                     ),
@@ -555,7 +555,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Refer & Earn Up To ₹1 Lac* Cash!', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+                Text('Refer & Earn Up To ₹1 Lac* Cash!', style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
                 const SizedBox(height: 4),
                 Text('February Referral Rush is LIVE.', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                 const SizedBox(height: 10),
@@ -567,7 +567,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
                     borderRadius: BorderRadius.circular(8),
                     child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: Text('Refer Now', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+                      child: Text('Refer Now', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 13)),
                     ),
                   ),
                 ),
@@ -610,7 +610,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
               CircleAvatar(
                 radius: 28,
                 backgroundColor: AppColors.primaryElectric.withOpacity(0.2),
-                child: Text(name.substring(0, name.length >= 2 ? 2 : 1).toUpperCase(), style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primaryElectric)),
+                child: Text(name.substring(0, name.length >= 2 ? 2 : 1).toUpperCase(), style: const TextStyle(fontWeight: FontWeight.normal, color: AppColors.primaryElectric)),
               ),
               if (hasBadge)
                 Positioned(
@@ -629,7 +629,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+                Text(name, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
                 const SizedBox(height: 4),
                 Row(
                   children: [
@@ -642,7 +642,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      CircleAvatar(radius: 10, backgroundColor: AppColors.backgroundCardAlt, child: const Text('C', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold))),
+                      CircleAvatar(radius: 10, backgroundColor: AppColors.backgroundCardAlt, child: const Text('C', style: TextStyle(fontSize: 10, fontWeight: FontWeight.normal))),
                       const SizedBox(width: 6),
                       Text(captain, style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                     ],
@@ -653,7 +653,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
           ),
           Icon(Icons.grid_view_rounded, color: AppColors.primaryTeal, size: 22),
           if (captain != null) const SizedBox(width: 8),
-          if (captain != null) Text('Members', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.primaryTeal)),
+          if (captain != null) Text('Members', style: TextStyle(fontSize: 13, fontWeight: FontWeight.normal, color: AppColors.primaryTeal)),
         ],
       ),
     );
@@ -683,7 +683,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
                 children: const [
                   Icon(Icons.live_tv_rounded, color: Colors.white, size: 22),
                   SizedBox(width: 8),
-                  Text('Go live', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+                  Text('Go live', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 15)),
                 ],
               ),
             ),

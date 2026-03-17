@@ -118,7 +118,7 @@ class _ContactScreenState extends State<ContactScreen>
                           'Click here',
                           style: TextStyle(
                             color: AppColors.accentRed,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.normal,
                             decoration: TextDecoration.underline,
                           ),
                         ),
@@ -153,7 +153,7 @@ class _ContactScreenState extends State<ContactScreen>
                 'Send',
                 style: TextStyle(
                   fontSize: 15,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
             ),
@@ -207,7 +207,7 @@ class _ContactScreenState extends State<ContactScreen>
             style: TextStyle(
               color: AppColors.accentRed,
               fontSize: 18,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.normal,
             ),
           ),
           const SizedBox(height: 6),
@@ -244,7 +244,7 @@ class _ContactScreenState extends State<ContactScreen>
                           'Click here',
                           style: TextStyle(
                             color: AppColors.accentRed,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.normal,
                             decoration: TextDecoration.underline,
                           ),
                         ),

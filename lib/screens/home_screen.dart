@@ -39,89 +39,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           _buildHeader(),
           
           // Body Content
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                   const Text(
-                    'Premier League',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  
-                  // Featured Match (Live)
-                  const FeaturedMatchCard(
-                    league: 'Premier League',
-                    team1: 'Liverpool',
-                    team2: 'Man Utd',
-                    score1: 0,
-                    score2: 0,
-                    time: '27:33',
-                    question: 'Will the keeper of Liverpool stop any goals?',
-                  ),
-                  
-                  const SizedBox(height: 24),
-                  
-                  // Match List
-                  MatchCard(
-                    team1: 'Liverpool',
-                    team2: 'Chelsea',
-                    score1: 2,
-                    score2: 0,
-                    isLive: false,
-                    matchStatus: '22 Apr 17:20',
-                    subtitle: 'Home will win',
-                    subtitleColor: AppColors.accentGreen,
-                    onTap: () {},
-                  ),
-                  const SizedBox(height: 16),
-                  
-                  MatchCard(
-                    team1: 'Tottenham',
-                    team2: 'Man City',
-                    score1: 0,
-                    score2: 1,
-                     isLive: false,
-                    matchStatus: '16 Apr 14:00',
-                    subtitle: 'Guest will win',
-                    subtitleColor: AppColors.accentRed,
-                     onTap: () {},
-                  ),
-                  const SizedBox(height: 16),
-                  
-                  MatchCard(
-                    team1: 'Chelsea',
-                    team2: 'Man Utd',
-                    score1: 0,
-                    score2: 0,
-                     isLive: false,
-                    matchStatus: '3 Apr 10:30',
-                    subtitle: 'Draw',
-                    subtitleColor: AppColors.accentYellow,
-                     onTap: () {},
-                  ),
-                   const SizedBox(height: 16),
-                  
-                  MatchCard(
-                    team1: 'Tottenham',
-                    team2: 'Chelsea',
-                    score1: 1,
-                    score2: 2,
-                     isLive: false,
-                    matchStatus: '28 Mar 20:00',
-                    subtitle: 'Guest will win',
-                    subtitleColor: AppColors.accentGreen,
-                     onTap: () {},
-                  ),
-                  
-                  const SizedBox(height: 80), // Bottom padding
-                ],
+          const Expanded(
+            child: Center(
+              child: Text(
+                'No matches to show yet',
+                style: TextStyle(color: AppColors.textSecondary),
               ),
             ),
           ),
@@ -167,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                   IconButton(
@@ -186,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 indicatorWeight: 3,
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.white60,
-                labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                labelStyle: const TextStyle(fontWeight: FontWeight.normal),
                 tabs: const [
                   Tab(text: 'All'),
                   Tab(text: 'Trending'),

@@ -52,7 +52,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> with SingleTickerPr
         backgroundColor: AppColors.primaryElectric,
         foregroundColor: Colors.white,
         elevation: 0,
-        title: const Text('Create your team', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+        title: const Text('Create your team', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 18)),
         actions: [
           IconButton(icon: const Icon(Icons.qr_code_scanner, color: Colors.white), onPressed: () {}),
           IconButton(icon: const Icon(Icons.search, color: Colors.white), onPressed: () {}),
@@ -69,7 +69,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> with SingleTickerPr
               indicatorWeight: 3,
               labelColor: AppColors.textPrimary,
               unselectedLabelColor: AppColors.textSecondary,
-              labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              labelStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 14),
               tabs: const [
                 Tab(text: 'Your Teams'),
                 Tab(text: 'Opponents'),
@@ -115,7 +115,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> with SingleTickerPr
                             borderRadius: BorderRadius.circular(20),
                             child: const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                              child: Text('Add', style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600)),
+                              child: Text('Add', style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.normal)),
                             ),
                           ),
                         ),
@@ -201,7 +201,7 @@ class _CreateTeamScreenState extends State<CreateTeamScreen> with SingleTickerPr
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     alignment: Alignment.center,
-                    child: const Text('Add team', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+                    child: const Text('Add team', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 16)),
                   ),
                 ),
               ),

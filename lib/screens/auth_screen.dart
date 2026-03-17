@@ -17,9 +17,9 @@ class _AuthScreenState extends State<AuthScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _nameController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _authService = AuthService();
   bool _loading = false;
-  String _selectedRole = 'user'; // 'user' | 'player' | 'umpire'
   bool _obscurePassword = true;
   bool _rememberMe = false;
 
@@ -28,6 +28,7 @@ class _AuthScreenState extends State<AuthScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _nameController.dispose();
+    _phoneController.dispose();
     super.dispose();
   }
 
@@ -62,14 +63,15 @@ class _AuthScreenState extends State<AuthScreen> {
         );
         print('✅ [AUTH_SCREEN] Login successful');
       } else {
-        print('🔵 [AUTH_SCREEN] Attempting email signup with role: $_selectedRole');
+        print('🔵 [AUTH_SCREEN] Attempting email signup');
         await _authService.signUpWithEmail(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
           fullName: _nameController.text.trim().isEmpty
               ? null
               : _nameController.text.trim(),
-          role: _selectedRole,
+          phone: _phoneController.text.trim().isEmpty ? null : _phoneController.text.trim(),
+          role: 'user',
         );
         print('✅ [AUTH_SCREEN] Signup successful');
       }
@@ -166,41 +168,6 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
-  Widget _roleChip(String value, String label, IconData icon) {
-    final selected = _selectedRole == value;
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => setState(() => _selectedRole = value),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          decoration: BoxDecoration(
-            color: selected ? AppColors.primaryPurple.withOpacity(0.15) : AppColors.backgroundWhiteAlt,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: selected ? AppColors.primaryPurple : AppColors.divider,
-              width: selected ? 2 : 1,
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon, size: 18, color: selected ? AppColors.primaryPurple : AppColors.textSecondary),
-              const SizedBox(width: 6),
-              Text(
-                label,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: selected ? FontWeight.bold : FontWeight.w500,
-                  color: selected ? AppColors.primaryPurple : AppColors.textSecondary,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final bottomInset = MediaQuery.of(context).viewInsets.bottom;
@@ -238,7 +205,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             style: TextStyle(
                               color: AppColors.textPrimary,
                               fontSize: 32,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.normal,
                               letterSpacing: -0.5,
                               shadows: [
                                 Shadow(
@@ -335,24 +302,18 @@ class _AuthScreenState extends State<AuthScreen> {
                                     validator: (v) => (v == null || v.isEmpty) ? 'Please enter your name' : null,
                                   ),
                                   const SizedBox(height: 20),
-                                  // Role selector (signup only)
-                                  Text(
-                                    'I am a',
-                                    style: TextStyle(
-                                      color: AppColors.textSecondary,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      _roleChip('user', 'User', Icons.person_outline_rounded),
-                                      const SizedBox(width: 10),
-                                      _roleChip('player', 'Player', Icons.sports_cricket_rounded),
-                                      const SizedBox(width: 10),
-                                      _roleChip('umpire', 'Umpire', Icons.sports_rounded),
-                                    ],
+                                  _creativeInput(
+                                    controller: _phoneController,
+                                    label: 'Phone Number',
+                                    icon: Icons.phone_outlined,
+                                    keyboardType: TextInputType.phone,
+                                    validator: (v) {
+                                      final value = (v ?? '').trim();
+                                      if (value.isEmpty) return 'Phone number is required';
+                                      final digits = value.replaceAll(RegExp(r'[^0-9]'), '');
+                                      if (digits.length < 10) return 'Please enter a valid phone number';
+                                      return null;
+                                    },
                                   ),
                                   const SizedBox(height: 20),
                                 ],
@@ -436,7 +397,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                           style: TextStyle(
                                             color: AppColors.primaryPurple,
                                             fontSize: 14,
-                                            fontWeight: FontWeight.w600,
+                                            fontWeight: FontWeight.normal,
                                           ),
                                         ),
                                       ),
@@ -492,7 +453,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                                 style: const TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
+                                                  fontWeight: FontWeight.normal,
                                                   letterSpacing: 0.5,
                                                 ),
                                               ),
@@ -573,7 +534,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                               text: 'Register now',
                                               style: TextStyle(
                                                 color: AppColors.primaryPurple,
-                                                fontWeight: FontWeight.w600,
+                                                fontWeight: FontWeight.normal,
                                               ),
                                             ),
                                           ],
@@ -638,7 +599,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   color: selected
                       ? AppColors.primaryPurple
                       : AppColors.textSecondary,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                   fontSize: 14,
                 ),
               ),
@@ -768,7 +729,7 @@ class _AuthScreenState extends State<AuthScreen> {
               style: const TextStyle(
                 color: AppColors.textPrimary,
                 fontSize: 14,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.normal,
               ),
             ),
           ],

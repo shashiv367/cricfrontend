@@ -19,6 +19,7 @@ class _SelectGroundScreenState extends State<SelectGroundScreen>
   bool _loading = true;
   String? _loadError;
   final TextEditingController _searchController = TextEditingController();
+  bool _creating = false;
 
   static const List<Map<String, dynamic>> _fallbackGrounds = [
     {'name': 'Stadium Ground', 'area': 'Kukatpally', 'city': 'Hyderabad'},
@@ -103,7 +104,7 @@ class _SelectGroundScreenState extends State<SelectGroundScreen>
               indicatorWeight: 3,
               labelColor: AppColors.textPrimary,
               unselectedLabelColor: AppColors.textSecondary,
-              labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+              labelStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 13),
               tabs: const [
                 Tab(text: 'Nearby'),
                 Tab(text: 'Favorites'),
@@ -148,7 +149,7 @@ class _SelectGroundScreenState extends State<SelectGroundScreen>
                 style: const TextStyle(
                   fontSize: 14,
                   color: AppColors.primaryTeal,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
             ),
@@ -214,7 +215,7 @@ class _SelectGroundScreenState extends State<SelectGroundScreen>
                       name,
                       style: const TextStyle(
                         fontSize: 15,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                         color: AppColors.textPrimary,
                       ),
                     ),
@@ -240,7 +241,7 @@ class _SelectGroundScreenState extends State<SelectGroundScreen>
                   style: const TextStyle(
                     fontSize: 11,
                     color: AppColors.primaryTeal,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
@@ -332,16 +333,17 @@ class _SelectGroundScreenState extends State<SelectGroundScreen>
                 ),
               ),
               const SizedBox(width: 10),
-              Material(
-                color: AppColors.backgroundWhite,
-                borderRadius: BorderRadius.circular(10),
-                child: InkWell(
-                  onTap: () {},
-                  borderRadius: BorderRadius.circular(10),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Icon(Icons.filter_list_rounded, color: AppColors.textSecondary),
+              SizedBox(
+                height: 44,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primaryElectric,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
+                  onPressed: _creating ? null : _openCreateLocationDialog,
+                  icon: const Icon(Icons.add_location_alt_outlined, size: 18),
+                  label: const Text('Add', style: TextStyle(fontWeight: FontWeight.normal)),
                 ),
               ),
             ],
@@ -353,5 +355,123 @@ class _SelectGroundScreenState extends State<SelectGroundScreen>
         ),
       ],
     );
+  }
+
+  Future<void> _openCreateLocationDialog() async {
+    final createdName = await showDialog<String>(
+      context: context,
+      barrierDismissible: true,
+      builder: (ctx) {
+        final nameCtrl = TextEditingController(text: _searchController.text.trim());
+        final areaCtrl = TextEditingController();
+        final cityCtrl = TextEditingController();
+
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          title: const Text('Add location', style: TextStyle(fontWeight: FontWeight.normal)),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: nameCtrl,
+                  decoration: const InputDecoration(
+                    labelText: 'Ground / Location name',
+                    labelStyle: TextStyle(fontWeight: FontWeight.normal),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                TextField(
+                  controller: areaCtrl,
+                  decoration: const InputDecoration(
+                    labelText: 'Area / Address (optional)',
+                    labelStyle: TextStyle(fontWeight: FontWeight.normal),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                TextField(
+                  controller: cityCtrl,
+                  decoration: const InputDecoration(
+                    labelText: 'City (optional)',
+                    labelStyle: TextStyle(fontWeight: FontWeight.normal),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('Cancel', style: TextStyle(fontWeight: FontWeight.normal)),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primaryTeal,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () async {
+                final name = nameCtrl.text.trim();
+                if (name.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: const Text('Please enter a location name.'),
+                      backgroundColor: AppColors.accentRed,
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                  return;
+                }
+
+                setState(() => _creating = true);
+                try {
+                  final token = supabase.auth.currentSession?.accessToken;
+                  if (token != null) {
+                    await ApiService.createOrGetLocation(
+                      token: token,
+                      name: name,
+                      address: areaCtrl.text.trim().isEmpty ? null : areaCtrl.text.trim(),
+                      city: cityCtrl.text.trim().isEmpty ? null : cityCtrl.text.trim(),
+                    );
+                    // refresh list so it shows up in results
+                    await _loadGrounds();
+                  } else {
+                    // Offline/unauthenticated fallback: add to local list
+                    final item = {
+                      'name': name,
+                      'area': areaCtrl.text.trim().isEmpty ? '—' : areaCtrl.text.trim(),
+                      'city': cityCtrl.text.trim().isEmpty ? '—' : cityCtrl.text.trim(),
+                    };
+                    if (mounted) {
+                      setState(() {
+                        _grounds = [item, ..._grounds];
+                      });
+                    }
+                  }
+
+                  if (ctx.mounted) Navigator.pop(ctx, name);
+                } catch (e) {
+                  if (!mounted) return;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Failed to add location: $e'),
+                      backgroundColor: AppColors.accentRed,
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                } finally {
+                  if (mounted) setState(() => _creating = false);
+                }
+              },
+              child: const Text('Save', style: TextStyle(fontWeight: FontWeight.normal)),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (!mounted) return;
+    if (createdName != null) {
+      Navigator.pop(context, createdName);
+    }
   }
 }

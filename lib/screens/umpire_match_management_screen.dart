@@ -136,7 +136,7 @@ class _UmpireMatchManagementScreenState extends State<UmpireMatchManagementScree
           style: TextStyle(
             color: AppColors.textPrimary,
             fontSize: 20,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.normal,
           ),
         ),
         iconTheme: const IconThemeData(color: AppColors.textPrimary),
@@ -182,7 +182,7 @@ class _UmpireMatchManagementScreenState extends State<UmpireMatchManagementScree
                     style: TextStyle(
                       color: AppColors.textPrimary,
                       fontSize: 24,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -241,7 +241,7 @@ class _UmpireMatchManagementScreenState extends State<UmpireMatchManagementScree
                               style: TextStyle(
                                 color: AppColors.textSecondary,
                                 fontSize: 14,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ),
@@ -284,7 +284,7 @@ class _UmpireMatchManagementScreenState extends State<UmpireMatchManagementScree
                                 style: TextStyle(
                                   color: AppColors.textPrimary,
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.normal,
                                 ),
                               ),
                             ],
@@ -356,7 +356,7 @@ class _UmpireMatchManagementScreenState extends State<UmpireMatchManagementScree
                                 style: TextStyle(
                                   color: AppColors.textPrimary,
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.normal,
                                 ),
                               ),
                             ],
@@ -521,7 +521,7 @@ class _UmpireMatchManagementScreenState extends State<UmpireMatchManagementScree
                                     'Create Match',
                                     style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.normal,
                                     ),
                                   ),
                                 ],
@@ -588,7 +588,7 @@ class _UmpireMatchManagementScreenState extends State<UmpireMatchManagementScree
                 style: TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
             ],

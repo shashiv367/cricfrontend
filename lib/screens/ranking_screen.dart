@@ -35,7 +35,7 @@ class RankingScreen extends StatelessWidget {
                     'Test',
                     style: TextStyle(
                       color: AppColors.primaryBlue,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                   Text(
@@ -57,7 +57,7 @@ class RankingScreen extends StatelessWidget {
                   child: Text(
                     'Team',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                       color: AppColors.textDark,
                     ),
                   ),
@@ -66,7 +66,7 @@ class RankingScreen extends StatelessWidget {
                   child: Text(
                     'M',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                       color: AppColors.textDark,
                     ),
                     textAlign: TextAlign.center,
@@ -76,7 +76,7 @@ class RankingScreen extends StatelessWidget {
                   child: Text(
                     'W',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                       color: AppColors.textDark,
                     ),
                     textAlign: TextAlign.center,
@@ -86,7 +86,7 @@ class RankingScreen extends StatelessWidget {
                   child: Text(
                     'Pts',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                       color: AppColors.textDark,
                     ),
                     textAlign: TextAlign.center,
@@ -96,7 +96,7 @@ class RankingScreen extends StatelessWidget {
                   child: Text(
                     'NRR',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                       color: AppColors.textDark,
                     ),
                     textAlign: TextAlign.center,
@@ -125,7 +125,7 @@ class RankingScreen extends StatelessWidget {
                                 '${index + 1}',
                                 style: const TextStyle(
                                   fontSize: 12,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.normal,
                                   color: AppColors.primaryPurple,
                                 ),
                               ),
@@ -134,7 +134,7 @@ class RankingScreen extends StatelessWidget {
                             Text(
                               r['team'].toString(),
                               style: const TextStyle(
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.normal,
                                 color: AppColors.textDark,
                               ),
                             ),

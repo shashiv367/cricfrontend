@@ -61,9 +61,11 @@ class _UserDashboardScreenState extends State<UserDashboardScreen> with SingleTi
       color: AppColors.primaryElectric,
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        child: Material(
+          color: Colors.transparent,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             // CricHeroes-style: For you / Club tabs (below app bar)
             Container(
               color: Colors.transparent,
@@ -121,6 +123,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen> with SingleTi
             _buildTournamentsSection(),
             const SizedBox(height: 40),
           ],
+          ),
         ),
       ),
     );
@@ -128,7 +131,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen> with SingleTi
 
   Widget _buildSimplifiedTopBar() {
     return Container(
-      color: Colors.white,
+      color: AppColors.scaffoldSurface,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
         children: [
@@ -404,37 +407,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen> with SingleTi
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Row(
-              children: [
-                const Text('Match of Kcr Saab', style: TextStyle(color: Colors.grey, fontSize: 11)),
-                const Spacer(),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                  decoration: BoxDecoration(color: Colors.black87, borderRadius: BorderRadius.circular(10)),
-                  child: const Text('Result', style: TextStyle(color: Colors.white, fontSize: 10)),
-                ),
-              ],
-            ),
-          ),
-          const Divider(height: 1),
-          // Match Details
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              children: [
-                _buildTeamRow('Dudekonda Warriors', '244/4', '(20.0 Ov)', true),
-                const SizedBox(height: 12),
-                _buildTeamRow('Banglore Stars', '205/7', '(20.0 Ov)', false),
-                const SizedBox(height: 16),
-                const Text(
-                  'Dudekonda Warriors won by 39 runs',
-                  style: TextStyle(color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500),
-                ),
-              ],
-            ),
-          ),
+          // no static placeholder content – use real matches only
           const Spacer(),
           // Footer Links (CricHeroes-style: Insights, Squads)
           Container(

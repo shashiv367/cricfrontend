@@ -41,7 +41,7 @@ class TeamDetailScreen extends StatelessWidget {
                 player,
                 style: const TextStyle(
                   color: AppColors.textPrimary,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
               trailing: const Icon(Icons.person_outline, color: AppColors.textSecondary),

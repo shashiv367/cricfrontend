@@ -50,7 +50,7 @@ class _AddTournamentScreenState extends State<AddTournamentScreen> {
         backgroundColor: AppColors.primaryElectric,
         foregroundColor: Colors.white,
         elevation: 0,
-        title: const Text('Add a tournament / series', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+        title: const Text('Add a tournament / series', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 18)),
         actions: [
           IconButton(icon: const Icon(Icons.play_arrow, color: Colors.white), onPressed: () {}),
         ],
@@ -79,7 +79,7 @@ class _AddTournamentScreenState extends State<AddTournamentScreen> {
             const SizedBox(height: 4),
             Text('*get updated with CricHeroes offers and help videos on mail.', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
             const SizedBox(height: 24),
-            Text('Tournament dates', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+            Text('Tournament dates', style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
             const SizedBox(height: 12),
             Row(
               children: [
@@ -118,7 +118,7 @@ class _AddTournamentScreenState extends State<AddTournamentScreen> {
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   alignment: Alignment.center,
-                  child: const Text('Next', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+                  child: const Text('Next', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 16)),
                 ),
               ),
             ),

@@ -44,7 +44,7 @@ class InningsLogo extends StatelessWidget {
             style: TextStyle(
               color: color,
               fontSize: height * 0.6,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.normal,
               letterSpacing: 1.5,
               fontFamily: 'Roboto',
             ),

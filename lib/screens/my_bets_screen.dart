@@ -64,49 +64,8 @@ class _MyBetsScreenState extends State<MyBetsScreen>
   }
 
   Widget _buildPastBets() {
-    return ListView(
-      padding: const EdgeInsets.all(16),
-      children: [
-        PastBetItem(
-          date: '22 Apr 17:20',
-          team1: 'Liverpool',
-          team2: 'Chelsea',
-          score1: 2,
-          score2: 0,
-          result: 'Home will win',
-          isWin: true,
-        ),
-        const SizedBox(height: 12),
-        PastBetItem(
-          date: '15 Apr 14:00',
-          team1: 'Tottenham',
-          team2: 'Manchester City',
-          score1: 0,
-          score2: 1,
-          result: 'Guest will win',
-          isWin: false,
-        ),
-        const SizedBox(height: 12),
-        PastBetItem(
-          date: '3 Apr 10:30',
-          team1: 'Chelsea',
-          team2: 'Manchester United',
-          score1: 0,
-          score2: 0,
-          result: 'Draw',
-          isWin: true,
-        ),
-        const SizedBox(height: 12),
-        PastBetItem(
-          date: '28 Mar 20:00',
-          team1: 'Tottenham',
-          team2: 'Chelsea',
-          score1: 1,
-          score2: 2,
-          result: 'Guest will win',
-          isWin: true,
-        ),
-      ],
+    return const Center(
+      child: Text('No past bets yet'),
     );
   }
 }

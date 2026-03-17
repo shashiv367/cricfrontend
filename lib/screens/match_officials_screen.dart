@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/app_colors.dart';
+import '../services/match_service.dart';
 
 class MatchOfficialsScreen extends StatelessWidget {
-  const MatchOfficialsScreen({super.key});
+  final String? matchId;
+  final String? inviteCode;
+
+  const MatchOfficialsScreen({
+    super.key,
+    this.matchId,
+    this.inviteCode,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,25 +41,25 @@ class MatchOfficialsScreen extends StatelessWidget {
                         context,
                         label: '1st',
                         icon: Icons.account_circle_outlined,
-                        onTap: () => _openAddOfficial(context, 'umpire'),
+                        onTap: () => _openAddOfficial(context, 'umpire', matchId, inviteCode),
                       ),
                       _officialSlot(
                         context,
                         label: '2nd',
                         icon: Icons.account_circle_outlined,
-                        onTap: () => _openAddOfficial(context, 'umpire'),
+                        onTap: () => _openAddOfficial(context, 'umpire', matchId, inviteCode),
                       ),
                       _officialSlot(
                         context,
                         label: '3rd',
                         icon: Icons.account_circle_outlined,
-                        onTap: () => _openAddOfficial(context, 'umpire'),
+                        onTap: () => _openAddOfficial(context, 'umpire', matchId, inviteCode),
                       ),
                       _officialSlot(
                         context,
                         label: '4th',
                         icon: Icons.account_circle_outlined,
-                        onTap: () => _openAddOfficial(context, 'umpire'),
+                        onTap: () => _openAddOfficial(context, 'umpire', matchId, inviteCode),
                       ),
                     ],
                   ),
@@ -65,13 +74,13 @@ class MatchOfficialsScreen extends StatelessWidget {
                         context,
                         label: '1st',
                         icon: Icons.receipt_long_outlined,
-                        onTap: () => _openAddOfficial(context, 'scorer'),
+                        onTap: () => _openAddOfficial(context, 'scorer', matchId, inviteCode),
                       ),
                       _officialSlot(
                         context,
                         label: '2nd',
                         icon: Icons.receipt_long_outlined,
-                        onTap: () => _openAddOfficial(context, 'scorer'),
+                        onTap: () => _openAddOfficial(context, 'scorer', matchId, inviteCode),
                       ),
                     ],
                   ),
@@ -86,13 +95,13 @@ class MatchOfficialsScreen extends StatelessWidget {
                         context,
                         label: '1st',
                         icon: Icons.mic_none_rounded,
-                        onTap: () => _openAddOfficial(context, 'commentator'),
+                        onTap: () => _openAddOfficial(context, 'commentator', matchId, inviteCode),
                       ),
                       _officialSlot(
                         context,
                         label: '2nd',
                         icon: Icons.mic_none_rounded,
-                        onTap: () => _openAddOfficial(context, 'commentator'),
+                        onTap: () => _openAddOfficial(context, 'commentator', matchId, inviteCode),
                       ),
                     ],
                   ),
@@ -107,13 +116,13 @@ class MatchOfficialsScreen extends StatelessWidget {
                         context,
                         label: 'Referee',
                         icon: Icons.badge_outlined,
-                        onTap: () => _openAddOfficial(context, 'official'),
+                        onTap: () => _openAddOfficial(context, 'official', matchId, inviteCode),
                       ),
                       _officialSlot(
                         context,
                         label: 'Streamer',
                         icon: Icons.videocam_outlined,
-                        onTap: () => _openAddOfficial(context, 'streamer'),
+                        onTap: () => _openAddOfficial(context, 'streamer', matchId, inviteCode),
                       ),
                     ],
                   ),
@@ -139,7 +148,7 @@ class MatchOfficialsScreen extends StatelessWidget {
                   onPressed: () => Navigator.pop(context),
                   child: const Text(
                     'Done',
-                    style: TextStyle(fontWeight: FontWeight.w600),
+                    style: TextStyle(fontWeight: FontWeight.normal),
                   ),
                 ),
               ),
@@ -155,7 +164,7 @@ class MatchOfficialsScreen extends StatelessWidget {
       text,
       style: const TextStyle(
         fontSize: 14,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.normal,
         color: AppColors.textPrimary,
       ),
     );
@@ -202,7 +211,12 @@ class MatchOfficialsScreen extends StatelessWidget {
     );
   }
 
-  static Future<void> _openAddOfficial(BuildContext context, String role) async {
+  static Future<void> _openAddOfficial(
+    BuildContext context,
+    String role,
+    String? matchId,
+    String? inviteCode,
+  ) async {
     String title;
     String hint;
     TextInputType keyboardType = TextInputType.phone;
@@ -229,33 +243,187 @@ class MatchOfficialsScreen extends StatelessWidget {
           title: title,
           hintText: hint,
           keyboardType: keyboardType,
+          matchId: matchId,
+          inviteCode: inviteCode,
         ),
       ),
     );
   }
 }
 
-class AddOfficialByPhoneScreen extends StatelessWidget {
+class AddOfficialByPhoneScreen extends StatefulWidget {
   final String title;
   final String hintText;
   final TextInputType keyboardType;
+  final String? matchId;
+  final String? inviteCode;
 
   const AddOfficialByPhoneScreen({
     super.key,
     required this.title,
     required this.hintText,
     this.keyboardType = TextInputType.phone,
+    this.matchId,
+    this.inviteCode,
   });
 
   @override
+  State<AddOfficialByPhoneScreen> createState() => _AddOfficialByPhoneScreenState();
+}
+
+class _AddOfficialByPhoneScreenState extends State<AddOfficialByPhoneScreen> {
+  final _controller = TextEditingController();
+  bool _sending = false;
+  final _matchService = MatchService();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _showError(String message) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: AppColors.accentRed,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+    );
+  }
+
+  String _digitsOnly(String s) => s.replaceAll(RegExp(r'[^0-9]'), '');
+
+  bool _isValidPhoneDigits(String digits) {
+    // Simple pragmatic validation for QA: 10-15 digits after cleaning.
+    return digits.length >= 10 && digits.length <= 15;
+  }
+
+  bool _isValidEmail(String email) {
+    final v = email.trim();
+    return RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(v);
+  }
+
+  String _normalizePhoneForWhatsApp(String digits) {
+    // WhatsApp requires country code. If user enters 10 digits, assume India (+91).
+    if (digits.length == 10) return '91$digits';
+    return digits;
+  }
+
+  String _buildInviteMessage(String code) {
+    final joinDeepLink = 'innings://join-match?code=$code';
+    return 'Join my match on Innings.\n\nInvite code: $code\nJoin link: $joinDeepLink';
+  }
+
+  Future<void> _sendInvite() async {
+    final raw = _controller.text.trim();
+    if (raw.isEmpty) {
+      _showError('Empty field');
+      return;
+    }
+
+    final isEmailMode = widget.keyboardType == TextInputType.emailAddress;
+    if (isEmailMode) {
+      if (!_isValidEmail(raw)) {
+        _showError('Invalid email');
+        return;
+      }
+      _showError('Email invite is coming soon');
+      return;
+    }
+
+    final digits = _digitsOnly(raw);
+    if (!_isValidPhoneDigits(digits)) {
+      _showError('Invalid number');
+      return;
+    }
+
+    setState(() => _sending = true);
+    try {
+      String? code = widget.inviteCode;
+      if ((code == null || code.trim().isEmpty) && widget.matchId != null) {
+        code = await _matchService.getInviteCode(widget.matchId!);
+      }
+      if (code == null || code.trim().isEmpty) {
+        _showError('Please save the match first.');
+        return;
+      }
+
+      final message = _buildInviteMessage(code.trim());
+      final waPhone = _normalizePhoneForWhatsApp(digits);
+      final waUri = Uri.parse('https://wa.me/$waPhone?text=${Uri.encodeComponent(message)}');
+      final smsUri = Uri.parse('sms:$digits?body=${Uri.encodeComponent(message)}');
+
+      if (!mounted) return;
+      await showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        ),
+        builder: (_) {
+          return SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Send invite link',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    '+$waPhone',
+                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.normal, color: AppColors.textSecondary),
+                  ),
+                  const SizedBox(height: 16),
+                  ListTile(
+                    leading: const Icon(Icons.chat_bubble_outline, color: AppColors.primaryElectric),
+                    title: const Text('WhatsApp', style: TextStyle(fontWeight: FontWeight.normal)),
+                    onTap: () async {
+                      Navigator.pop(context);
+                      if (await canLaunchUrl(waUri)) {
+                        await launchUrl(waUri, mode: LaunchMode.externalApplication);
+                      } else {
+                        _showError('WhatsApp not available');
+                      }
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.sms_outlined, color: AppColors.primaryElectric),
+                    title: const Text('SMS', style: TextStyle(fontWeight: FontWeight.normal)),
+                    onTap: () async {
+                      Navigator.pop(context);
+                      if (await canLaunchUrl(smsUri)) {
+                        await launchUrl(smsUri, mode: LaunchMode.externalApplication);
+                      } else {
+                        _showError('SMS not available');
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    } finally {
+      if (mounted) setState(() => _sending = false);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final controller = TextEditingController();
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
         backgroundColor: AppColors.primaryElectric,
         foregroundColor: Colors.white,
-        title: Text(title),
+        title: Text(widget.title),
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
@@ -263,10 +431,10 @@ class AddOfficialByPhoneScreen extends StatelessWidget {
           children: [
             Expanded(
               child: TextField(
-                controller: controller,
-                keyboardType: keyboardType,
+                controller: _controller,
+                keyboardType: widget.keyboardType,
                 decoration: InputDecoration(
-                  hintText: hintText,
+                  hintText: widget.hintText,
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
@@ -288,16 +456,10 @@ class AddOfficialByPhoneScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Find by ${keyboardType == TextInputType.emailAddress ? 'phone or email' : 'phone'} – coming soon'),
-                    ),
-                  );
-                },
+                onPressed: _sending ? null : _sendInvite,
                 child: const Text(
                   'Find',
-                  style: TextStyle(fontWeight: FontWeight.w600),
+                  style: TextStyle(fontWeight: FontWeight.normal),
                 ),
               ),
             ),

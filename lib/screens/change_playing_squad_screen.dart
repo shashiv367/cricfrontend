@@ -79,7 +79,7 @@ class _ChangePlayingSquadScreenState extends State<ChangePlayingSquadScreen> wit
           indicatorWeight: 3,
           labelColor: Colors.white,
           unselectedLabelColor: Colors.white70,
-          labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+          labelStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 14),
           onTap: (_) => setState(() {}),
           tabs: [
             Tab(text: teamA),
@@ -129,7 +129,7 @@ class _ChangePlayingSquadScreenState extends State<ChangePlayingSquadScreen> wit
                         children: [
                           Icon(Icons.add, color: Colors.white, size: 20),
                           SizedBox(width: 6),
-                          Text('Add player', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 13)),
+                          Text('Add player', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 13)),
                         ],
                       ),
                     ),
@@ -142,7 +142,7 @@ class _ChangePlayingSquadScreenState extends State<ChangePlayingSquadScreen> wit
             padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
             child: Text(
               'Playing squad',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: AppColors.textPrimary),
             ),
           ),
           Expanded(
@@ -171,7 +171,7 @@ class _ChangePlayingSquadScreenState extends State<ChangePlayingSquadScreen> wit
                     children: [
                       Icon(Icons.check, color: Colors.white, size: 18),
                       SizedBox(width: 8),
-                      Text('Synced', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                      Text('Synced', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal)),
                     ],
                   ),
                 ),
@@ -197,7 +197,7 @@ class _ChangePlayingSquadScreenState extends State<ChangePlayingSquadScreen> wit
                     );
                     Navigator.of(context).pop();
                   },
-                  child: const Text('Continue scoring', style: TextStyle(fontWeight: FontWeight.w600)),
+                  child: const Text('Continue scoring', style: TextStyle(fontWeight: FontWeight.normal)),
                 ),
               ),
             ),
@@ -227,7 +227,7 @@ class _ChangePlayingSquadScreenState extends State<ChangePlayingSquadScreen> wit
               backgroundColor: AppColors.primaryTeal.withOpacity(0.2),
               child: Text(
                 name.isNotEmpty ? name[0].toUpperCase() : '?',
-                style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primaryTeal),
+                style: const TextStyle(fontWeight: FontWeight.normal, color: AppColors.primaryTeal),
               ),
             ),
             Positioned(
@@ -238,13 +238,13 @@ class _ChangePlayingSquadScreenState extends State<ChangePlayingSquadScreen> wit
                 backgroundColor: isCaptain ? Colors.blue : AppColors.accentGreen,
                 child: Text(
                   isCaptain ? 'C' : '✓',
-                  style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.normal),
                 ),
               ),
             ),
           ],
         ),
-        title: Text(name, style: const TextStyle(fontWeight: FontWeight.w600)),
+        title: Text(name, style: const TextStyle(fontWeight: FontWeight.normal)),
       ),
     );
   }

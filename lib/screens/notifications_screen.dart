@@ -40,7 +40,7 @@ class NotificationsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        title: const Text('Notifications', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text('Notifications', style: TextStyle(fontWeight: FontWeight.normal)),
         backgroundColor: AppColors.primaryElectric,
         foregroundColor: Colors.white,
       ),
@@ -59,7 +59,7 @@ class NotificationsScreen extends StatelessWidget {
               title: Text(
                 item['title'] as String,
                 style: TextStyle(
-                  fontWeight: item['isUnread'] as bool ? FontWeight.bold : FontWeight.normal,
+                  fontWeight: item['isUnread'] as bool ? FontWeight.normal : FontWeight.normal,
                   fontSize: 15,
                 ),
               ),

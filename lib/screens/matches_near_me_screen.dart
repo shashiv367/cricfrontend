@@ -34,7 +34,7 @@ class _MatchesNearMeScreenState extends State<MatchesNearMeScreen> with SingleTi
         elevation: 0,
         title: Text(
           _tabController.index == 0 ? 'Matches near me' : 'Tournaments near me',
-          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 18),
         ),
       ),
       body: Column(
@@ -49,7 +49,7 @@ class _MatchesNearMeScreenState extends State<MatchesNearMeScreen> with SingleTi
               indicatorWeight: 3,
               labelColor: AppColors.textPrimary,
               unselectedLabelColor: AppColors.textSecondary,
-              labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              labelStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 14),
               tabs: const [
                 Tab(text: 'Matches'),
                 Tab(text: 'Tournaments'),
@@ -100,7 +100,7 @@ class _MatchesNearMeScreenState extends State<MatchesNearMeScreen> with SingleTi
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 alignment: Alignment.center,
-                child: const Text('Use current location', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+                child: const Text('Use current location', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 15)),
               ),
             ),
           ),
@@ -109,7 +109,7 @@ class _MatchesNearMeScreenState extends State<MatchesNearMeScreen> with SingleTi
             onTap: () {},
             child: const Text(
               'Select location manually',
-              style: TextStyle(color: AppColors.primaryTeal, fontSize: 15, fontWeight: FontWeight.w600),
+              style: TextStyle(color: AppColors.primaryTeal, fontSize: 15, fontWeight: FontWeight.normal),
             ),
           ),
           const SizedBox(height: 40),
@@ -144,7 +144,7 @@ class _MatchesNearMeScreenState extends State<MatchesNearMeScreen> with SingleTi
                       color: AppColors.textPrimary,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Text(listLabel, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600)),
+                    child: Text(listLabel, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.normal)),
                   ),
                 ),
               if (listLabel != null) const SizedBox(height: 12),

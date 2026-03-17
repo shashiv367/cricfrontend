@@ -109,7 +109,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       title: Text(
                         '$teamA vs $teamB',
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.normal),
                       ),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

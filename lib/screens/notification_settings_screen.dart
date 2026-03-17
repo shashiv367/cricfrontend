@@ -77,7 +77,7 @@ class NotificationSettingsScreen extends StatelessWidget {
                     'Enable push notifications',
                     style: TextStyle(
                       fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                 ),
@@ -102,7 +102,7 @@ class NotificationSettingsScreen extends StatelessWidget {
         title,
         style: const TextStyle(
           fontSize: 15,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.normal,
           color: AppColors.textPrimary,
         ),
       ),
@@ -144,7 +144,7 @@ class _TournamentNotificationsScreenState
           'News',
           style: TextStyle(
             fontSize: 15,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.normal,
           ),
         ),
         subtitle: const Text(

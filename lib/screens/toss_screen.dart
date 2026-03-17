@@ -59,7 +59,7 @@ class _TossScreenState extends State<TossScreen> {
                 'Who won the toss?',
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.normal,
                   color: AppColors.textPrimary,
                 ),
               ),
@@ -76,7 +76,7 @@ class _TossScreenState extends State<TossScreen> {
                 'Winner of the toss elected to?',
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.normal,
                   color: AppColors.textPrimary,
                 ),
               ),
@@ -115,7 +115,7 @@ class _TossScreenState extends State<TossScreen> {
                     child: Text(
                       _isHeads ? 'HEADS' : 'TAILS',
                       style: const TextStyle(
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                         letterSpacing: 1.2,
                         color: AppColors.textPrimary,
                       ),
@@ -152,7 +152,7 @@ class _TossScreenState extends State<TossScreen> {
                           : _saveTossAndStartMatch,
                       child: const Text(
                         "Let's play",
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: TextStyle(fontWeight: FontWeight.normal),
                       ),
                     ),
                   ),
@@ -194,7 +194,7 @@ class _TossScreenState extends State<TossScreen> {
                 name.isNotEmpty ? name[0].toUpperCase() : '?',
                 style: const TextStyle(
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                   fontSize: 20,
                 ),
               ),
@@ -205,7 +205,7 @@ class _TossScreenState extends State<TossScreen> {
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 fontSize: 14,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.normal,
                 color: AppColors.textPrimary,
               ),
             ),
@@ -239,7 +239,7 @@ class _TossScreenState extends State<TossScreen> {
           label,
           style: TextStyle(
             fontSize: 15,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.normal,
             color: selected ? AppColors.primaryTeal : AppColors.textPrimary,
           ),
         ),

@@ -7,8 +7,8 @@ class FeaturedMatchCard extends StatelessWidget {
   final String team2;
   final int score1;
   final int score2;
-  final String time; // e.g. "27:33"
-  final String question; // e.g. "Will the keeper of Liverpool stop any goals?"
+  final String time;
+  final String question;
 
   const FeaturedMatchCard({
     super.key,
@@ -49,7 +49,7 @@ class FeaturedMatchCard extends StatelessWidget {
                  style: const TextStyle(
                    color: AppColors.textPrimary,
                    fontSize: 14,
-                   fontWeight: FontWeight.w600,
+                   fontWeight: FontWeight.normal,
                  ),
                ),
                Container(
@@ -63,7 +63,7 @@ class FeaturedMatchCard extends StatelessWidget {
                    style: TextStyle(
                      color: Colors.white,
                      fontSize: 10,
-                     fontWeight: FontWeight.bold,
+                     fontWeight: FontWeight.normal,
                    ),
                  ),
                ),
@@ -90,7 +90,7 @@ class FeaturedMatchCard extends StatelessWidget {
                     '$score1 - $score2',
                     style: const TextStyle(
                       fontSize: 32,
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.normal,
                       color: AppColors.textPrimary,
                     ),
                   ),
@@ -180,7 +180,7 @@ class FeaturedMatchCard extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             name.isNotEmpty ? name[0] : '?',
-            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.normal),
           ),
         ),
         const SizedBox(height: 8),
@@ -188,7 +188,7 @@ class FeaturedMatchCard extends StatelessWidget {
           name,
           style: const TextStyle(
             fontSize: 13,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.normal,
             color: AppColors.textPrimary,
           ),
         ),
@@ -209,7 +209,7 @@ class FeaturedMatchCard extends StatelessWidget {
         label,
         style: TextStyle(
           color: color,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.normal,
         ),
       ),
     );

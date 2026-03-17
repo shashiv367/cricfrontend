@@ -386,7 +386,7 @@ class _UmpireDashboardScreenState extends State<UmpireDashboardScreen> with Sing
                                                           style: const TextStyle(
                                                             color: AppColors.primaryPurple,
                                                             fontSize: 36,
-                                                            fontWeight: FontWeight.bold,
+                                                            fontWeight: FontWeight.normal,
                                                           ),
                                                         ),
                                                       ),
@@ -411,7 +411,7 @@ class _UmpireDashboardScreenState extends State<UmpireDashboardScreen> with Sing
                                                           style: const TextStyle(
                                                             color: AppColors.primaryPurple,
                                                             fontSize: 36,
-                                                            fontWeight: FontWeight.bold,
+                                                            fontWeight: FontWeight.normal,
                                                           ),
                                                         ),
                                                       ),
@@ -462,7 +462,7 @@ class _UmpireDashboardScreenState extends State<UmpireDashboardScreen> with Sing
                                   style: const TextStyle(
                                     color: AppColors.textPrimary,
                                     fontSize: 28,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.normal,
                                     letterSpacing: -0.5,
                                   ),
                                 ),
@@ -588,7 +588,7 @@ class _UmpireDashboardScreenState extends State<UmpireDashboardScreen> with Sing
                   style: TextStyle(
                     color: AppColors.textPrimary,
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ],
@@ -664,7 +664,7 @@ class _UmpireDashboardScreenState extends State<UmpireDashboardScreen> with Sing
                     style: const TextStyle(
                       color: AppColors.textPrimary,
                       fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                   const SizedBox(height: 6),
@@ -711,7 +711,7 @@ class _UmpireDashboardScreenState extends State<UmpireDashboardScreen> with Sing
             style: TextStyle(
               color: AppColors.textSecondary,
               fontSize: 18,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.normal,
             ),
           ),
           const SizedBox(height: 8),
@@ -769,7 +769,7 @@ class _UmpireDashboardScreenState extends State<UmpireDashboardScreen> with Sing
                   style: TextStyle(
                     color: AppColors.accentGreen,
                     fontSize: 12,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
@@ -801,7 +801,7 @@ class _UmpireDashboardScreenState extends State<UmpireDashboardScreen> with Sing
                       style: const TextStyle(
                         color: AppColors.textPrimary,
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -820,7 +820,7 @@ class _UmpireDashboardScreenState extends State<UmpireDashboardScreen> with Sing
                 style: TextStyle(
                   color: AppColors.textMuted,
                   fontSize: 14,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
               const SizedBox(width: 16),
@@ -833,7 +833,7 @@ class _UmpireDashboardScreenState extends State<UmpireDashboardScreen> with Sing
                       style: const TextStyle(
                         color: AppColors.textPrimary,
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                       ),
                       textAlign: TextAlign.end,
                     ),
@@ -867,7 +867,7 @@ class _UmpireDashboardScreenState extends State<UmpireDashboardScreen> with Sing
             style: TextStyle(
               color: AppColors.textPrimary,
               fontSize: 20,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.normal,
             ),
           ),
           const SizedBox(height: 24),
@@ -909,7 +909,7 @@ class _UmpireDashboardScreenState extends State<UmpireDashboardScreen> with Sing
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
             ),

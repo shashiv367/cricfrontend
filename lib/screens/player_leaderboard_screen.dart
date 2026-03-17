@@ -48,7 +48,7 @@ class _PlayerLeaderboardScreenState extends State<PlayerLeaderboardScreen> with 
         ),
         title: const Text(
           'Player Leaderboard',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 18),
         ),
         actions: [
           IconButton(icon: const Icon(Icons.help_outline, color: Colors.white), onPressed: () {}),
@@ -68,7 +68,7 @@ class _PlayerLeaderboardScreenState extends State<PlayerLeaderboardScreen> with 
                 indicatorWeight: 3,
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.white70,
-                labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                labelStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 14),
                 unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal, fontSize: 14),
                 dividerColor: Colors.transparent,
                 tabs: _sports.map((s) => Tab(text: s)).toList(),
@@ -130,7 +130,7 @@ class _SportLeaderboardPageState extends State<_SportLeaderboardPage> {
             _criteriaText,
             style: const TextStyle(
               color: AppColors.primaryTeal,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.normal,
               fontSize: 14,
             ),
           ),
@@ -164,7 +164,7 @@ class _SportLeaderboardPageState extends State<_SportLeaderboardPage> {
                   child: Text(
                     _roles[i],
                     style: TextStyle(
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.normal,
                       fontSize: 14,
                       color: selected ? Colors.white : AppColors.textPrimary,
                     ),
@@ -351,7 +351,7 @@ class _SportLeaderboardPageState extends State<_SportLeaderboardPage> {
                 backgroundColor: AppColors.backgroundCardAlt,
                 child: Text(
                   name.isNotEmpty ? name.substring(0, 1).toUpperCase() : '?',
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.textSecondary),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.normal, color: AppColors.textSecondary),
                 ),
               ),
               if (isPro)
@@ -364,7 +364,7 @@ class _SportLeaderboardPageState extends State<_SportLeaderboardPage> {
                       color: AppColors.primaryTeal,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: const Text('PRO', style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold)),
+                    child: const Text('PRO', style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.normal)),
                   ),
                 ),
             ],
@@ -374,7 +374,7 @@ class _SportLeaderboardPageState extends State<_SportLeaderboardPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.textPrimary)),
+                Text(name, style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 14, color: AppColors.textPrimary)),
                 const SizedBox(height: 2),
                 Text('($location)', style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                 const SizedBox(height: 4),
@@ -384,7 +384,7 @@ class _SportLeaderboardPageState extends State<_SportLeaderboardPage> {
           ),
           Text(
             '$rank',
-            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.textSecondary),
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.normal, color: AppColors.textSecondary),
           ),
         ],
       ),
@@ -406,7 +406,7 @@ class _SportLeaderboardPageState extends State<_SportLeaderboardPage> {
                 const Expanded(
                   child: Text(
                     'Ready to challenge yourself?',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: AppColors.promoTitle),
+                    style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15, color: AppColors.promoTitle),
                   ),
                 ),
                 GestureDetector(
@@ -439,7 +439,7 @@ class _SportLeaderboardPageState extends State<_SportLeaderboardPage> {
                       child: Center(
                         child: Text(
                           _roleIndex == 0 ? '3\n30s' : _roleIndex == 1 ? '1\n5W' : '5',
-                          style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
+                          style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.normal),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -449,7 +449,7 @@ class _SportLeaderboardPageState extends State<_SportLeaderboardPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(_promoTitle, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.textPrimary)),
+                          Text(_promoTitle, style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 14, color: AppColors.textPrimary)),
                           const SizedBox(height: 2),
                           Row(
                             children: [
@@ -474,7 +474,7 @@ class _SportLeaderboardPageState extends State<_SportLeaderboardPage> {
                       borderRadius: BorderRadius.circular(10),
                       child: const Padding(
                         padding: EdgeInsets.symmetric(vertical: 12),
-                        child: Center(child: Text('Join', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15))),
+                        child: Center(child: Text('Join', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 15))),
                       ),
                     ),
                   ),
@@ -483,7 +483,7 @@ class _SportLeaderboardPageState extends State<_SportLeaderboardPage> {
                 Center(
                   child: GestureDetector(
                     onTap: () {},
-                    child: const Text('Explore', style: TextStyle(color: AppColors.primaryTeal, fontWeight: FontWeight.w600, fontSize: 13)),
+                    child: const Text('Explore', style: TextStyle(color: AppColors.primaryTeal, fontWeight: FontWeight.normal, fontSize: 13)),
                   ),
                 ),
               ],

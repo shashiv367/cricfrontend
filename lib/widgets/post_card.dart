@@ -62,7 +62,7 @@ class PostCard extends StatelessWidget {
               post.user,
               style: const TextStyle(
                 color: AppColors.textPrimary,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.normal,
               ),
               overflow: TextOverflow.ellipsis,
             ),

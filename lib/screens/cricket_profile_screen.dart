@@ -80,7 +80,7 @@ class CricketProfileScreen extends StatelessWidget {
                       name,
                       style: const TextStyle(
                         fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                         color: AppColors.textPrimary,
                       ),
                     ),
@@ -134,7 +134,7 @@ class CricketProfileScreen extends StatelessWidget {
                   'Go PRO',
                   style: TextStyle(
                     fontSize: 13,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
@@ -168,7 +168,7 @@ class CricketProfileScreen extends StatelessWidget {
             'Profile',
             style: TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.normal,
               color: AppColors.textPrimary,
             ),
           ),
@@ -216,7 +216,7 @@ class CricketProfileScreen extends StatelessWidget {
                 '75%',
                 style: TextStyle(
                   fontSize: 12,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.normal,
                   color: AppColors.textSecondary,
                 ),
               ),
@@ -230,7 +230,7 @@ class CricketProfileScreen extends StatelessWidget {
                 'Complete profile',
                 style: TextStyle(
                   color: AppColors.primaryTeal,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
             ),
@@ -302,7 +302,7 @@ class CricketProfileScreen extends StatelessWidget {
               'Find Cricketers',
               style: TextStyle(
                 fontSize: 14,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.normal,
                 color: AppColors.textPrimary,
               ),
             ),
@@ -442,7 +442,7 @@ class CricketProfileScreen extends StatelessWidget {
                             'Change language',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.normal,
                               color: AppColors.accentRed,
                             ),
                           ),
@@ -482,7 +482,7 @@ class CricketProfileScreen extends StatelessWidget {
                                   lang,
                                   style: TextStyle(
                                     fontSize: 14,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.normal,
                                     color: isSelected ? Colors.white : AppColors.textPrimary,
                                   ),
                                 ),
@@ -521,7 +521,7 @@ class CricketProfileScreen extends StatelessWidget {
                           },
                           child: const Text(
                             'Apply',
-                            style: TextStyle(color: AppColors.primaryTeal, fontWeight: FontWeight.w600),
+                            style: TextStyle(color: AppColors.primaryTeal, fontWeight: FontWeight.normal),
                           ),
                         ),
                       ),
@@ -599,7 +599,7 @@ class _ProfileStatsNumber extends StatelessWidget {
           value,
           style: const TextStyle(
             fontSize: 18,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.normal,
             color: AppColors.textPrimary,
           ),
         ),

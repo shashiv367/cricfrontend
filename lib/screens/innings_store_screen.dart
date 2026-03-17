@@ -11,7 +11,7 @@ class InningsStoreScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text('Market', style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold)),
+        title: const Text('Market', style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.normal)),
       ),
       body: Center(
         child: Padding(
@@ -23,7 +23,7 @@ class InningsStoreScreen extends StatelessWidget {
               const SizedBox(height: 16),
               const Text(
                 'Market',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.textPrimary),
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 18, color: AppColors.textPrimary),
               ),
               const SizedBox(height: 8),
               Text(

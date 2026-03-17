@@ -98,7 +98,7 @@ class _MatchRulesScreenState extends State<MatchRulesScreen> {
                               letter,
                               style: TextStyle(
                                 color: selected ? Colors.white : AppColors.textSecondary,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ),
@@ -107,7 +107,7 @@ class _MatchRulesScreenState extends State<MatchRulesScreen> {
                     }).toList(),
                   ),
                   const SizedBox(height: 12),
-                  const Text('For overs', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.textSecondary)),
+                  const Text('For overs', style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal, color: AppColors.textSecondary)),
                   const SizedBox(height: 4),
                   SizedBox(
                     width: 120,
@@ -132,7 +132,7 @@ class _MatchRulesScreenState extends State<MatchRulesScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: const [
-                        Text('Connect to LED board', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
+                        Text('Connect to LED board', style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
                         Icon(Icons.arrow_forward_ios, size: 14, color: AppColors.textSecondary),
                       ],
                     ),
@@ -158,7 +158,7 @@ class _MatchRulesScreenState extends State<MatchRulesScreen> {
                         _ignoreOversController.clear();
                       });
                     },
-                    child: const Text('Reset', style: TextStyle(color: AppColors.textSecondary, fontWeight: FontWeight.w600)),
+                    child: const Text('Reset', style: TextStyle(color: AppColors.textSecondary, fontWeight: FontWeight.normal)),
                   ),
                   const Spacer(),
                   ElevatedButton(
@@ -169,7 +169,7 @@ class _MatchRulesScreenState extends State<MatchRulesScreen> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     ),
                     onPressed: _onDone,
-                    child: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600)),
+                    child: const Text('Done', style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ],
               ),
@@ -185,7 +185,7 @@ class _MatchRulesScreenState extends State<MatchRulesScreen> {
       padding: const EdgeInsets.only(bottom: 8),
       child: Text(
         text,
-        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
+        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: AppColors.textPrimary),
       ),
     );
   }
@@ -208,7 +208,7 @@ class _MatchRulesScreenState extends State<MatchRulesScreen> {
       padding: const EdgeInsets.only(bottom: 8),
       child: Row(
         children: [
-          CircleAvatar(radius: 12, backgroundColor: AppColors.backgroundLight, child: Text(letter, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600))),
+          CircleAvatar(radius: 12, backgroundColor: AppColors.backgroundLight, child: Text(letter, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.normal))),
           const SizedBox(width: 10),
           Expanded(child: Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textPrimary))),
           Switch(value: value, onChanged: onChanged, activeColor: AppColors.primaryTeal),
@@ -222,7 +222,7 @@ class _MatchRulesScreenState extends State<MatchRulesScreen> {
       padding: const EdgeInsets.only(bottom: 8),
       child: Row(
         children: [
-          CircleAvatar(radius: 12, backgroundColor: AppColors.backgroundLight, child: Text(letter, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600))),
+          CircleAvatar(radius: 12, backgroundColor: AppColors.backgroundLight, child: Text(letter, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.normal))),
           const SizedBox(width: 10),
           Expanded(child: Text(label, style: const TextStyle(fontSize: 13, color: AppColors.textPrimary))),
           Row(
@@ -233,7 +233,7 @@ class _MatchRulesScreenState extends State<MatchRulesScreen> {
                 onPressed: () => onChanged(value - 1),
                 color: AppColors.primaryTeal,
               ),
-              SizedBox(width: 28, child: Center(child: Text('$value', style: const TextStyle(fontWeight: FontWeight.w700)))),
+              SizedBox(width: 28, child: Center(child: Text('$value', style: const TextStyle(fontWeight: FontWeight.normal)))),
               IconButton(
                 icon: const Icon(Icons.add_circle_outline, size: 22),
                 onPressed: () => onChanged(value + 1),
@@ -262,7 +262,7 @@ class _MatchRulesScreenState extends State<MatchRulesScreen> {
               child: const Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 32),
             ),
             const SizedBox(height: 16),
-            const Text('Save changes', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
+            const Text('Save changes', style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
             const SizedBox(height: 8),
             const Text(
               'Are you sure you want to apply the new match settings?',

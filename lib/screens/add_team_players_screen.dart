@@ -368,7 +368,7 @@ class _AddTeamPlayersScreenState extends State<AddTeamPlayersScreen> {
           style: const TextStyle(
             color: AppColors.textPrimary,
             fontSize: 20,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.normal,
           ),
         ),
         iconTheme: const IconThemeData(color: AppColors.textPrimary),
@@ -414,7 +414,7 @@ class _AddTeamPlayersScreenState extends State<AddTeamPlayersScreen> {
                     style: const TextStyle(
                       color: AppColors.textPrimary,
                       fontSize: 28,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -440,7 +440,7 @@ class _AddTeamPlayersScreenState extends State<AddTeamPlayersScreen> {
                       style: TextStyle(
                         color: widget.isTeamA ? AppColors.primaryBlue : AppColors.accentRed,
                         fontSize: 14,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ),
@@ -495,7 +495,7 @@ class _AddTeamPlayersScreenState extends State<AddTeamPlayersScreen> {
                               style: TextStyle(
                                 color: AppColors.textPrimary,
                                 fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ],
@@ -637,7 +637,7 @@ class _AddTeamPlayersScreenState extends State<AddTeamPlayersScreen> {
                           style: const TextStyle(
                             color: AppColors.textPrimary,
                             fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ],
@@ -670,7 +670,7 @@ class _AddTeamPlayersScreenState extends State<AddTeamPlayersScreen> {
                                   style: TextStyle(
                                     color: widget.isTeamA ? AppColors.primaryBlue : AppColors.accentRed,
                                     fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.normal,
                                   ),
                                 ),
                               ),
@@ -716,7 +716,7 @@ class _AddTeamPlayersScreenState extends State<AddTeamPlayersScreen> {
                             style: TextStyle(
                               color: AppColors.textSecondary,
                               fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -764,7 +764,7 @@ class _AddTeamPlayersScreenState extends State<AddTeamPlayersScreen> {
                                   widget.isTeamA ? 'Continue to Team B' : 'Finish',
                                   style: const TextStyle(
                                     fontSize: 18,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.normal,
                                   ),
                                 ),
                                 const SizedBox(width: 12),

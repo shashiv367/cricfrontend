@@ -14,14 +14,14 @@ class _LookingScreenState extends State<LookingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       body: Column(
         children: [
           // 1. CricHeroes-style: Discover teams, opponents, players, umpires, grounds
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.scaffoldSurface,
               boxShadow: [
                 BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 2, offset: const Offset(0, 1)),
               ],
@@ -104,34 +104,13 @@ class _LookingScreenState extends State<LookingScreen> {
           ),
           const Divider(height: 1),
 
-          // 3. Main List
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.all(12),
-              children: [
-                _buildLookingCard(
-                  name: "D Rajesh's team (Fire Storm)",
-                  finding: "Bowler (None)",
-                  details: ["Open ground", "Bowler (None)"],
-                  timestamp: "34 seconds ago",
-                  isPro: true,
-                ),
-                _buildLookingCard(
-                  name: "Mahesh's team (Fire Blasters)",
-                  finding: "opponent to play a Match",
-                  details: ["Wed, Feb 04 2026 | 07:00 AM", "Open ground"],
-                  timestamp: "13 minutes ago",
-                  iconType: "VS",
-                  isPro: true,
-                ),
-                _buildLookingCard(
-                  name: "Chiranjeet's team (Divine Kings)",
-                  finding: "All-rounder (Right-arm Off Break)",
-                  details: ["Thu, Feb 05 2026", "All-rounder (Right-arm Off Break)"],
-                  timestamp: "14 minutes ago",
-                  isPro: true,
-                ),
-              ],
+          // 3. Main List – start empty for QA (no static posts)
+          const Expanded(
+            child: Center(
+              child: Text(
+                'No looking posts yet',
+                style: TextStyle(color: AppColors.textSecondary),
+              ),
             ),
           ),
         ],

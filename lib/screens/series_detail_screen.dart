@@ -56,7 +56,7 @@ class _SeriesDetailScreenState extends State<SeriesDetailScreen> {
                   const Expanded(
                     child: Text(
                       'Big Bash League 2025-26',
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 18),
                     ),
                   ),
                   IconButton(icon: const Icon(Icons.tune, color: Colors.white), onPressed: () {}),
@@ -70,7 +70,7 @@ class _SeriesDetailScreenState extends State<SeriesDetailScreen> {
               indicatorWeight: 3,
               labelColor: Colors.white,
               unselectedLabelColor: Colors.white70,
-              labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+              labelStyle: TextStyle(fontWeight: FontWeight.normal, fontSize: 13),
               dividerColor: Colors.transparent,
               padding: EdgeInsets.symmetric(horizontal: 10),
               tabs: [
@@ -95,12 +95,12 @@ class _SeriesDetailScreenState extends State<SeriesDetailScreen> {
         _buildMatchListItem('39th Match • Perth', 'Perth Scorchers', '', 'Melbourne Stars', '', '2:45 PM'),
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-          child: Text('SUN, 18 JAN 2026', style: TextStyle(fontWeight: FontWeight.w900, color: AppColors.textSecondary, fontSize: 13, letterSpacing: 0.5)),
+          child: Text('SUN, 18 JAN 2026', style: TextStyle(fontWeight: FontWeight.normal, color: AppColors.textSecondary, fontSize: 13, letterSpacing: 0.5)),
         ),
         _buildMatchListItem('40th Match • Brisbane', 'Brisbane Heat', '', 'Sydney Sixers', '', '1:45 PM'),
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-          child: Text('TUE, 20 JAN 2026', style: TextStyle(fontWeight: FontWeight.w900, color: AppColors.textSecondary, fontSize: 13, letterSpacing: 0.5)),
+          child: Text('TUE, 20 JAN 2026', style: TextStyle(fontWeight: FontWeight.normal, color: AppColors.textSecondary, fontSize: 13, letterSpacing: 0.5)),
         ),
         _buildMatchListItem('Qualifier • TBC', 'TBC', '', 'TBC', '', '2:00 PM'),
       ],
@@ -122,7 +122,7 @@ class _SeriesDetailScreenState extends State<SeriesDetailScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.bold)),
+              Text(title, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12, fontWeight: FontWeight.normal)),
               const Icon(Icons.notifications_none, color: AppColors.textSecondary, size: 18),
             ],
           ),
@@ -131,8 +131,8 @@ class _SeriesDetailScreenState extends State<SeriesDetailScreen> {
             children: [
               Container(width: 24, height: 24, color: Colors.grey.shade200), // Placeholder for logo
               const SizedBox(width: 12),
-              Expanded(child: Text(team1, style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.textPrimary))),
-              Text(score1, style: const TextStyle(fontWeight: FontWeight.w900, color: AppColors.textPrimary)),
+              Expanded(child: Text(team1, style: const TextStyle(fontWeight: FontWeight.normal, color: AppColors.textPrimary))),
+              Text(score1, style: const TextStyle(fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
             ],
           ),
           const SizedBox(height: 8),
@@ -140,12 +140,12 @@ class _SeriesDetailScreenState extends State<SeriesDetailScreen> {
             children: [
               Container(width: 24, height: 24, color: Colors.grey.shade200), // Placeholder for logo
               const SizedBox(width: 12),
-              Expanded(child: Text(team2, style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.textPrimary))),
-              Text(score2, style: const TextStyle(fontWeight: FontWeight.w900, color: AppColors.textPrimary)),
+              Expanded(child: Text(team2, style: const TextStyle(fontWeight: FontWeight.normal, color: AppColors.textPrimary))),
+              Text(score2, style: const TextStyle(fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
             ],
           ),
           const SizedBox(height: 12),
-          Text(status, style: TextStyle(color: isLive ? Colors.red : Colors.orange, fontWeight: FontWeight.w600, fontSize: 13)),
+          Text(status, style: TextStyle(color: isLive ? Colors.red : Colors.orange, fontWeight: FontWeight.normal, fontSize: 13)),
         ],
       ),
     );
@@ -206,13 +206,13 @@ class _SeriesDetailScreenState extends State<SeriesDetailScreen> {
       child: const Row(
         children: [
           SizedBox(width: 30, child: Text('', textAlign: TextAlign.center)),
-          Expanded(child: Text('Team', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: AppColors.textSecondary))),
-          SizedBox(width: 25, child: Text('P', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: AppColors.textSecondary))),
-          SizedBox(width: 25, child: Text('W', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: AppColors.textSecondary))),
-          SizedBox(width: 25, child: Text('L', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: AppColors.textSecondary))),
-          SizedBox(width: 25, child: Text('NR', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: AppColors.textSecondary))),
-          SizedBox(width: 30, child: Text('Pts', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: AppColors.textSecondary))),
-          SizedBox(width: 50, child: Text('NRR', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: AppColors.textSecondary))),
+          Expanded(child: Text('Team', style: TextStyle(fontWeight: FontWeight.normal, fontSize: 11, color: AppColors.textSecondary))),
+          SizedBox(width: 25, child: Text('P', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.normal, fontSize: 11, color: AppColors.textSecondary))),
+          SizedBox(width: 25, child: Text('W', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.normal, fontSize: 11, color: AppColors.textSecondary))),
+          SizedBox(width: 25, child: Text('L', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.normal, fontSize: 11, color: AppColors.textSecondary))),
+          SizedBox(width: 25, child: Text('NR', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.normal, fontSize: 11, color: AppColors.textSecondary))),
+          SizedBox(width: 30, child: Text('Pts', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.normal, fontSize: 11, color: AppColors.textSecondary))),
+          SizedBox(width: 50, child: Text('NRR', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.normal, fontSize: 11, color: AppColors.textSecondary))),
           SizedBox(width: 20),
         ],
       ),
@@ -227,13 +227,13 @@ class _SeriesDetailScreenState extends State<SeriesDetailScreen> {
       ),
       child: Row(
         children: [
-          SizedBox(width: 30, child: Text(rank, style: const TextStyle(color: AppColors.textSecondary, fontSize: 13, fontWeight: FontWeight.bold))),
+          SizedBox(width: 30, child: Text(rank, style: const TextStyle(color: AppColors.textSecondary, fontSize: 13, fontWeight: FontWeight.normal))),
           Expanded(
             child: Row(
               children: [
                 Container(width: 20, height: 20, color: Colors.grey.shade200), // Logo
                 const SizedBox(width: 8),
-                Text(team, style: const TextStyle(fontWeight: FontWeight.w600, color: AppColors.primaryElectric, fontSize: 13)),
+                Text(team, style: const TextStyle(fontWeight: FontWeight.normal, color: AppColors.primaryElectric, fontSize: 13)),
               ],
             ),
           ),
@@ -241,7 +241,7 @@ class _SeriesDetailScreenState extends State<SeriesDetailScreen> {
           SizedBox(width: 25, child: Text(w, textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, color: AppColors.textPrimary))),
           SizedBox(width: 25, child: Text(l, textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, color: AppColors.textPrimary))),
           SizedBox(width: 25, child: Text(nr, textAlign: TextAlign.center, style: const TextStyle(fontSize: 13, color: AppColors.textPrimary))),
-          SizedBox(width: 30, child: Text(pts, textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: AppColors.textPrimary))),
+          SizedBox(width: 30, child: Text(pts, textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 13, color: AppColors.textPrimary))),
           SizedBox(width: 50, child: Text(nrr, textAlign: TextAlign.center, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary))),
           const Icon(Icons.keyboard_arrow_down, size: 18, color: Colors.black38),
         ],
@@ -297,7 +297,7 @@ class _SeriesDetailScreenState extends State<SeriesDetailScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: AppColors.textPrimary)),
+                    Text(title, style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 15, color: AppColors.textPrimary)),
                     const SizedBox(height: 4),
                     Text(time, style: const TextStyle(color: AppColors.textSecondary, fontSize: 12)),
                   ],
@@ -332,7 +332,7 @@ class _SeriesDetailScreenState extends State<SeriesDetailScreen> {
       children: [
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Text('T20', style: TextStyle(fontWeight: FontWeight.w900, color: AppColors.textSecondary, fontSize: 13, letterSpacing: 0.5)),
+          child: Text('T20', style: TextStyle(fontWeight: FontWeight.normal, color: AppColors.textSecondary, fontSize: 13, letterSpacing: 0.5)),
         ),
         ...teams.map((team) => _buildTeamListItem(team)),
       ],
@@ -346,7 +346,7 @@ class _SeriesDetailScreenState extends State<SeriesDetailScreen> {
         border: const Border(bottom: BorderSide(color: Colors.black12)),
       ),
       child: ListTile(
-        title: Text(teamName, style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+        title: Text(teamName, style: const TextStyle(fontWeight: FontWeight.normal, color: AppColors.textPrimary)),
         onTap: () {
           Navigator.pushNamed(
             context,

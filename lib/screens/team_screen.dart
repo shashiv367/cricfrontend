@@ -68,14 +68,14 @@ class TeamScreen extends StatelessWidget {
                   team['ranking'].toString(),
                   style: const TextStyle(
                     color: AppColors.primaryPurple,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
               title: Text(
                 team['name'].toString(),
                 style: const TextStyle(
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                   color: AppColors.textDark,
                 ),
               ),

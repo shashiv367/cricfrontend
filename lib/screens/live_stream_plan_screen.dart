@@ -15,7 +15,7 @@ class LiveStreamPlanScreen extends StatelessWidget {
         elevation: 0,
         title: const Text(
           'How do you plan to live stream?',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 18),
         ),
       ),
       body: Column(
@@ -84,7 +84,7 @@ class LiveStreamPlanScreen extends StatelessWidget {
               const SizedBox(height: 12),
               Text(
                 title,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: AppColors.textPrimary),
               ),
               const SizedBox(height: 4),
               Text(
@@ -131,7 +131,7 @@ class LiveStreamPlanScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                child: Text('Find here', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
+                child: Text('Find here', style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 14)),
               ),
             ),
           ),

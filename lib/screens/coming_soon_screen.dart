@@ -69,7 +69,7 @@ class ComingSoonScreen extends StatelessWidget {
                         style: const TextStyle(
                           color: AppColors.textPrimary,
                           fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                     ],
@@ -130,7 +130,7 @@ class ComingSoonScreen extends StatelessWidget {
                                   style: TextStyle(
                                     color: AppColors.textPrimary,
                                     fontSize: 22,
-                                    fontWeight: FontWeight.w900,
+                                    fontWeight: FontWeight.normal,
                                     letterSpacing: -0.5,
                                   ),
                                 ),
@@ -176,7 +176,7 @@ class ComingSoonScreen extends StatelessWidget {
                                       'BACK TO DASHBOARD',
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.normal,
                                         fontSize: 14,
                                         letterSpacing: 1.0,
                                       ),

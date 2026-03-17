@@ -91,7 +91,7 @@ class InningsDrawer extends StatelessWidget {
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                             Text(
@@ -114,7 +114,7 @@ class InningsDrawer extends StatelessWidget {
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 10,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.normal,
                                 ),
                               ),
                             ),
@@ -159,7 +159,7 @@ class InningsDrawer extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.9),
                           fontSize: 11,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                     ],
@@ -352,7 +352,7 @@ class InningsDrawer extends StatelessWidget {
                 style: TextStyle(
                   color: badgeColor ?? Colors.grey,
                   fontSize: 10,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
             ),

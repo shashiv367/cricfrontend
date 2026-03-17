@@ -32,7 +32,7 @@ class FeaturedCard extends StatelessWidget {
             title,
             style: TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.normal,
               color: color,
             ),
           ),

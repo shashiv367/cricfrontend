@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../utils/app_colors.dart';
+import 'match_scoring_screen.dart';
+import 'select_innings_player_screen.dart';
 
 class StartInningsScreen extends StatefulWidget {
   const StartInningsScreen({super.key});
@@ -15,6 +17,7 @@ class _StartInningsScreenState extends State<StartInningsScreen> {
   String? _bowlingTeamName;
   List<String> _battingSquad = [];
   List<String> _bowlingSquad = [];
+  String _battingSide = 'A'; // 'A' or 'B'
 
   String? _striker;
   String? _nonStriker;
@@ -33,6 +36,7 @@ class _StartInningsScreenState extends State<StartInningsScreen> {
     final battingSide = args['battingSide'] as String? ?? 'A'; // 'A' or 'B'
 
     final bool isTeamABatting = battingSide == 'A';
+    _battingSide = battingSide;
 
     _battingTeamName ??= isTeamABatting ? teamA : teamB;
     _bowlingTeamName ??= isTeamABatting ? teamB : teamA;
@@ -50,7 +54,7 @@ class _StartInningsScreenState extends State<StartInningsScreen> {
     final bowlingTeam = _bowlingTeamName ?? 'Bowling team';
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.backgroundLight,
       appBar: AppBar(
         backgroundColor: AppColors.primaryElectric,
         foregroundColor: Colors.white,
@@ -247,7 +251,7 @@ class _StartInningsScreenState extends State<StartInningsScreen> {
       return;
     }
 
-    final selected = await Navigator.push<String>(
+    final result = await Navigator.push<Map<String, dynamic>>(
       context,
       MaterialPageRoute(
         builder: (_) => _SelectInningsPlayerScreen(
@@ -259,14 +263,22 @@ class _StartInningsScreenState extends State<StartInningsScreen> {
       ),
     );
 
-    if (selected == null) return;
+    if (result == null) return;
+
+    final selected = result['selected'] as String?;
+    final updatedSquad = (result['squad'] as List?)?.cast<String>() ?? <String>[];
+    if (selected == null || selected.trim().isEmpty) return;
 
     setState(() {
+      // Persist newly added players back to the match squad list.
       if (isForBowler) {
+        _bowlingSquad = List<String>.from(updatedSquad);
         _bowler = selected;
       } else if (isForStriker) {
+        _battingSquad = List<String>.from(updatedSquad);
         _striker = selected;
       } else {
+        _battingSquad = List<String>.from(updatedSquad);
         _nonStriker = selected;
       }
     });
@@ -274,16 +286,22 @@ class _StartInningsScreenState extends State<StartInningsScreen> {
 
   void _startScoring() {
     if (_matchId == null) return;
-    Navigator.pushReplacementNamed(
+    Navigator.pushReplacement(
       context,
-      '/live-detail',
-      arguments: {
-        'matchId': _matchId,
-        'initialTabIndex': 1,
-        'initialStrikerName': _striker,
-        'initialNonStrikerName': _nonStriker,
-        'initialBowlerName': _bowler,
-      },
+      MaterialPageRoute(
+        builder: (_) => MatchScoringScreen(
+          matchId: _matchId!,
+          matchTitle: '${_battingTeamName ?? 'Team A'} vs ${_bowlingTeamName ?? 'Team B'}',
+          battingSide: _battingSide,
+          strikerName: _striker,
+          nonStrikerName: _nonStriker,
+          bowlerName: _bowler,
+          battingTeamName: _battingTeamName ?? 'Team A',
+          bowlingTeamName: _bowlingTeamName ?? 'Team B',
+          battingSquad: _battingSquad,
+          bowlingSquad: _bowlingSquad,
+        ),
+      ),
     );
   }
 
@@ -391,7 +409,7 @@ class _SelectInningsPlayerScreenState extends State<_SelectInningsPlayerScreen> 
   Widget build(BuildContext context) {
     final title = 'Select ${widget.roleLabel} for ${widget.teamName}';
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.backgroundLight,
       appBar: AppBar(
         backgroundColor: AppColors.primaryElectric,
         foregroundColor: Colors.white,
@@ -443,7 +461,10 @@ class _SelectInningsPlayerScreenState extends State<_SelectInningsPlayerScreen> 
                   onPressed: _selectedName == null
                       ? null
                       : () {
-                          Navigator.pop(context, _selectedName);
+                          Navigator.pop(context, {
+                            'selected': _selectedName,
+                            'squad': _players,
+                          });
                         },
                   child: const Text(
                     'Continue scoring',

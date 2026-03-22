@@ -13,12 +13,14 @@ import 'dart:developer' as developer;
 
 class SelectSquadScreen extends StatefulWidget {
   final String teamName;
+  final String? teamId;
   final bool addMyself;
   final Set<String> blockedPlayers;
 
   const SelectSquadScreen({
     super.key,
     required this.teamName,
+    this.teamId,
     this.addMyself = false,
     this.blockedPlayers = const {},
   });
@@ -74,29 +76,57 @@ class _SelectSquadScreenState extends State<SelectSquadScreen> {
         return;
       }
 
-      final resp = await ApiService.listPlayers(token);
-      final players = List<Map<String, dynamic>>.from(resp['players'] ?? []);
+      // If teamId is provided, load only the players already stored for this team
+      // (via match_player_stats) so "teams" behave per-user and don't show everyone.
+      if (widget.teamId != null && widget.teamId!.trim().isNotEmpty) {
+        final teamId = widget.teamId!;
+        final stats = await supabase
+            .from('match_player_stats')
+            .select('player_name')
+            .eq('team_id', teamId)
+            .order('created_at', ascending: false)
+            .limit(200);
 
-      // Convert to display names (prefer full_name, else username/email prefix, else phone)
-      final names = <String>[];
-      for (final p in players) {
-        final full = (p['full_name'] ?? '').toString().trim();
-        final username = (p['username'] ?? '').toString().trim();
-        final phone = (p['phone'] ?? '').toString().trim();
-        String display = full.isNotEmpty ? full : username;
-        if (display.isEmpty && phone.isNotEmpty) display = phone;
-        if (display.isNotEmpty) names.add(display);
+        final names = <String>[];
+        for (final s in (stats as List<dynamic>? ?? [])) {
+          final name = (s as Map<dynamic, dynamic>)['player_name']?.toString().trim() ?? '';
+          if (name.isNotEmpty) names.add(name);
+        }
+
+        if (!mounted) return;
+        setState(() {
+          _registeredPlayers.clear();
+          _allPlayers
+            ..clear()
+            ..addAll(names.toSet().toList()
+              ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase())));
+        });
+      } else {
+        final resp = await ApiService.listPlayers(token);
+        final players = List<Map<String, dynamic>>.from(resp['players'] ?? []);
+
+        // Convert to display names (prefer full_name, else username/email prefix, else phone)
+        final names = <String>[];
+        for (final p in players) {
+          final full = (p['full_name'] ?? '').toString().trim();
+          final username = (p['username'] ?? '').toString().trim();
+          final phone = (p['phone'] ?? '').toString().trim();
+          String display = full.isNotEmpty ? full : username;
+          if (display.isEmpty && phone.isNotEmpty) display = phone;
+          if (display.isNotEmpty) names.add(display);
+        }
+
+        if (!mounted) return;
+        setState(() {
+          _registeredPlayers
+            ..clear()
+            ..addAll(players);
+          _allPlayers
+            ..clear()
+            ..addAll(names.toSet().toList()
+              ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase())));
+        });
       }
-
-      if (!mounted) return;
-      setState(() {
-        _registeredPlayers
-          ..clear()
-          ..addAll(players);
-        _allPlayers
-          ..clear()
-          ..addAll(names.toSet().toList()..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase())));
-      });
 
       if (widget.addMyself) {
         final user = supabase.auth.currentUser;

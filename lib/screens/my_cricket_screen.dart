@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
+import '../services/supabase_client.dart';
 import 'coming_soon_screen.dart';
 
 class MyCricketScreen extends StatefulWidget {
@@ -15,6 +16,60 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
   int _tournamentsFilterIndex = 0;
   int _teamsFilterIndex = 0;
   int _highlightsFilterIndex = 0;
+
+  bool get _isLoggedIn =>
+      supabase.auth.currentUser != null && supabase.auth.currentSession?.accessToken != null;
+
+  Future<bool> _showLoginRequiredDialog() async {
+    final result = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: Colors.white,
+        title: const Text(
+          'Login Required',
+          style: TextStyle(fontWeight: FontWeight.normal, color: AppColors.textPrimary),
+        ),
+        content: const Text(
+          'You need to login to start a match and manage scores',
+          style: TextStyle(fontWeight: FontWeight.normal, color: AppColors.textSecondary),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: const Text('CANCEL'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primaryElectric,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('LOGIN'),
+          ),
+        ],
+      ),
+    );
+    return result == true;
+  }
+
+  void _handleStartMatchPressed() {
+    _handleStartMatchTap();
+  }
+
+  Future<void> _handleStartMatchTap() async {
+    if (_isLoggedIn) {
+      if (!mounted) return;
+      Navigator.pushNamed(context, '/select-playing-teams');
+      return;
+    }
+
+    final shouldLogin = await _showLoginRequiredDialog();
+    if (!mounted) return;
+    if (shouldLogin) {
+      Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
+    }
+  }
 
   @override
   void initState() {
@@ -75,7 +130,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildStartMatchRow('Want to start a match?', 'Start', () => Navigator.pushNamed(context, '/select-playing-teams')),
+          _buildStartMatchRow('Want to start a match?', 'Start', _handleStartMatchPressed),
           const SizedBox(height: 16),
           _buildFilterPills(
             labels: const ['Your', 'Played', 'Network', 'All'],
@@ -175,10 +230,27 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
           const SizedBox(height: 16),
           _buildQuickSearchBar(),
           const SizedBox(height: 16),
-          _buildTeamListTile(name: 'Nidish P', location: 'Hyderabad (Telangana)', captain: 'Akshay Reddy', hasBadge: true),
-          _buildTeamListTile(name: 'Hi', location: 'Hyderabad (Telangana)', captain: 'Broo', hasBadge: false),
-          _buildTeamListTile(name: 'D Team', location: 'Hyderabad (Telangana)', captain: 'Varshith Red...', hasBadge: false),
+          _buildTeamsEmptyState(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildTeamsEmptyState() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 24),
+        child: Column(
+          children: [
+            Icon(Icons.sports_cricket_rounded, size: 64, color: AppColors.textSecondary.withOpacity(0.5)),
+            const SizedBox(height: 16),
+            Text(
+              'No teams yet.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -362,7 +434,7 @@ class _MyCricketScreenState extends State<MyCricketScreen> with SingleTickerProv
           children: [
             Expanded(
               child: ElevatedButton(
-                onPressed: () => Navigator.pushNamed(context, '/select-playing-teams'),
+                onPressed: _handleStartMatchPressed,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primaryTeal,
                   foregroundColor: Colors.white,

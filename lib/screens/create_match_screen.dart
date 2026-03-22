@@ -4,6 +4,8 @@ import '../services/match_service.dart';
 import '../widgets/innings_logo.dart';
 import 'select_squad_screen.dart';
 import 'match_officials_screen.dart';
+import '../config/app_config.dart';
+import '../services/supabase_client.dart';
 
 class CreateMatchScreen extends StatefulWidget {
   const CreateMatchScreen({super.key});
@@ -18,6 +20,51 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
   final _teamBController = TextEditingController();
   final _matchService = MatchService();
   bool _argsApplied = false;
+  bool _authChecked = false;
+
+  bool get _isLoggedIn => supabase.auth.currentUser != null && supabase.auth.currentSession?.accessToken != null;
+
+  Future<bool> _showLoginRequiredDialog() async {
+    final result = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: Colors.white,
+        title: const Text(
+          'Login Required',
+          style: TextStyle(fontWeight: FontWeight.normal, color: AppColors.textPrimary),
+        ),
+        content: const Text(
+          'You need to login to start a match and manage scores',
+          style: TextStyle(fontWeight: FontWeight.normal, color: AppColors.textSecondary),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: const Text('CANCEL'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primaryElectric,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('LOGIN'),
+          ),
+        ],
+      ),
+    );
+    return result == true;
+  }
+
+  Future<void> _ensureLoggedIn() async {
+    if (_isLoggedIn) return;
+    final shouldLogin = await _showLoginRequiredDialog();
+    if (!mounted) return;
+    if (shouldLogin) {
+      Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
+    }
+  }
 
   int scoreA = 0;
   int scoreB = 0;
@@ -45,6 +92,14 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
+    if (!_authChecked) {
+      _authChecked = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _ensureLoggedIn();
+      });
+    }
+
     if (!_argsApplied) {
       _argsApplied = true;
       final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
@@ -1108,7 +1163,6 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
     setState(() => saving = true);
     try {
       final overs = int.tryParse(_oversController.text.trim()) ?? 20;
-      final oversPerBowler = int.tryParse(_oversPerBowlerController.text.trim());
       final resp = await _matchService.createMatch(
         teamAName: _teamAController.text.trim(),
         teamBName: _teamBController.text.trim(),
@@ -1116,7 +1170,6 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
         overs: overs,
         isPublic: isPublic,
         startDate: _matchDateTime,
-        oversPerBowler: oversPerBowler,
       );
 
       final id = resp['matchId']?.toString();
@@ -1169,7 +1222,7 @@ class _CreateMatchScreenState extends State<CreateMatchScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to save match: $e'),
+            content: Text('Failed to save match: $e\nAPI: ${AppConfig.apiBaseUrl}'),
             backgroundColor: AppColors.accentRed,
             behavior: SnackBarBehavior.floating,
           ),

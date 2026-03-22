@@ -3,6 +3,7 @@ import '../utils/app_colors.dart';
 import '../services/api_service.dart';
 import '../services/supabase_client.dart';
 import 'dart:developer' as developer;
+import 'dart:async';
 
 class UserDashboardScreen extends StatefulWidget {
   final String? searchQuery;
@@ -18,6 +19,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen> with SingleTi
   bool _loading = true;
   late TabController _feedTabController;
   int _feedTabIndex = 0;
+  Timer? _autoRefreshTimer;
 
   @override
   void initState() {
@@ -27,16 +29,22 @@ class _UserDashboardScreenState extends State<UserDashboardScreen> with SingleTi
       if (_feedTabController.indexIsChanging) setState(() => _feedTabIndex = _feedTabController.index);
     });
     _loadMatches();
+    _autoRefreshTimer = Timer.periodic(const Duration(seconds: 5), (_) {
+      if (!mounted) return;
+      // Lightweight refresh while user is on dashboard so scores update after scoring.
+      _loadMatches(silent: true);
+    });
   }
 
   @override
   void dispose() {
+    _autoRefreshTimer?.cancel();
     _feedTabController.dispose();
     super.dispose();
   }
 
-  Future<void> _loadMatches() async {
-    setState(() => _loading = true);
+  Future<void> _loadMatches({bool silent = false}) async {
+    if (!silent) setState(() => _loading = true);
     try {
       final token = await supabase.auth.currentSession?.accessToken;
       final response = await ApiService.listMatches(token: token);

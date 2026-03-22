@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
 import 'select_team_screen.dart';
 import 'select_squad_screen.dart';
+import '../services/supabase_client.dart';
 
 class SelectPlayingTeamsScreen extends StatefulWidget {
   const SelectPlayingTeamsScreen({super.key});
@@ -13,6 +14,8 @@ class SelectPlayingTeamsScreen extends StatefulWidget {
 class _SelectPlayingTeamsScreenState extends State<SelectPlayingTeamsScreen> {
   String? _teamAName;
   String? _teamBName;
+  String? _teamAId;
+  String? _teamBId;
   SquadSelectionResult? _teamASquad;
   SquadSelectionResult? _teamBSquad;
   bool _teamAAddMyself = false;
@@ -22,7 +25,63 @@ class _SelectPlayingTeamsScreenState extends State<SelectPlayingTeamsScreen> {
     return players.map((p) => p.trim().toLowerCase()).where((p) => p.isNotEmpty).toSet();
   }
 
+  bool get _isLoggedIn => supabase.auth.currentUser != null && supabase.auth.currentSession?.accessToken != null;
+
+  Future<bool> _showLoginRequiredDialog() async {
+    final result = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: Colors.white,
+        title: const Text(
+          'Login Required',
+          style: TextStyle(fontWeight: FontWeight.normal, color: AppColors.textPrimary),
+        ),
+        content: const Text(
+          'You need to login to start a match and manage scores',
+          style: TextStyle(fontWeight: FontWeight.normal, color: AppColors.textSecondary),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: const Text('CANCEL'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primaryElectric,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('LOGIN'),
+          ),
+        ],
+      ),
+    );
+    return result == true;
+  }
+
+  Future<bool> _requireLogin() async {
+    if (_isLoggedIn) return true;
+    final shouldLogin = await _showLoginRequiredDialog();
+    if (!mounted) return false;
+    if (shouldLogin) {
+      Navigator.pushNamedAndRemoveUntil(context, '/auth', (route) => false);
+    }
+    return false;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Guard this route in case it was opened without auth.
+      _requireLogin();
+    });
+  }
+
   Future<void> _selectTeam(bool isTeamA) async {
+    if (!await _requireLogin()) return;
+
     final selected = await Navigator.push<TeamSelectionResult>(
       context,
       MaterialPageRoute(
@@ -58,6 +117,7 @@ class _SelectPlayingTeamsScreenState extends State<SelectPlayingTeamsScreen> {
       MaterialPageRoute(
         builder: (_) => SelectSquadScreen(
           teamName: selected.teamName,
+          teamId: selected.teamId,
           addMyself: selected.addMyself,
           blockedPlayers: blocked,
         ),
@@ -69,10 +129,12 @@ class _SelectPlayingTeamsScreenState extends State<SelectPlayingTeamsScreen> {
     setState(() {
       if (isTeamA) {
         _teamAName = selected.teamName;
+        _teamAId = selected.teamId;
         _teamASquad = squad;
         _teamAAddMyself = selected.addMyself;
       } else {
         _teamBName = selected.teamName;
+        _teamBId = selected.teamId;
         _teamBSquad = squad;
         _teamBAddMyself = selected.addMyself;
       }
@@ -191,6 +253,12 @@ class _SelectPlayingTeamsScreenState extends State<SelectPlayingTeamsScreen> {
   }
 
   void _handleContinueToMatch() {
+    _handleContinueToMatchAsync();
+  }
+
+  Future<void> _handleContinueToMatchAsync() async {
+    if (!await _requireLogin()) return;
+
     // Require at least two players in each squad before proceeding,
     // similar to CricHeroes UX.
     if (_teamASquad == null || (_teamASquad!.players.length) < 2) {

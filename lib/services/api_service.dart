@@ -4,11 +4,7 @@ import 'dart:developer' as developer;
 import '../config/app_config.dart';
 
 class ApiService {
-  static const bool useLocal = false; 
-  static const String _prodBaseUrl = 'http://103.233.73.55:3000/api';
-  static const String _localBaseUrl = 'http://localhost:3000/api';
-
-  static String get baseUrl => useLocal ? _localBaseUrl : _prodBaseUrl;
+  static String get baseUrl => AppConfig.apiBaseUrl;
 
   static Future<bool> connectionTest() async {
     try {
@@ -252,7 +248,6 @@ class ApiService {
     String? locationId,
     String? locationName,
     int overs = 20,
-    int? oversPerBowler,
     String? date,
     bool? isPublic,
     String? status,
@@ -266,7 +261,6 @@ class ApiService {
         if (locationId != null) 'locationId': locationId,
         if (locationName != null) 'locationName': locationName,
         'overs': overs,
-        if (oversPerBowler != null) 'oversPerBowler': oversPerBowler,
         if (date != null) 'date': date,
         if (isPublic != null) 'isPublic': isPublic,
         if (status != null) 'status': status,

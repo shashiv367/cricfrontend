@@ -27,7 +27,6 @@ class MatchService {
     int overs = 20,
     bool isPublic = true,
     DateTime? startDate,
-    int? oversPerBowler,
   }) async {
     try {
       final token = supabase.auth.currentSession?.accessToken;
@@ -41,7 +40,6 @@ class MatchService {
         teamBName: teamBName,
         locationName: venue,
         overs: overs,
-        oversPerBowler: oversPerBowler,
         date: startDate?.toIso8601String(),
         isPublic: isPublic,
         status: 'live',

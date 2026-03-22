@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
+import '../services/supabase_client.dart';
 
 class TeamSelectionResult {
   final String teamName;
+  final String? teamId;
   final bool addMyself;
-  const TeamSelectionResult({required this.teamName, required this.addMyself});
+  const TeamSelectionResult({required this.teamName, this.teamId, required this.addMyself});
 }
 
 class SelectTeamScreen extends StatefulWidget {
@@ -30,19 +32,80 @@ class _SelectTeamScreenState extends State<SelectTeamScreen> with SingleTickerPr
   final _captainNumberController = TextEditingController();
   final _captainNameController = TextEditingController();
   bool _addMyself = false;
-  static const _location = 'Hyderabad (Telangana)';
 
-  final List<Map<String, dynamic>> _yourTeams = [
-    {'name': 'Nidish P', 'location': _location, 'captain': 'Akshay Reddy', 'verified': true, 'avatarColor': null},
-    {'name': 'Hi', 'location': _location, 'captain': 'Broo', 'verified': false, 'avatarColor': 0xFF3B82F6},
-    {'name': 'Icb', 'location': _location, 'captain': null, 'verified': false, 'avatarColor': 0xFFF43F5E},
-  ];
+  bool _loadingTeams = true;
+  List<Map<String, dynamic>> _yourTeams = const [];
+  static const _defaultLocation = 'Hyderabad (Telangana)';
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(() => setState(() {}));
+    _loadYourTeams();
+  }
+
+  Future<void> _loadYourTeams() async {
+    try {
+      final user = supabase.auth.currentUser;
+      final token = await supabase.auth.currentSession?.accessToken;
+      if (user == null || token == null) {
+        if (!mounted) return;
+        setState(() {
+          _yourTeams = const [];
+          _loadingTeams = false;
+        });
+        return;
+      }
+
+      // Build "your teams" from teams referenced in matches created by this user.
+      // This avoids showing other users' teams.
+      final resp = await supabase
+          .from('matches')
+          .select('team_a:teams!matches_team_a_fkey(id,name), team_b:teams!matches_team_b_fkey(id,name)')
+          .eq('created_by', user.id)
+          .limit(200);
+
+      final data = resp as List<dynamic>? ?? [];
+      final teamsById = <String, Map<String, dynamic>>{};
+
+      for (final m in data) {
+        if (m is! Map) continue;
+        final teamA = m['team_a'] as Map<dynamic, dynamic>?;
+        final teamB = m['team_b'] as Map<dynamic, dynamic>?;
+
+        void addTeam(Map<dynamic, dynamic>? team) {
+          if (team == null) return;
+          final id = team['id']?.toString();
+          final name = team['name']?.toString();
+          if (id == null || id.isEmpty || name == null || name.isEmpty) return;
+          teamsById[id] = {
+            'id': id,
+            'name': name,
+            'location': _defaultLocation,
+            'captain': null,
+            'verified': false,
+            'avatarColor': null,
+          };
+        }
+
+        addTeam(teamA);
+        addTeam(teamB);
+      }
+
+      if (!mounted) return;
+      setState(() {
+        _yourTeams = teamsById.values.toList()
+          ..sort((a, b) => (a['name'] as String).toLowerCase().compareTo((b['name'] as String).toLowerCase()));
+        _loadingTeams = false;
+      });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _yourTeams = const [];
+        _loadingTeams = false;
+      });
+    }
   }
 
   @override
@@ -149,7 +212,7 @@ class _SelectTeamScreenState extends State<SelectTeamScreen> with SingleTickerPr
             child: TabBarView(
               controller: _tabController,
               children: [
-                _buildTeamList(_yourTeams),
+                _loadingTeams ? const Center(child: CircularProgressIndicator()) : _buildTeamList(_yourTeams),
                 _buildTeamList([]),
                 _buildAddTab(),
               ],
@@ -177,7 +240,14 @@ class _SelectTeamScreenState extends State<SelectTeamScreen> with SingleTickerPr
           captain: t['captain'] as String?,
           verified: t['verified'] as bool,
           avatarColor: t['avatarColor'] as int?,
-          onTap: () => Navigator.pop(context, TeamSelectionResult(teamName: t['name'] as String, addMyself: false)),
+          onTap: () => Navigator.pop(
+            context,
+            TeamSelectionResult(
+              teamName: t['name'] as String,
+              teamId: t['id'] as String?,
+              addMyself: false,
+            ),
+          ),
         );
       },
     );

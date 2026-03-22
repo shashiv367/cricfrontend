@@ -10,9 +10,9 @@ class CricketProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = supabase.auth.currentUser;
-    final name = (user?.userMetadata?['full_name'] as String?) ?? 'Player Name';
-    final city = (user?.userMetadata?['city'] as String?) ?? 'Hyderabad (Telangana)';
-    final since = (user?.userMetadata?['since'] as String?) ?? 'Since 11-Nov-2022';
+    final name = (user?.userMetadata?['full_name'] as String?) ?? '-';
+    final city = (user?.userMetadata?['city'] as String?) ?? '-';
+    final since = (user?.userMetadata?['since'] as String?) ?? '-';
     final meta = user?.userMetadata ?? {};
 
     return Scaffold(
@@ -353,6 +353,9 @@ class CricketProfileScreen extends StatelessWidget {
                       if (user != null) {
                         await supabase.auth.updateUser(
                           UserAttributes(data: {
+                            'full_name': '',
+                            'city': '',
+                            'since': '',
                             'phone': '',
                             'gender': '',
                             'playing_role': '',
@@ -363,9 +366,15 @@ class CricketProfileScreen extends StatelessWidget {
                           }),
                         );
                       }
+                      await supabase.auth.signOut();
                       if (context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Profile data cleared.')),
+                          const SnackBar(content: Text('Profile data cleared. Please login again.')),
+                        );
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          '/auth',
+                          (route) => false,
                         );
                       }
                     },
